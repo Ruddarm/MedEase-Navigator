@@ -168,7 +168,7 @@ public class DBConnectivity {
             String MedicalReportTableQuerry = "create table APPOINTMENT" +
                     "(" +
                     "  Patient_ID          varchar(40)," +
-                    "  Time                Varchar(20)," +
+                    "  Time                Time," +
                     "  Date                Date," +
                     "  Status              varchar(50)," +
                     "  IN_Time             TIME," +
@@ -207,5 +207,6 @@ public class DBConnectivity {
             return false;
         }
     }
+
 
 }

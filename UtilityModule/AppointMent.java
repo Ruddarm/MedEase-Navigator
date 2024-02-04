@@ -1,14 +1,15 @@
 package MedEaseNavigator.UtilityModule;
-
 public class AppointMent {
     private String Date;
     private String TimeSlot;
     private String PID;
     private String Name;
+    private String Status;
+    private String intime;
     AppointMent nextAppointment;
     
-    public void setDate(String date) {
-        Date = date;
+    public void setDate(java.lang.String string) {
+        Date = string;
     }
 
     public void setName(String name) {
@@ -42,6 +43,17 @@ public class AppointMent {
 
     public String getPID() {
         return PID;
+    }
+    public String getIntime() {
+        return intime;
+    }public AppointMent getNextAppointment() {
+        return nextAppointment;
+    }public String getStatus() {
+        return Status;
+    }public void setIntime(String intime) {
+        this.intime = intime;
+    }public void setStatus(String status) {
+        Status = status;
     }
 
     public void CreateAppointmentList() {

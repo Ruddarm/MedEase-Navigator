@@ -7,6 +7,14 @@
  */
 package MedEaseNavigator.DriverPackage;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+
+import com.mysql.cj.util.TimeUtil;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.PaymentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.WaitingInterface;
@@ -16,6 +24,7 @@ import MedEaseNavigator.DoctorDashBoard.MedDoctorDashBoard;
 import MedEaseNavigator.FindPatientModule.FindCustomerUtil;
 import MedEaseNavigator.LoginModule.MedEaseLogin;
 import MedEaseNavigator.MedMenuBar.MenuBar;
+import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
@@ -46,15 +55,24 @@ public class MedEaseApp {
         }
         app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
+        DateTimeFormatter formatr = DateTimeFormatter.ofPattern("hh:mm a");
+        System.out.println(LocalTime.now().format(formatr));
 
-        new MedEaseLogin();
-        app.MedEaseUtil.SetMainFrame();
-        new MenuBar(app.MedEaseUtil.MedEaseFrmae);
-        new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae);
-        new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
-        new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
-        new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
-        new MedDoctorDashBoard();
+        AppointMent appoin = new AppointMent();
+        appoin.setPID("PID111");
+        appoin.setTimeSlot("10:20 am");
+        appoin.setDate("" + LocalDate.now());
+        appoin.setIntime(LocalTime.now().format(formatr));
+        appoin.setStatus("Createdd");
+        app.MedEaseUtil.DBO.ScheduleAppointment(appoin);
+        // new MedEaseLogin();
+        // app.MedEaseUtil.SetMainFrame();
+        // new MenuBar(app.MedEaseUtil.MedEaseFrmae);
+        // new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae);
+        // new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
+        // new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
+        // new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
+        // new MedDoctorDashBoard();
 
     }
 }
@@ -112,4 +130,26 @@ public class MedEaseApp {
  * app.MedEaseUtil.DBO.UPdateMID(1001);
  * app.MedEaseUtil.DBO.SetUserDetails("Ruddarm", "Ruddarm4234");
  * 
+ */
+/*
+ * Getter Method of Utilty testin
+ * 
+ * System.out.println(app.MedEaseUtil.DBO.GetLastPID());
+ * System.out.println(app.MedEaseUtil.DBO.GetLastMID());
+ * System.out.println(app.MedEaseUtil.DBO.GetLastDID());
+ * System.out.println(app.MedEaseUtil.DBO.GetPswd());
+ * System.out.println(app.MedEaseUtil.DBO.GetUserName());
+ * 
+ */
+/*
+ * Get medical Report method
+ * ResultSet data =app.MedEaseUtil.DBO.GetMedicalReport(111);
+ * 
+ */
+/*
+ * Testing Dotor Login method
+ * if (app.MedEaseUtil.DBO.DoctorLogin("8369517140", "RuddarmUser",
+ * "ruddarmpswd")) {
+ * System.out.println("Loged in");
+ * }
  */

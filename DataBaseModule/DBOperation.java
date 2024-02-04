@@ -1,15 +1,17 @@
 package MedEaseNavigator.DataBaseModule;
-
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
+import com.mysql.cj.protocol.Resultset;
 import com.mysql.cj.protocol.a.SqlDateValueEncoder;
+import com.mysql.cj.xdevapi.Result;
 
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
+import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
@@ -55,9 +57,23 @@ public class DBOperation implements DBOpertaionInterface {
     }
 
     @Override
-    public ResultSet GetMedicalReport(String PID) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'GetMedicalReport'");
+    public ResultSet GetMedicalReport(int PID) {
+        try {
+            preparedQuery = DBcon.prepareStatement("Select *from Medical_history where patient_ID =?");
+            preparedQuery.setString(1, "PID" + PID);
+            data = preparedQuery.executeQuery();
+            if (data.next() != false) {
+                return data;
+            } else {
+                Dbnotfy.setMsg("No Medical History", -1);
+                return null;
+            }
+
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error To find Medical Report", -1);
+            System.out.println(ex);
+            return null;
+        }
     }
 
     @Override
@@ -276,4 +292,210 @@ public class DBOperation implements DBOpertaionInterface {
             return false;
         }
     }
+
+    /*
+     * A method to get last pid
+     */
+    public int GetLastPID() {
+        try {
+            data = SqlStatement.executeQuery("select *from Utility where utindex =1");
+            if (data.next() != false) {
+                return data.getInt(2);
+            }
+        } catch (SQLException ex) {
+
+            Dbnotfy.setMsg("Error In get Last PID method ", -1);
+            return 0;
+        }
+        return 0;
+    }
+
+    /*
+     * A method to get last mid
+     */
+    public int GetLastMID() {
+
+        try {
+            data = SqlStatement.executeQuery("Select *from Utility where utindex = 1 ");
+            if (data.next() != false) {
+                return data.getInt(3);
+            }
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error in Get lat mid method ", -1);
+            return 0;
+        }
+        return 0;
+    }
+
+    public int GetLastDID() {
+
+        try {
+            data = SqlStatement.executeQuery("Select *from Utility where utindex = 1 ");
+            if (data.next() != false) {
+                return data.getInt(4);
+            }
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error in Get lat mid method ", -1);
+            return 0;
+        }
+        return 0;
+    }
+
+    public String GetUserName() {
+
+        try {
+            data = SqlStatement.executeQuery("Select *from Utility where utindex = 1 ");
+            if (data.next() != false) {
+                return data.getString(5);
+            }
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error in Get lat mid method ", -1);
+            return "";
+        }
+        return "";
+    }
+
+    public String GetPswd() {
+
+        try {
+            data = SqlStatement.executeQuery("Select *from Utility where utindex = 1 ");
+            if (data.next() != false) {
+                return data.getString(6);
+            }
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error in Get lat mid method ", -1);
+            return "";
+        }
+        return "";
+    }
+
+    /*
+     * A method to check login credintals
+     * 
+     * @param Username
+     * 
+     * @param Password
+     * 
+     * @return boolean
+     */
+    public boolean AdminLogin(String UserName, String Password) {
+        String Admin = GetUserName();
+        String pswd = GetPswd();
+        if (Admin.equals(UserName) && pswd.equals(Password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean DoctorLogin(String Number, String UserName, String Password) {
+        try {
+            preparedQuery = DBcon.prepareStatement("Select *from Doctor where Phone_no=?");
+            preparedQuery.setString(1, Number);
+            data = preparedQuery.executeQuery();
+            if (data.next() != false) {
+                String DocUser = data.getString(5);
+                String DocPswd = data.getString(6);
+                if (DocUser.equals(UserName) && DocPswd.equals(Password)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+
+            Dbnotfy.setMsg("Erro in Doctor Loging", -1);
+            return false;
+        }
+    }
+    /*
+     * 
+     * A method to create appoint in database
+     * 
+     * @param Medease Appointment
+     * 
+     * @return boolean
+     */
+    public boolean ScheduleAppointment(AppointMent appoint){
+        // INSERT INTO appointment VALUE('PID111',str_to_date('8:50 am','%h:%i %p'),'2002-10-24','Created',null);
+        try{
+            preparedQuery = DBcon.prepareStatement("INSERT INTO appointment VALUE(?,str_to_date(?,'%h:%i %p'),?,?,str_to_date(?,'%h:%i %p'))");
+            preparedQuery.setString(1, appoint.getPID());
+            preparedQuery.setString(2, appoint.getTimeSlot());
+            preparedQuery.setString(3, appoint.getDate());
+            preparedQuery.setString(4, appoint.getStatus());
+            preparedQuery.setString(5,""+appoint.getIntime());
+            preparedQuery.executeUpdate();
+            DBcon.commit();
+            Dbnotfy.setMsg("Appointment Scheduled", 1);
+            return true;
+        }catch(SQLException ex){
+            Dbnotfy.setMsg("Error while Scheduling appointment", -1);
+            System.out.println(ex);
+            return false;
+        }
+    }
+    /*
+     * A method to get today Appointment
+     */
+    public ResultSet GetTodayAppointment(){
+
+        try{
+            // SELECT *from appointment WHERE Date = '2024-02-04'
+            preparedQuery =DBcon.prepareStatement("SELECT *from appointment WHERE Date = ? ORDER BY Time asc");
+            preparedQuery.setString(1, ""+LocalDate.now());
+            data = preparedQuery.executeQuery();
+            return data;
+        }catch(SQLException ex){
+            Dbnotfy.setMsg("Error in Today Appointmetn method", 1);
+            return null;
+        }
+
+    }
+    public boolean UpdateAppointment(String Status,int PID){
+
+        try{
+            // UPDATE appointment SET status='in' WHERE DATE='2024-02-04' && patient_id='PID111';
+            preparedQuery =DBcon.prepareStatement("UPDATE appointment SET status=? WHERE DATE=? && patient_id=?;");
+            preparedQuery.setString(1, Status);
+            preparedQuery.setString(2, ""+LocalDate.now());
+            preparedQuery.setString(3, "PID"+PID);
+            preparedQuery.executeUpdate();
+            DBcon.commit();
+            Dbnotfy.setMsg("Status Updated", 1);
+            return true;
+        }catch(SQLException ex){
+            Dbnotfy.setMsg("Error while updating Appointment Status", -1);
+            return false;
+        }
+    }
+    public boolean UpdatePatientDetials(MedEasePatient pt){
+        // UPDATE patient set name='Nikita',Number ='9594120025', Dob='2004-7-22', height='5.4ft', Weight='45',bloodgrp='B+' WHERE patient_ID = 'PID112'
+        try{
+            preparedQuery = DBcon.prepareStatement("UPDATE patient set name=?,Number =?, Dob=?, height=?, Weight=?,bloodgrp=? WHERE patient_ID = ?");
+            preparedQuery.setString(1, pt.getName());
+            preparedQuery.setString(2, pt.getNumber());
+            preparedQuery.setString(3, pt.getDOB());
+            preparedQuery.setString(4, pt.getHeight());
+            preparedQuery.setInt(5, pt.getWeight());
+            preparedQuery.setString(6, pt.getBlodGroup());
+            preparedQuery.setString(7, "PID"+pt.getPID());
+            preparedQuery.executeUpdate();
+            DBcon.commit();
+            Dbnotfy.setMsg("Patient data Updated", 1);
+            return true;
+
+        }catch(SQLException ex){
+            Dbnotfy.setMsg("Error while updateing data ", -1);
+            return false;
+        }
+    }
+    
+    
+
+
+
+
 }
