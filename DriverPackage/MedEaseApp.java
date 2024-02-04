@@ -21,7 +21,7 @@ import MedEaseNavigator.UtilityModule.UtilityMedease;
 
 public class MedEaseApp {
     UtilityMedease MedEaseUtil;
-    
+
     public MedEaseApp() {
         MedEaseUtil = new UtilityMedease();
     }
@@ -32,25 +32,19 @@ public class MedEaseApp {
          * First we will setup connection with database
          */
         // Creating object of DBconnectivity
-        app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "ruddarmsql", app.MedEaseUtil.DBCon);
+        app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "ruddarmsql",
+                app.MedEaseUtil.DBCon);
         // If true then connection Sucesfull
         if (!app.MedEaseUtil.DbConnectObj.setConnection()) {
             app.MedEaseUtil.Notify.setMsg("Bhai DataBase connect Nhi ho raha hai ", -1);
         }
-        //if True then DataBase MedEaseNavigator already exist or created
-        if(!app.MedEaseUtil.DbConnectObj.CreateDB("MedEaseNavigator")){
+        // if True then DataBase MedEaseNavigator already exist or created
+        if (!app.MedEaseUtil.DbConnectObj.CreateDB("MedEaseNavigator")) {
             app.MedEaseUtil.Notify.setMsg("Bhai DB nhi create hua ", -1);
         }
-        app.MedEaseUtil.DBCon=app.MedEaseUtil.DbConnectObj.GetConnection();
-        app.MedEaseUtil.DBO =new DBOperation(app.MedEaseUtil.DBCon);
-        MedEasePatient demopt= new MedEasePatient();
-        demopt.setName(" Nikita");
-        demopt.setNumber("9702400616");
-        demopt.setPID(112);
-        demopt.setHeight("5f5");
-        demopt.setWeight(54);
-        demopt.setBlodGroup("B+");
-        app.MedEaseUtil.DBO.InsertPatient(demopt);
+        app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
+        app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
+
         // App main screen
         // new MedEaseLogin();
         // app.MedEaseUtil.SetMainFrame();
@@ -61,6 +55,23 @@ public class MedEaseApp {
         // new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
         // new MedDoctorDashBoard();
 
-
     }
 }
+
+/*
+ * Testign Add pation method
+ */
+//          MedEasePatient demopt= new MedEasePatient();
+//          demopt.setName(" Nikita");
+//          demopt.setNumber("9702400616");
+//          demopt.setPID(112);
+//          demopt.setHeight("5ft");
+//          demopt.setWeight(54);
+//          demopt.setBlodGroup("B+");
+//          app.MedEaseUtil.DBO.InsertPatient(demopt);
+
+/*
+ * Testing Get Patient Method
+            app.MedEaseUtil.DBO.GetPatient("836951140");
+ * 
+ */
