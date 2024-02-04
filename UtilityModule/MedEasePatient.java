@@ -11,7 +11,8 @@ public class MedEasePatient {
    private String Number;
    private String DOB;
    private String Gender;
-   private String BlodGroup, height, Weight, Allergy;
+   private String BlodGroup, height,Allergy;
+   private int Weight;
    private MedEaseMedicalReport ReportHead;
    private Boolean IsVlaid;
    /* Getter Method */
@@ -25,7 +26,7 @@ public class MedEasePatient {
        return Gender;
    }public String getHeight() {
        return height;
-   }public String getWeight() {
+   }public int getWeight() {
        return Weight;
    }public String getName() {
        return Name;
@@ -55,7 +56,7 @@ public class MedEasePatient {
        PID = pID;
    }public void setReportHead(MedEaseMedicalReport reportHead) {
        ReportHead = reportHead;
-   }public void setWeight(String weight) {
+   }public void setWeight(int weight) {
        Weight = weight;
    }
    public Boolean getIsVlaid() {

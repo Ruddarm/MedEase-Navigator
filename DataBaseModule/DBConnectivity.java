@@ -16,13 +16,14 @@ public class DBConnectivity {
     Connection DBCon;
     Statement SqlStaement;
     MedEaseNotify DbNotify = new MedEaseNotify();
+
     public DBConnectivity(String UserName, String Password, Connection DBCon2) {
         this.UserName = UserName;
         this.Password = Password;
         this.DBCon = DBCon2;
     }
 
-    public Connection GetConnection(){
+    public Connection GetConnection() {
         return DBCon;
     }
 
@@ -71,7 +72,7 @@ public class DBConnectivity {
                         CreateMedicalReportTable() &&
                         CreateUtilitytable()) {
                     DBCon.commit();
-                }else{
+                } else {
                     DbNotify.setMsg("Uanablee to create tables", -1);
                 }
                 return true;
@@ -94,11 +95,10 @@ public class DBConnectivity {
                     "( Patient_ID          varchar(40)             primary key," +
                     " Name                varchar(50)        not null," +
                     " Number              varchar(10)        not null," +
-                    " Age                 int," +
-                    " Height              varchar(5)," +
-                    " Weight              int," +
-                    " BloodGrp            varchar(3)," +
-                    " Allergy             varchar(30)" +
+                    " DOB                 Date  DEFAULT null," +
+                    " Height              varchar(5) DEFAULT null," +
+                    " Weight              int      DEFAULT null," +
+                    " BloodGrp            varchar(3) DEFAULT null" +
                     " )";
             SqlStaement.execute(PatientTableQuerry);
             DBCon.commit();
@@ -114,16 +114,16 @@ public class DBConnectivity {
         try {
             String MedicalReportTableQuerry = " create table MEDICAL_HISTORY" +
                     " ( MRID               varchar(20)        not null     primary key," +
-                    "   Cheif_Complaint    varchar(500)," +
-                    "   Diagnosis          varchar(4000)," +
-                    "   Prescription       varchar(1000)," +
-                    "   FollowUp_Advice    varchar(500)," +
-                    "   FollowUp_Date      Date," +
-                    "   Symptoms           varchar(500)," +
-                    "   Lab_Test           varchar(1500)," +
-                    "   Status             varchar(20)," +
-                    "   Fees               int," +
-                    "   Patient_ID         varchar(40)," +
+                    "   Cheif_Complaint    varchar(500)    DEFAULT null," +
+                    "   Diagnosis          varchar(4000)    DEFAULT null," +
+                    "   Prescription       varchar(1000)    DEFAULT null," +
+                    "   FollowUp_Advice    varchar(500)    DEFAULT null," +
+                    "   FollowUp_Date      Date    DEFAULT null," +
+                    "   Symptoms           varchar(500)    DEFAULT null," +
+                    "   Lab_Test           varchar(1500)    DEFAULT null," +
+                    "   Status             varchar(20)    DEFAULT null," +
+                    "   Fees               int    DEFAULT null," +
+                    "   Patient_ID         varchar(40)     ," +
                     "   DID                varchar(40)," +
                     "   FOREIGN KEY(Patient_ID) REFERENCES PATIENT(Patient_ID)," +
                     "   FOREIGN KEY(DID) REFERENCES Doctor(DID)" +

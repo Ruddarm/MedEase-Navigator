@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
+import MedEaseNavigator.UtilityModule.MedEasePatient;
 
 public class DBOperation implements DBOpertaionInterface {
     Connection DBcon;
@@ -59,6 +60,32 @@ public class DBOperation implements DBOpertaionInterface {
             return true;
         }catch(SQLException ex){
             Dbnotfy.setMsg("Error while Updatning User Detials", 0);
+            return false;
+        }
+    }
+    /*
+     * A Method to insert patient detials in Database
+     * @param MedeasePatietn a object containg data of patient
+     * @return boolen true if isnertion compelte suceffuly else false
+     */
+    public boolean InsertPatient(MedEasePatient pt){
+        try{
+            // INSERT INTO patient VALUEs('PID111','Ruddarm','8369517140','2002-10-24','5ft',54,'B+')
+            preparedQuery = DBcon.prepareStatement("INSERT INTO patient VALUEs(?,?,?,?,?,?,?)");
+            preparedQuery.setString(1, ("PID"+pt.getPID()));
+            preparedQuery.setString(2, pt.getName());
+            preparedQuery.setString(3, pt.getNumber());
+            preparedQuery.setString(4, pt.getDOB());
+            preparedQuery.setString(5, pt.getHeight());
+            preparedQuery.setInt(6, pt.getWeight());
+            preparedQuery.setString(7, pt.getBlodGroup());
+            preparedQuery.executeUpdate();
+            Dbnotfy.setMsg("Patient Added", 1);
+            DBcon.commit();
+            return true;
+            
+        }catch(SQLException ex){
+            Dbnotfy.setMsg("Patient Not added", -1);
             return false;
         }
     }
