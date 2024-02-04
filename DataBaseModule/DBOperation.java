@@ -1,11 +1,17 @@
 package MedEaseNavigator.DataBaseModule;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import com.mysql.cj.protocol.a.SqlDateValueEncoder;
+
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
+import MedEaseNavigator.UtilityModule.MedEaseDoctor;
+import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 
 public class DBOperation implements DBOpertaionInterface {
@@ -111,12 +117,61 @@ public class DBOperation implements DBOpertaionInterface {
         }
     }
     /*
-     * A method to find patient details using contact number
-     * 
-     * @param Number Number of Patient
-     * 
-     * @return Patient/Null
+     * A method to insert doctor data in database
+     * @param MeddeaseDoctor A doctor object conataing data of doctor
+     * @retrun boolena will retuurn true if insertion performed sucesfully
      * 
      */
+    public boolean InsertDoctor(MedEaseDoctor doc){
+
+        try{
+            // INSERT INTO doctor VALUES('DOC111','Ruddarm','86369517140','39','ruddarmuser','ruddarm4234')
+            preparedQuery = DBcon.prepareStatement(" INSERT INTO doctor VALUES(?,?,?,?,?,?)");
+            preparedQuery.setString(1, "DOC"+doc.getDID());
+            preparedQuery.setString(2, doc.getName());
+            preparedQuery.setString(3, doc.getPhnNumber());
+            preparedQuery.setInt(4, doc.getAge());
+            preparedQuery.setString(5, doc.getUsername());
+            preparedQuery.setString(6, doc.getPswd());
+            preparedQuery.executeUpdate();
+            DBcon.commit();
+            Dbnotfy.setMsg(" Doctor added Sucesfully", 1);
+            return true;
+        }catch(SQLException ex){
+            Dbnotfy.setMsg(" Unable to add Doctor", -1);
+            return false;
+        }
+
+    }
+
+    public boolean InsertMedicalHistory(MedEaseMedicalReport MedicalReport){
+        try{
+            // INSERT INTO medical_history VALUES ('MRID11','Fever','viral fever ','Crocine','Nothing','null','high temprature','no','close','700','PID111','DOC123')
+            preparedQuery =DBcon.prepareStatement(" INSERT INTO medical_history VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            preparedQuery.setString(1,"MRID"+MedicalReport.getMRID());
+            preparedQuery.setString(2, MedicalReport.getChiefcomplaint());
+            preparedQuery.setString(3, MedicalReport.getDiagnosis());
+            preparedQuery.setString(4, MedicalReport.getPrescription());
+            preparedQuery.setString(5, MedicalReport.getFollowupadvice());
+            preparedQuery.setString(6, MedicalReport.getFollowupdate());
+            preparedQuery.setString(7, MedicalReport.getSymptoms());
+            preparedQuery.setString(8, MedicalReport.getLabtest());
+            preparedQuery.setString(9, MedicalReport.getStatus());
+            preparedQuery.setFloat(10, MedicalReport.getFees());
+            preparedQuery.setString(11, "PID"+MedicalReport.getPID());
+            preparedQuery.setString(12, "DOC"+MedicalReport.getDID());
+
+            preparedQuery.executeUpdate();
+            DBcon.commit();
+            Dbnotfy.setMsg("Medical Report Added", 1);
+            return true;
+
+        }catch(SQLException ex){
+            Dbnotfy.setMsg("Error while Inserting Medical Reprot", -1);
+            System.out.println(ex);
+            return false;
+        }
+    }
+
 
 }

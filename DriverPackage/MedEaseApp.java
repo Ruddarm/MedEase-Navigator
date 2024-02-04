@@ -16,6 +16,8 @@ import MedEaseNavigator.DoctorDashBoard.MedDoctorDashBoard;
 import MedEaseNavigator.FindPatientModule.FindCustomerUtil;
 import MedEaseNavigator.LoginModule.MedEaseLogin;
 import MedEaseNavigator.MedMenuBar.MenuBar;
+import MedEaseNavigator.UtilityModule.MedEaseDoctor;
+import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 import MedEaseNavigator.UtilityModule.UtilityMedease;
 
@@ -44,9 +46,21 @@ public class MedEaseApp {
         }
         app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
-
+        
+        MedEaseMedicalReport mr = new MedEaseMedicalReport();
+        mr.setPID(111);
+        mr.setChiefcomplaint("Fever");
+        mr.setDID(123);
+        mr.setDiagnosis("Viral Fever");
+        mr.setFollowupadvice("Nothing");
+        // mr.setFollowupdate(null);
+        mr.setFees(800);
+        mr.setLabtest("NO");
+        mr.setMRID(1000);
+        mr.setPrescription("Crocine");
+        app.MedEaseUtil.DBO.InsertMedicalHistory(mr);
         // App main screen
-        // new MedEaseLogin();
+            // new MedEaseLogin();
         // app.MedEaseUtil.SetMainFrame();
         // new MenuBar(app.MedEaseUtil.MedEaseFrmae);
         // new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae);
@@ -73,5 +87,22 @@ public class MedEaseApp {
 /*
  * Testing Get Patient Method
             app.MedEaseUtil.DBO.GetPatient("836951140");
+ * 
+ */
+/*
+ *     Testing Method to add doctor 
+ *      MedEaseDoctor doc =new MedEaseDoctor();
+        doc.setName(" Ruddarm");
+        doc.setPhnNumber("8369517140");
+        doc.setDID(123);
+        doc.setUsername(" RuddarmUser");
+        doc.setPswd("ruddarmpswd");
+        doc.setAge(21);
+        app.MedEaseUtil.DBO.InsertDoctor(doc);
+ * 
+ */
+/*
+ *          Testign Medical Report History Added Method
+ *  
  * 
  */
