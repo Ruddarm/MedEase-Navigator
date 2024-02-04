@@ -46,28 +46,15 @@ public class MedEaseApp {
         }
         app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
-        
-        MedEaseMedicalReport mr = new MedEaseMedicalReport();
-        mr.setPID(111);
-        mr.setChiefcomplaint("Fever");
-        mr.setDID(123);
-        mr.setDiagnosis("Viral Fever");
-        mr.setFollowupadvice("Nothing");
-        // mr.setFollowupdate(null);
-        mr.setFees(800);
-        mr.setLabtest("NO");
-        mr.setMRID(1000);
-        mr.setPrescription("Crocine");
-        app.MedEaseUtil.DBO.InsertMedicalHistory(mr);
-        // App main screen
-            // new MedEaseLogin();
-        // app.MedEaseUtil.SetMainFrame();
-        // new MenuBar(app.MedEaseUtil.MedEaseFrmae);
-        // new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae);
-        // new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
-        // new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
-        // new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
-        // new MedDoctorDashBoard();
+
+        new MedEaseLogin();
+        app.MedEaseUtil.SetMainFrame();
+        new MenuBar(app.MedEaseUtil.MedEaseFrmae);
+        new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae);
+        new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
+        new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
+        new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
+        new MedDoctorDashBoard();
 
     }
 }
@@ -75,34 +62,54 @@ public class MedEaseApp {
 /*
  * Testign Add pation method
  */
-//          MedEasePatient demopt= new MedEasePatient();
-//          demopt.setName(" Nikita");
-//          demopt.setNumber("9702400616");
-//          demopt.setPID(112);
-//          demopt.setHeight("5ft");
-//          demopt.setWeight(54);
-//          demopt.setBlodGroup("B+");
-//          app.MedEaseUtil.DBO.InsertPatient(demopt);
+// MedEasePatient demopt= new MedEasePatient();
+// demopt.setName(" Nikita");
+// demopt.setNumber("9702400616");
+// demopt.setPID(112);
+// demopt.setHeight("5ft");
+// demopt.setWeight(54);
+// demopt.setBlodGroup("B+");
+// app.MedEaseUtil.DBO.InsertPatient(demopt);
 
 /*
  * Testing Get Patient Method
-            app.MedEaseUtil.DBO.GetPatient("836951140");
+ * app.MedEaseUtil.DBO.GetPatient("836951140");
  * 
  */
 /*
- *     Testing Method to add doctor 
- *      MedEaseDoctor doc =new MedEaseDoctor();
-        doc.setName(" Ruddarm");
-        doc.setPhnNumber("8369517140");
-        doc.setDID(123);
-        doc.setUsername(" RuddarmUser");
-        doc.setPswd("ruddarmpswd");
-        doc.setAge(21);
-        app.MedEaseUtil.DBO.InsertDoctor(doc);
+ * Testing Method to add doctor
+ * MedEaseDoctor doc =new MedEaseDoctor();
+ * doc.setName(" Ruddarm");
+ * doc.setPhnNumber("8369517140");
+ * doc.setDID(123);
+ * doc.setUsername(" RuddarmUser");
+ * doc.setPswd("ruddarmpswd");
+ * doc.setAge(21);
+ * app.MedEaseUtil.DBO.InsertDoctor(doc);
  * 
  */
 /*
- *          Testign Medical Report History Added Method
- *  
+ * Testign Medical Report History Added Method
+ * MedEaseMedicalReport mr = new MedEaseMedicalReport();
+ * mr.setPID(111);
+ * mr.setChiefcomplaint("Fever");
+ * mr.setDID(123);
+ * mr.setDiagnosis("Viral Fever");
+ * mr.setFollowupadvice("Nothing");
+ * // mr.setFollowupdate(null);
+ * mr.setFees(800);
+ * mr.setLabtest("NO");
+ * mr.setMRID(1000);
+ * mr.setPrescription("Crocine");
+ * app.MedEaseUtil.DBO.InsertMedicalHistory(mr);
+ * 
+ * 
+ * 
+ */
+/*
+ * Testing Utility Method
+ * app.MedEaseUtil.DBO.UPdateDoc(124);
+ * app.MedEaseUtil.DBO.UPdateMID(1001);
+ * app.MedEaseUtil.DBO.SetUserDetails("Ruddarm", "Ruddarm4234");
  * 
  */

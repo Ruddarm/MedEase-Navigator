@@ -34,20 +34,20 @@ public class DBOperation implements DBOpertaionInterface {
 
     @Override
     public ResultSet GetPatient(String Number) {
-        //  SELECT *from patient where Number = '836517140';
+        // SELECT *from patient where Number = '836517140';
 
-        try{
-          preparedQuery = DBcon.prepareStatement("SELECT *from patient where Number = ?;");
-          preparedQuery.setString(1, Number);
-          data = preparedQuery.executeQuery();
-          if(data.next()!=false){
-            System.out.println(" Patient found");
-          }else{
-            System.out.println(" Pt not found   ");
-          }
+        try {
+            preparedQuery = DBcon.prepareStatement("SELECT *from patient where Number = ?;");
+            preparedQuery.setString(1, Number);
+            data = preparedQuery.executeQuery();
+            if (data.next() != false) {
+                System.out.println(" Patient found");
+            } else {
+                System.out.println(" Pt not found   ");
+            }
 
-        }catch(SQLException ex){
-            Dbnotfy.setMsg(""+ex, -1);
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("" + ex, -1);
             return null;
         }
 
@@ -74,17 +74,19 @@ public class DBOperation implements DBOpertaionInterface {
 
     @Override
     public boolean SetUserDetails(String UserName, String Password) {
-        try {
-            preparedQuery = this.DBcon.prepareStatement("UPDATE utility set Admin_login =?, Pswd=? WHERE utindex =1;");
-            preparedQuery.setString(1, UserName);
-            preparedQuery.setString(2, Password);
-            preparedQuery.executeUpdate();
-            Dbnotfy.setMsg("User Detials Updated ", 1);
+        if (SetUserName(UserName) & SetUserPswd(Password)) {
+            Dbnotfy.setMsg("Updated User Details", 1);
             return true;
-        } catch (SQLException ex) {
-            Dbnotfy.setMsg("Error while Updatning User Detials", 0);
-            return false;
+        } else {
+            try {
+                DBcon.rollback();
+                ;
+            } catch (SQLException ex) {
+                return false;
+
+            }
         }
+        return false;
     }
 
     /*
@@ -116,18 +118,22 @@ public class DBOperation implements DBOpertaionInterface {
             return false;
         }
     }
+
     /*
      * A method to insert doctor data in database
+     * 
      * @param MeddeaseDoctor A doctor object conataing data of doctor
+     * 
      * @retrun boolena will retuurn true if insertion performed sucesfully
      * 
      */
-    public boolean InsertDoctor(MedEaseDoctor doc){
+    public boolean InsertDoctor(MedEaseDoctor doc) {
 
-        try{
-            // INSERT INTO doctor VALUES('DOC111','Ruddarm','86369517140','39','ruddarmuser','ruddarm4234')
+        try {
+            // INSERT INTO doctor
+            // VALUES('DOC111','Ruddarm','86369517140','39','ruddarmuser','ruddarm4234')
             preparedQuery = DBcon.prepareStatement(" INSERT INTO doctor VALUES(?,?,?,?,?,?)");
-            preparedQuery.setString(1, "DOC"+doc.getDID());
+            preparedQuery.setString(1, "DOC" + doc.getDID());
             preparedQuery.setString(2, doc.getName());
             preparedQuery.setString(3, doc.getPhnNumber());
             preparedQuery.setInt(4, doc.getAge());
@@ -137,18 +143,27 @@ public class DBOperation implements DBOpertaionInterface {
             DBcon.commit();
             Dbnotfy.setMsg(" Doctor added Sucesfully", 1);
             return true;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Dbnotfy.setMsg(" Unable to add Doctor", -1);
             return false;
         }
 
     }
 
-    public boolean InsertMedicalHistory(MedEaseMedicalReport MedicalReport){
-        try{
-            // INSERT INTO medical_history VALUES ('MRID11','Fever','viral fever ','Crocine','Nothing','null','high temprature','no','close','700','PID111','DOC123')
-            preparedQuery =DBcon.prepareStatement(" INSERT INTO medical_history VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-            preparedQuery.setString(1,"MRID"+MedicalReport.getMRID());
+    /*
+     * A method to insert medical history in data base
+     * 
+     * @para MedEaseMedicaL Report a objec consist of all data
+     * 
+     * @return True if insertion sucessfull else false;
+     */
+    public boolean InsertMedicalHistory(MedEaseMedicalReport MedicalReport) {
+        try {
+            // INSERT INTO medical_history VALUES ('MRID11','Fever','viral fever
+            // ','Crocine','Nothing','null','high
+            // temprature','no','close','700','PID111','DOC123')
+            preparedQuery = DBcon.prepareStatement(" INSERT INTO medical_history VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            preparedQuery.setString(1, "MRID" + MedicalReport.getMRID());
             preparedQuery.setString(2, MedicalReport.getChiefcomplaint());
             preparedQuery.setString(3, MedicalReport.getDiagnosis());
             preparedQuery.setString(4, MedicalReport.getPrescription());
@@ -158,20 +173,107 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(8, MedicalReport.getLabtest());
             preparedQuery.setString(9, MedicalReport.getStatus());
             preparedQuery.setFloat(10, MedicalReport.getFees());
-            preparedQuery.setString(11, "PID"+MedicalReport.getPID());
-            preparedQuery.setString(12, "DOC"+MedicalReport.getDID());
+            preparedQuery.setString(11, "PID" + MedicalReport.getPID());
+            preparedQuery.setString(12, "DOC" + MedicalReport.getDID());
 
             preparedQuery.executeUpdate();
             DBcon.commit();
             Dbnotfy.setMsg("Medical Report Added", 1);
             return true;
 
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Dbnotfy.setMsg("Error while Inserting Medical Reprot", -1);
             System.out.println(ex);
             return false;
         }
     }
 
+    /*
+     * UPdate PID in utility table;
+     * 
+     */
+    public boolean UPdatePID(int newPID) {
+        try {
+            preparedQuery = DBcon.prepareStatement("UPDATE utility SET last_pid=? WHERE Utindex=1;");
+            preparedQuery.setInt(1, newPID);
+            preparedQuery.executeUpdate();
+            DBcon.commit();
+            return true;
 
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error while updating PID", -1);
+            System.out.println(ex);
+            return false;
+
+        }
+    }
+
+    /*
+     * UPdte MID in utilit table
+     */
+    public boolean UPdateMID(int newMID) {
+        try {
+            preparedQuery = DBcon.prepareStatement("UPDATE utility SET last_MID=? WHERE Utindex=1;");
+            preparedQuery.setInt(1, newMID);
+            preparedQuery.executeUpdate();
+            DBcon.commit();
+            return true;
+
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error while updating MID", -1);
+            System.out.println(ex);
+            return false;
+
+        }
+
+    }
+
+    /*
+     * update Dotor id
+     */
+    public boolean UPdateDoc(int newDOCID) {
+        try {
+            preparedQuery = DBcon.prepareStatement("UPDATE utility SET last_DID=? WHERE Utindex=1;");
+            preparedQuery.setInt(1, newDOCID);
+            preparedQuery.executeUpdate();
+            DBcon.commit();
+            return true;
+
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error while updating DOC ID", -1);
+            System.out.println(ex);
+            return false;
+        }
+
+    }
+
+    public boolean SetUserName(String UserName) {
+        try {
+            preparedQuery = DBcon.prepareStatement("UPDATE utility SET Admin_login=? WHERE Utindex=1;");
+            preparedQuery.setString(1, UserName);
+            preparedQuery.executeUpdate();
+            DBcon.commit();
+            return true;
+
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error while updating User Name", -1);
+            System.out.println(ex);
+            return false;
+        }
+    }
+
+    public boolean SetUserPswd(String Pswd) {
+        try {
+            preparedQuery = DBcon.prepareStatement("UPDATE utility SET pswd=? WHERE Utindex=1;");
+            preparedQuery.setString(1, Pswd);
+            preparedQuery.executeUpdate();
+            DBcon.commit();
+            return true;
+
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error while updating User Name", -1);
+            System.out.println(ex);
+            return false;
+        }
+    }
 }
