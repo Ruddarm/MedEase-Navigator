@@ -3,13 +3,9 @@
  * 
  */
 package MedEaseNavigator.AppointMentModule;
-
-import java.security.Guard;
-
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.GUIUtil;

@@ -1,15 +1,11 @@
 package MedEaseNavigator.DataBaseModule;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-
-import com.mysql.cj.protocol.Resultset;
-import com.mysql.cj.protocol.a.SqlDateValueEncoder;
-import com.mysql.cj.xdevapi.Result;
-
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.MedEaseDoctor;
@@ -43,17 +39,15 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(1, Number);
             data = preparedQuery.executeQuery();
             if (data.next() != false) {
-                System.out.println(" Patient found");
+                return data;
             } else {
-                System.out.println(" Pt not found   ");
+                return null;
             }
 
         } catch (SQLException ex) {
             Dbnotfy.setMsg("" + ex, -1);
             return null;
         }
-
-        return null;
     }
 
     @Override
@@ -410,6 +404,7 @@ public class DBOperation implements DBOpertaionInterface {
             return false;
         }
     }
+
     /*
      * 
      * A method to create appoint in database
@@ -418,84 +413,87 @@ public class DBOperation implements DBOpertaionInterface {
      * 
      * @return boolean
      */
-    public boolean ScheduleAppointment(AppointMent appoint){
-        // INSERT INTO appointment VALUE('PID111',str_to_date('8:50 am','%h:%i %p'),'2002-10-24','Created',null);
-        try{
-            preparedQuery = DBcon.prepareStatement("INSERT INTO appointment VALUE(?,str_to_date(?,'%h:%i %p'),?,?,str_to_date(?,'%h:%i %p'))");
+    public boolean ScheduleAppointment(AppointMent appoint) {
+        // INSERT INTO appointment VALUE('PID111',str_to_date('8:50 am','%h:%i
+        // %p'),'2002-10-24','Created',null);
+        try {
+            preparedQuery = DBcon.prepareStatement(
+                    "INSERT INTO appointment VALUE(?,str_to_date(?,'%h:%i %p'),?,?,str_to_date(?,'%h:%i %p'))");
             preparedQuery.setString(1, appoint.getPID());
             preparedQuery.setString(2, appoint.getTimeSlot());
             preparedQuery.setString(3, appoint.getDate());
             preparedQuery.setString(4, appoint.getStatus());
-            preparedQuery.setString(5,""+appoint.getIntime());
+            preparedQuery.setString(5, "" + appoint.getIntime());
             preparedQuery.executeUpdate();
             DBcon.commit();
             Dbnotfy.setMsg("Appointment Scheduled", 1);
             return true;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Dbnotfy.setMsg("Error while Scheduling appointment", -1);
             System.out.println(ex);
             return false;
         }
     }
+
     /*
      * A method to get today Appointment
      */
-    public ResultSet GetTodayAppointment(){
+    public ResultSet GetTodayAppointment() {
 
-        try{
+        try {
             // SELECT *from appointment WHERE Date = '2024-02-04'
-            preparedQuery =DBcon.prepareStatement("SELECT *from appointment WHERE Date = ? ORDER BY Time asc");
-            preparedQuery.setString(1, ""+LocalDate.now());
+            preparedQuery = DBcon.prepareStatement("SELECT *from appointment WHERE Date = ? ORDER BY Time asc");
+            preparedQuery.setString(1, "" + LocalDate.now());
             data = preparedQuery.executeQuery();
             return data;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Dbnotfy.setMsg("Error in Today Appointmetn method", 1);
             return null;
         }
 
     }
-    public boolean UpdateAppointment(String Status,int PID){
 
-        try{
-            // UPDATE appointment SET status='in' WHERE DATE='2024-02-04' && patient_id='PID111';
-            preparedQuery =DBcon.prepareStatement("UPDATE appointment SET status=? WHERE DATE=? && patient_id=?;");
+    public boolean UpdateAppointment(String Status, int PID) {
+
+        try {
+            // UPDATE appointment SET status='in' WHERE DATE='2024-02-04' &&
+            // patient_id='PID111';
+            preparedQuery = DBcon.prepareStatement("UPDATE appointment SET status=? WHERE DATE=? && patient_id=?;");
             preparedQuery.setString(1, Status);
-            preparedQuery.setString(2, ""+LocalDate.now());
-            preparedQuery.setString(3, "PID"+PID);
+            preparedQuery.setString(2, "" + LocalDate.now());
+            preparedQuery.setString(3, "PID" + PID);
             preparedQuery.executeUpdate();
             DBcon.commit();
             Dbnotfy.setMsg("Status Updated", 1);
             return true;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Dbnotfy.setMsg("Error while updating Appointment Status", -1);
             return false;
         }
     }
-    public boolean UpdatePatientDetials(MedEasePatient pt){
-        // UPDATE patient set name='Nikita',Number ='9594120025', Dob='2004-7-22', height='5.4ft', Weight='45',bloodgrp='B+' WHERE patient_ID = 'PID112'
-        try{
-            preparedQuery = DBcon.prepareStatement("UPDATE patient set name=?,Number =?, Dob=?, height=?, Weight=?,bloodgrp=? WHERE patient_ID = ?");
+
+    public boolean UpdatePatientDetials(MedEasePatient pt) {
+        // UPDATE patient set name='Nikita',Number ='9594120025', Dob='2004-7-22',
+        // height='5.4ft', Weight='45',bloodgrp='B+' WHERE patient_ID = 'PID112'
+        try {
+            preparedQuery = DBcon.prepareStatement(
+                    "UPDATE patient set name=?,Number =?, Dob=?, height=?, Weight=?,bloodgrp=? WHERE patient_ID = ?");
             preparedQuery.setString(1, pt.getName());
             preparedQuery.setString(2, pt.getNumber());
             preparedQuery.setString(3, pt.getDOB());
             preparedQuery.setString(4, pt.getHeight());
             preparedQuery.setInt(5, pt.getWeight());
             preparedQuery.setString(6, pt.getBlodGroup());
-            preparedQuery.setString(7, "PID"+pt.getPID());
+            preparedQuery.setString(7, "PID" + pt.getPID());
             preparedQuery.executeUpdate();
             DBcon.commit();
             Dbnotfy.setMsg("Patient data Updated", 1);
             return true;
 
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Dbnotfy.setMsg("Error while updateing data ", -1);
             return false;
         }
     }
-    
-    
-
-
-
 
 }

@@ -55,24 +55,15 @@ public class MedEaseApp {
         }
         app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
-        DateTimeFormatter formatr = DateTimeFormatter.ofPattern("hh:mm a");
-        System.out.println(LocalTime.now().format(formatr));
 
-        AppointMent appoin = new AppointMent();
-        appoin.setPID("PID111");
-        appoin.setTimeSlot("10:20 am");
-        appoin.setDate("" + LocalDate.now());
-        appoin.setIntime(LocalTime.now().format(formatr));
-        appoin.setStatus("Createdd");
-        app.MedEaseUtil.DBO.ScheduleAppointment(appoin);
-        // new MedEaseLogin();
-        // app.MedEaseUtil.SetMainFrame();
-        // new MenuBar(app.MedEaseUtil.MedEaseFrmae);
-        // new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae);
-        // new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
-        // new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
-        // new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
-        // new MedDoctorDashBoard();
+        new MedEaseLogin();
+        app.MedEaseUtil.SetMainFrame();
+        new MenuBar(app.MedEaseUtil.MedEaseFrmae);
+        new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae,app.MedEaseUtil.DBO);
+        new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
+        new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
+        new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
+        new MedDoctorDashBoard();
 
     }
 }
@@ -152,4 +143,18 @@ public class MedEaseApp {
  * "ruddarmpswd")) {
  * System.out.println("Loged in");
  * }
+ */
+/*
+ * Testing Appointment method
+ * DateTimeFormatter formatr = DateTimeFormatter.ofPattern("hh:mm a");
+ * System.out.println(LocalTime.now().format(formatr));
+ * 
+ * AppointMent appoin = new AppointMent();
+ * appoin.setPID("PID111");
+ * appoin.setTimeSlot("10:20 am");
+ * appoin.setDate("" + LocalDate.now());
+ * appoin.setIntime(LocalTime.now().format(formatr));
+ * appoin.setStatus("Createdd");
+ * app.MedEaseUtil.DBO.ScheduleAppointment(appoin);
+ * 
  */
