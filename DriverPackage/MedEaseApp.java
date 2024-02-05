@@ -57,13 +57,13 @@ public class MedEaseApp {
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
 
         new MedEaseLogin();
-        app.MedEaseUtil.SetMainFrame();
-        new MenuBar(app.MedEaseUtil.MedEaseFrmae);
-        new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae,app.MedEaseUtil.DBO);
-        new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
-        new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
-        new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
-        new MedDoctorDashBoard();
+        // app.MedEaseUtil.SetMainFrame();
+        // new MenuBar(app.MedEaseUtil.MedEaseFrmae);
+        // new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae,app.MedEaseUtil.DBO);
+        // new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
+        // new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
+        // new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
+        // new MedDoctorDashBoard();
 
     }
 }

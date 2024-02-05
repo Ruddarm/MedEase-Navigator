@@ -25,12 +25,11 @@ public class FindPatientEventHandel implements ActionListener {
             if (UtilityMedease.isValidNumber(Number)) {
                 ptdata = findpteint.DBO.GetPatient(Number);
                 if(ptdata!=null){
-                    
+
                 }else{
                     Patient=null;
                 }
                 new MedEaseAppointMentInterface(Patient);
-
             }
 
         } else {
