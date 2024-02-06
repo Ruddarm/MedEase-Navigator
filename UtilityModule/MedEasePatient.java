@@ -131,7 +131,10 @@ public class MedEasePatient {
     public static boolean SetPTData(MedEasePatient pt, ResultSet data) {
         try {
             pt.setStrPID(data.getString(1));
-            
+            pt.setName(data.getString(2));
+            pt.setNumber(data.getString(3));
+            pt.setDOB(data.getString(4));
+            pt.setGender(data.getString(5));
             return true;
         } catch (SQLException ex) {
             return false;
