@@ -20,12 +20,13 @@ public class LoginEventHandeler extends KeyAdapter implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getSource());
+        System.out.println("click");
+        System.out.println(logobj.LoginBtn);
         logobj.warn.setVisible(false);
         if (e.getSource() == logobj.LoginBtn) {
-            System.out.println("btn click");
             String Username = logobj.UserName.getText();
             String Password = logobj.Password.getText();
-
             if (logobj.DBO.AdminLogin(Username, Password)) {
                 System.out.println("Loged in    ");
             } else {
@@ -34,10 +35,12 @@ public class LoginEventHandeler extends KeyAdapter implements ActionListener {
                 logobj.warn.setVisible(true);
             }
 
+        }else if(e.getSource()==logobj.SetupBtn){
+            System.out.println("setupbtn");
         }
     }
 
-    @Override
+     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
         // super.keyPressed(e);
