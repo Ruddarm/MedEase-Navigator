@@ -55,7 +55,7 @@ public class MedEaseApp {
         app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
 
-        new MedEaseLogin(app.MedEaseUtil.DBO);
+        // new MedEaseLogin(app.MedEaseUtil.DBO);
         
         app.MedEaseUtil.SetMainFrame();
         new MenuBar(app.MedEaseUtil.MedEaseFrmae);
@@ -63,7 +63,7 @@ public class MedEaseApp {
         new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
         new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
         new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
-        new MedDoctorDashBoard();
+        // new MedDoctorDashBoard();
 
     }
 }

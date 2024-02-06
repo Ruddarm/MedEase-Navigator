@@ -7,6 +7,9 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+
+import com.mysql.cj.PingTarget;
+
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.GUIUtil;
@@ -19,7 +22,8 @@ public class MedEaseAppointMentInterface {
      */
     JDialog PatientBox;
     MedPannel logoBox, InfoBox;
-    JLabel Plogo, PID, Name, Number,WarngingLabel;
+    JLabel Plogo, PIDLabel, NameLabel, NumberLabel,WarngingLabel;
+
     MedEaseBtn AppointmentBtn, ViewBtn;
     MedEasePatient Patient;
     AppointmenEventHandling AppointmentEvenetHanldingObj;
@@ -79,9 +83,25 @@ public class MedEaseAppointMentInterface {
             WarngingLabel.setBounds(100, 50, 200, 30);
             System.out.println("Code was here");
             InfoBox.add(WarngingLabel);
+        }else{
+            SetPatientDetials();
         }
     }
     public void SetPatientDetials(){
+        PIDLabel=new JLabel(Patient.getStrPID());
+        PIDLabel.setFont(GUIUtil.TimesBold);
+        PIDLabel.setBounds(30, 10, 150, 20);
+        InfoBox.add(PIDLabel);
+        NameLabel=new JLabel(Patient.getName());
+        NameLabel.setFont(GUIUtil.TimesBold);
+        NameLabel.setBounds(30, 35, 150, 20);
+        InfoBox.add(NameLabel);
+        NumberLabel=new JLabel(Patient.getNumber());
+        NumberLabel.setFont(GUIUtil.TimesBold);
+        NumberLabel.setBounds(30, 60, 150, 20);
+        InfoBox.add(NumberLabel);
+        NameLabel=new JLabel();
 
+        
     }
 }

@@ -98,7 +98,8 @@ public class DBConnectivity {
                     " DOB                 Date  DEFAULT null," +
                     " Height              varchar(5) DEFAULT null," +
                     " Weight              int      DEFAULT null," +
-                    " BloodGrp            varchar(3) DEFAULT null" +
+                    " BloodGrp            varchar(3) DEFAULT null," +
+                    " Gender              varhcar(3) Default null"+
                     " )";
             SqlStaement.execute(PatientTableQuerry);
             DBCon.commit();
