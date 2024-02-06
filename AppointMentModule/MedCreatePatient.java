@@ -44,6 +44,7 @@ public class MedCreatePatient {
         AddPatientBtn.setForeground(GUIUtil.WhiteClr);
         AddPatientBtn.setFont(GUIUtil.TimesBoldS2);
         BackPannel.add(AddPatientBtn);
+        
     }
 
 
