@@ -47,11 +47,11 @@ public class MedEaseApp {
                 app.MedEaseUtil.DBCon);
         // If true then connection Sucesfull
         if (!app.MedEaseUtil.DbConnectObj.setConnection()) {
-            app.MedEaseUtil.Notify.setMsg("Bhai DataBase connect Nhi ho raha hai ", -1);
+            app.MedEaseUtil.Notify.setMsg("DATABASE HAS NOT BEEN CONNECTED ", -1);
         }
         // if True then DataBase MedEaseNavigator already exist or created
         if (!app.MedEaseUtil.DbConnectObj.CreateDB("MedEaseNavigator")) {
-            app.MedEaseUtil.Notify.setMsg("Bhai DB nhi create hua ", -1);
+            app.MedEaseUtil.Notify.setMsg("DATABASE HAS NOT BEEN CREATED ", -1);
         }
         app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
