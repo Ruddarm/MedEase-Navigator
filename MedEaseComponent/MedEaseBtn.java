@@ -30,7 +30,6 @@ public class MedEaseBtn extends JButton {
         setFocusPainted(false);
         setContentAreaFilled(false);
 
-
     }
 
     @Override
@@ -50,6 +49,6 @@ public class MedEaseBtn extends JButton {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(BorderColor);
         g2.drawRoundRect(getX(), getY(), getWidth(), getHeight(), Radius, Radius);
-        
+
     }
 }
