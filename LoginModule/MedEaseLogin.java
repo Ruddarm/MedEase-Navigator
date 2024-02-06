@@ -6,25 +6,15 @@ package MedEaseNavigator.LoginModule;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.naming.ldap.UnsolicitedNotificationListener;
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-
-import com.mysql.cj.log.Log;
-
 import javax.swing.JLabel;
-
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.GUIUtil;
-import java.awt.event.KeyAdapter;;
 
 public class MedEaseLogin {
     JFrame LoginFrame;
