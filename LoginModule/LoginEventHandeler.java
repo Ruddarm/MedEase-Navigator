@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import com.mysql.cj.x.protobuf.MysqlxExpect.Open.Condition.Key;
 
 public class LoginEventHandeler extends KeyAdapter implements ActionListener {
     MedEaseLogin logobj;
@@ -24,7 +23,7 @@ public class LoginEventHandeler extends KeyAdapter implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         logobj.warn.setVisible(false);
         if(e.getSource()==logobj.LoginBtn){
-            
+            System.out.println("btn click");
             String Username =logobj.UserName.getText();
             String Password = logobj.Password.getText();
 
@@ -32,6 +31,7 @@ public class LoginEventHandeler extends KeyAdapter implements ActionListener {
                 System.out.println("Loged in    ");
             }else{
                 logobj.warn.setText("User Name or Password is wrong");
+                System.out.println("error");
                 logobj.warn.setVisible(true);
             }
             

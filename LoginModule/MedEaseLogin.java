@@ -13,6 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+
+import com.mysql.cj.log.Log;
+
 import javax.swing.JLabel;
 
 import MedEaseNavigator.DataBaseModule.DBOperation;
@@ -98,6 +101,8 @@ public class MedEaseLogin {
                 LoginBtn.setText("LOGIN");
                 LoginBtn.setForeground(Color.WHITE);
                 LoginBtn.setFont(GUIUtil.TimesBold);
+                LoginBtn.addActionListener(LogEvent);
+                LoginBtn.addKeyListener(LogEvent);
                 UserDetailsPannel.add(LoginBtn);
             }
         });
