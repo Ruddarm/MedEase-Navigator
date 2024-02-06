@@ -26,15 +26,15 @@ public class MedEaseLogin {
     MedEaseBtn SetupBtn; // setup Btn
     LoginEventHandeler LogEvent;
     MedPannel UserDetailsPannel;
-    JLabel warn;
-    JLabel UsernameLabel, UserPasswordLabel;
+
+    JLabel UsernameLabel, UserPasswordLabel,warn;
     JLabel MedEaselabel, NavigatorLabel;
     JTextField UserName;
     JTextField Password;
     DBOperation DBO;
 
-    public MedEaseLogin(DBOperation Dbo) {
-        this.DBO = Dbo;
+    public MedEaseLogin(DBOperation dbo) {
+        this.DBO=dbo;
         LogEvent = new LoginEventHandeler(this);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -60,20 +60,20 @@ public class MedEaseLogin {
                 NavigatorLabel.setForeground(GUIUtil.WhiteClr);
                 NavigatorLabel.setBounds(80, 130, 200, 40);
                 NavigatorLabel.setFont(new Font("Times New Roman", Font.CENTER_BASELINE, 30));
-                LoginFrame.add(NavigatorLabel);
-                warn = new JLabel();
+                warn=new JLabel();
+                warn.setVisible(false);
+                warn.setBounds(50, 20, 150, 20);
                 warn.setFont(GUIUtil.TimesItalic);
                 warn.setForeground(GUIUtil.WarningColor);
-                warn.setBounds(80, 10, 150, 30);
-                warn.setVisible(false);
                 UserDetailsPannel.add(warn);
+                LoginFrame.add(NavigatorLabel);
                 UsernameLabel = new JLabel("User Name");
                 UsernameLabel.setFont(GUIUtil.TimesBoldS2);
                 UsernameLabel.setBounds(30, 40, 100, 30);
                 UserDetailsPannel.add(UsernameLabel);
                 UserName = new JTextField();
-                UserName.setBounds(30, 70, 150, 30);
-                UserName.setFont(GUIUtil.TimesBold);
+                UserName.setBounds(30, 70, 170, 30);
+                UserName.setFont(GUIUtil.TimesBoldS2);
                 // UserName.setBackground(GUIUtil.MedEaseGrey);
                 UserName.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 UserDetailsPannel.add(UserName);
@@ -82,18 +82,22 @@ public class MedEaseLogin {
                 UserPasswordLabel.setBounds(30, 105, 100, 30);
                 UserDetailsPannel.add(UserPasswordLabel);
                 Password = new JTextField();
-                Password.setBounds(30, 135, 150, 30);
-                Password.setFont(GUIUtil.TimesBold);
+                Password.setBounds(30, 135, 170, 30);
+                Password.setFont(GUIUtil.TimesBoldS2);
                 Password.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                Password.addKeyListener(LogEvent);
                 UserDetailsPannel.add(Password);
-                LoginBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 20);
-                LoginBtn.setText("Log In");
+                MedEaseBtn LoginBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 20);
+                LoginBtn.setBounds(20, 190, 100, 30);
+                LoginBtn.setText("LOGIN");
+                LoginBtn.setForeground(Color.WHITE);
                 LoginBtn.setFont(GUIUtil.TimesBold);
-                LoginBtn.setForeground(GUIUtil.WhiteClr);
-                LoginBtn.setBounds(130, 180, 100, 30);
-                LoginBtn.addActionListener(LogEvent);
                 UserDetailsPannel.add(LoginBtn);
+                MedEaseBtn SetupBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 20);
+                LoginBtn.setBounds(130, 190, 100, 30);
+                LoginBtn.setText("SIGNUP");
+                LoginBtn.setForeground(Color.WHITE);
+                LoginBtn.setFont(GUIUtil.TimesBold);
+                UserDetailsPannel.add(SetupBtn);
             }
         });
     }
