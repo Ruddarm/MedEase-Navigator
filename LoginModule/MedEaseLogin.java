@@ -13,8 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+
+import com.mysql.cj.log.Log;
+
 import javax.swing.JLabel;
 
+import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.GUIUtil;
@@ -25,12 +29,15 @@ public class MedEaseLogin {
     MedEaseBtn SetupBtn; // setup Btn
     LoginEventHandeler LogEvent;
     MedPannel UserDetailsPannel;
-    JLabel UsernameLabel, UserPasswordLabel;
+
+    JLabel UsernameLabel, UserPasswordLabel,warn;
     JLabel MedEaselabel, NavigatorLabel;
     JTextField UserName;
     JTextField Password;
+    DBOperation DBO;
 
-    public MedEaseLogin() {
+    public MedEaseLogin(DBOperation dbo) {
+        this.DBO=dbo;
         LogEvent = new LoginEventHandeler(this);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -56,6 +63,12 @@ public class MedEaseLogin {
                 NavigatorLabel.setForeground(GUIUtil.WhiteClr);
                 NavigatorLabel.setBounds(80, 130, 200, 40);
                 NavigatorLabel.setFont(new Font("Times New Roman", Font.CENTER_BASELINE, 30));
+                warn=new JLabel();
+                warn.setVisible(false);
+                warn.setBounds(50, 20, 150, 20);
+                warn.setFont(GUIUtil.TimesItalic);
+                warn.setForeground(GUIUtil.WarningColor);
+                UserDetailsPannel.add(warn);
                 LoginFrame.add(NavigatorLabel);
                 UsernameLabel = new JLabel("User Name");
                 UsernameLabel.setFont(GUIUtil.TimesBoldS2);
@@ -77,17 +90,19 @@ public class MedEaseLogin {
                 Password.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 UserDetailsPannel.add(Password);
 
-                MedEaseBtn SetupBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 20);
+                MedEaseBtn SetupBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
                 SetupBtn.setBounds(130, 190, 100, 30);
                 SetupBtn.setText("SIGNUP");
                 SetupBtn.setForeground(Color.WHITE);
                 SetupBtn.setFont(GUIUtil.TimesBold);
                 UserDetailsPannel.add(SetupBtn);
-                MedEaseBtn LoginBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 20);
+                MedEaseBtn LoginBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
                 LoginBtn.setBounds(20, 190, 100, 30);
                 LoginBtn.setText("LOGIN");
                 LoginBtn.setForeground(Color.WHITE);
                 LoginBtn.setFont(GUIUtil.TimesBold);
+                LoginBtn.addActionListener(LogEvent);
+                LoginBtn.addKeyListener(LogEvent);
                 UserDetailsPannel.add(LoginBtn);
             }
         });

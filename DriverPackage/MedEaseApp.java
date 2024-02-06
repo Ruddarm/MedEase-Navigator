@@ -10,7 +10,6 @@ package MedEaseNavigator.DriverPackage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-
 import com.mysql.cj.util.TimeUtil;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -43,7 +42,7 @@ public class MedEaseApp {
          * First we will setup connection with database
          */
         // Creating object of DBconnectivity
-        app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "Serene@123#",
+        app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "ruddarmsql",
                 app.MedEaseUtil.DBCon);
         // If true then connection Sucesfull
         if (!app.MedEaseUtil.DbConnectObj.setConnection()) {
@@ -56,14 +55,15 @@ public class MedEaseApp {
         app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
 
-        new MedEaseLogin();
-        // app.MedEaseUtil.SetMainFrame();
-        // new MenuBar(app.MedEaseUtil.MedEaseFrmae);
-        // new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae,app.MedEaseUtil.DBO);
-        // new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
-        // new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
-        // new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
-        // new MedDoctorDashBoard();
+        new MedEaseLogin(app.MedEaseUtil.DBO);
+        
+        app.MedEaseUtil.SetMainFrame();
+        new MenuBar(app.MedEaseUtil.MedEaseFrmae);
+        new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae,app.MedEaseUtil.DBO);
+        new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
+        new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
+        new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
+        new MedDoctorDashBoard();
 
     }
 }
