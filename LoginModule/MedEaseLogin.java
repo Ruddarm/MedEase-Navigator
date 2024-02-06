@@ -90,13 +90,13 @@ public class MedEaseLogin {
                 Password.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 UserDetailsPannel.add(Password);
 
-                MedEaseBtn SetupBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 20);
+                MedEaseBtn SetupBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
                 SetupBtn.setBounds(130, 190, 100, 30);
                 SetupBtn.setText("SIGNUP");
                 SetupBtn.setForeground(Color.WHITE);
                 SetupBtn.setFont(GUIUtil.TimesBold);
                 UserDetailsPannel.add(SetupBtn);
-                MedEaseBtn LoginBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 20);
+                MedEaseBtn LoginBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
                 LoginBtn.setBounds(20, 190, 100, 30);
                 LoginBtn.setText("LOGIN");
                 LoginBtn.setForeground(Color.WHITE);
