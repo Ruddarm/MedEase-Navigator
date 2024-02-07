@@ -36,9 +36,9 @@ public class MedCreatePatient implements ActionListener {
 
     String Number;
 
-    public MedCreatePatient(DBOperation dbo,String Number) {
-        this.Number=Number;
-        this.DBO=dbo;
+    public MedCreatePatient(DBOperation dbo, String Number) {
+        this.Number = Number;
+        this.DBO = dbo;
         CreateDailog = new JDialog();
         CreateDailog.getContentPane().setBackground(GUIUtil.Dark_BLue);
         CreateDailog.setBounds(200, 100, 450, 500);
@@ -69,7 +69,7 @@ public class MedCreatePatient implements ActionListener {
         PidField = new JTextField();
         PidField.setBounds(130, 20, 300, 30);
         PidField.setFont(GUIUtil.TimesBoldS2);
-        PidField.setText("PID"+DBO.GetLastPID());
+        PidField.setText("PID" + DBO.GetLastPID());
         PidField.setEditable(false);
         // PidField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         BackPannel.add(PidField);
@@ -127,22 +127,20 @@ public class MedCreatePatient implements ActionListener {
         // GenderFeild.setFont(GUIUtil.TimesBold);
         // GenderFeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         // BackPannel.add(GenderFeild);
-        String gender[]={"M","F","NA"};
+        String gender[] = { "M", "F", "NA" };
         Genderopt = new JComboBox<String>(gender);
         Genderopt.setBounds(150, 215, 120, 30);
         Genderopt.setFont(GUIUtil.TimesBoldS2);
         Genderopt.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        BackPannel.add(Genderopt);  
+        BackPannel.add(Genderopt);
 
         // HEIGHT LABEL
         Height = new JLabel("HEIGHT");
-<<<<<<< HEAD
+
         Height.setFont(GUIUtil.TimesBoldS2);
         Height.setBounds(305, 180, 100, 30);
-=======
         Height.setFont(GUIUtil.TimesBold);
         Height.setBounds(304, 180, 100, 30);
->>>>>>> 9ba5552436dac00505e23d85c27a7ac890261c81
         BackPannel.add(Height);
 
         // HEIGHT TEXTFIELD
@@ -203,17 +201,17 @@ public class MedCreatePatient implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==AddPatientBtn){
-            if(NameField.getText().trim().isEmpty()){
-                // warn label   
+        if (e.getSource() == AddPatientBtn) {
+            if (NameField.getText().trim().isEmpty()) {
+                // warn label
             }
-            MedEasePatient pt=new MedEasePatient();
+            MedEasePatient pt = new MedEasePatient();
             pt.setStrPID(PidField.getText());
             pt.setName(NameField.getText());
             pt.setNumber(NumberField.getText());
             pt.setDOB(DOBfeild.getText());
             pt.setBlodGroup(GroupFeild.getText());
             // pt.setGender(Number);
-        }    
+        }
     }
 }
