@@ -1,7 +1,7 @@
 package MedEaseNavigator.UtilityModule;
 
 public class MedEaseMedicalReport {
-    private int MRID;
+    private String MRID;
     private String chiefcomplaint;
     private String diagnosis;
     private String prescription;
@@ -13,14 +13,14 @@ public class MedEaseMedicalReport {
     private float fees;
     // try 
     private int PID;
-    private int DID;
-    private MedEaseMedicalReport reporthead;
+    private String DID;
+    private MedEaseMedicalReport next;
     private Boolean IsVlaid;
     /*Getter method */
     public String getChiefcomplaint() {
         return chiefcomplaint;
     }
-    public int getDID() {
+    public String getDID() {
         return DID;
     }
     public String getDiagnosis() {
@@ -41,7 +41,7 @@ public class MedEaseMedicalReport {
     public String getLabtest() {
         return labtest;
     }
-    public int getMRID() {
+    public String getMRID() {
         return MRID;
     }
     public int getPID() {
@@ -50,8 +50,8 @@ public class MedEaseMedicalReport {
     public String getPrescription() {
         return prescription;
     }
-    public MedEaseMedicalReport getReporthead() {
-        return reporthead;
+    public MedEaseMedicalReport getNextReport() {
+        return next;
     }
     public String getStatus() {
         return status;
@@ -63,10 +63,10 @@ public class MedEaseMedicalReport {
     public void setChiefcomplaint(String chiefcomplaint) {
         this.chiefcomplaint = chiefcomplaint;
     }
-    public void setReporthead(MedEaseMedicalReport reporthead) {
-        this.reporthead = reporthead;
+    public void setNextReport(MedEaseMedicalReport nextReport) {
+        this.next = nextReport;
     }
-    public void setDID(int dID) {
+    public void setDID(String dID) {
         DID = dID;
     }
     public void setDiagnosis(String diagnosis) {
@@ -87,7 +87,7 @@ public class MedEaseMedicalReport {
     public void setLabtest(String labtest) {
         this.labtest = labtest;
     }
-    public void setMRID(int mRID) {
+    public void setMRID(String mRID) {
         MRID = mRID;
     }
     public void setPID(int pID) {

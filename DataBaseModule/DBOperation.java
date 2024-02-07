@@ -110,7 +110,7 @@ public class DBOperation implements DBOpertaionInterface {
         try {
             // INSERT INTO patient
             // VALUEs('PID111','Ruddarm','8369517140','2002-10-24','5ft',54,'B+')
-            preparedQuery = DBcon.prepareStatement("INSERT INTO patient VALUEs(?,?,?,?,?,?,?)");
+            preparedQuery = DBcon.prepareStatement("INSERT INTO patient VALUEs(?,?,?,?,?,?,?,?)");
             preparedQuery.setString(1, ("PID" + pt.getPID()));
             preparedQuery.setString(2, pt.getName());
             preparedQuery.setString(3, pt.getNumber());
@@ -118,6 +118,7 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(5, pt.getHeight());
             preparedQuery.setInt(6, pt.getWeight());
             preparedQuery.setString(7, pt.getBlodGroup());
+            preparedQuery.setString(8, pt.getGender());
             preparedQuery.executeUpdate();
             Dbnotfy.setMsg("Patient Added", 1);
             DBcon.commit();

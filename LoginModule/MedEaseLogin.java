@@ -105,7 +105,7 @@ public class MedEaseLogin {
                 LoginBtn.addActionListener(LogEvent);
                 LoginBtn.addKeyListener(LogEvent);
                 UserDetailsPannel.add(LoginBtn);
-
+                
             }
         });
 
