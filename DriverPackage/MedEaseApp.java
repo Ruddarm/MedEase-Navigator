@@ -63,7 +63,7 @@ public class MedEaseApp {
         new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
         new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
         new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
-        // new MedDoctorDashBoard();
+        new MedDoctorDashBoard();
 
     }
 }
