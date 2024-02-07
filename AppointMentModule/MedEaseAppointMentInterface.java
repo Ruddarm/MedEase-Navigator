@@ -108,7 +108,6 @@ public class MedEaseAppointMentInterface {
         NumberLabel.setBounds(30, 60, 150, 20);
         InfoBox.add(NumberLabel);
         NameLabel=new JLabel();
-
-        
     }
+    
 }

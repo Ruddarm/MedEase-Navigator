@@ -21,9 +21,12 @@ import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.SQLException;;
 
-public class MedCreatePatient implements ActionListener {
+public class MedCreatePatient extends KeyAdapter implements  ActionListener {
 
     JDialog CreateDailog;
     JLabel CreateHeadingLabel, pid, PatientName, PatientNumber, DOB, Gender, Height, Weight, BloodGroup, Allergy;
@@ -174,10 +177,10 @@ public class MedCreatePatient implements ActionListener {
         BackPannel.add(GroupFeild);
 
         // Allergy LABEL
-        Allergy = new JLabel("ALLERGY");
-        Allergy.setFont(GUIUtil.TimesBold);
-        Allergy.setBounds(305, 270, 120, 30);
-        BackPannel.add(Allergy);
+        // Allergy = new JLabel("ALLERGY");
+        // Allergy.setFont(GUIUtil.TimesBold);
+        // Allergy.setBounds(305, 270, 120, 30);
+        // BackPannel.add(Allergy);
 
         // Allergy TEXTFIELD
         AllergyField = new JTextField();
@@ -192,15 +195,31 @@ public class MedCreatePatient implements ActionListener {
         AddPatientBtn.setText("Add");
         AddPatientBtn.setForeground(GUIUtil.WhiteClr);
         AddPatientBtn.setFont(GUIUtil.TimesBold);
+        AddPatientBtn.addActionListener(this);
+        AddPatientBtn.addKeyListener(this);
         BackPannel.add(AddPatientBtn);
+
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        int Weight=0;
         if(e.getSource()==AddPatientBtn){
+            
             if(NameField.getText().trim().isEmpty()){
                 // warn label   
+            }
+            if(HeightFeild.getText().length()>5){
+                HeightFeild.setForeground(GUIUtil.WarningColor);
+                return;
+            }
+            try{
+                 Weight = Integer.parseInt(WeightFeild.getText());
+
+            }catch(NumberFormatException ex){
+                WeightFeild.setForeground(GUIUtil.WarningColor);
+                return ;
             }
             MedEasePatient pt=new MedEasePatient();
             pt.setStrPID(PidField.getText());
@@ -208,7 +227,22 @@ public class MedCreatePatient implements ActionListener {
             pt.setNumber(NumberField.getText());
             pt.setDOB(DOBfeild.getText());
             pt.setBlodGroup(GroupFeild.getText());
+            pt.setHeight(Height.getText());
+            pt.setWeight(Weight);
+            pt.setGender(""+Genderopt.getSelectedItem());
+            pt.setIsVlaid(true);
+            
+            	
+
             // pt.setGender(Number);
         }    
+    }
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getSource()==HeightFeild){
+            HeightFeild.setForeground(Color.black);
+        }if(e.getSource()==WeightFeild){
+            HeightFeild.setForeground(Color.BLACK);
+        }
     }
 }

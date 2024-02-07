@@ -55,8 +55,7 @@ public class MedEaseApp {
         app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
 
-        // new MedEaseLogin(app.MedEaseUtil.DBO);
-        
+        new MedEaseLogin(app.MedEaseUtil.DBO);
         app.MedEaseUtil.SetMainFrame();
         new MenuBar(app.MedEaseUtil.MedEaseFrmae);
         new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO);
