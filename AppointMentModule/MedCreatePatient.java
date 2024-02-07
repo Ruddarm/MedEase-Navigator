@@ -111,7 +111,7 @@ public class MedCreatePatient {
         // HEIGHT LABEL
         Height = new JLabel("HEIGHT");
         Height.setFont(GUIUtil.TimesBoldS2);
-        Height.setBounds(304, 180, 100, 30);
+        Height.setBounds(305, 180, 100, 30);
         BackPannel.add(Height);
 
         // HEIGHT TEXTFIELD
