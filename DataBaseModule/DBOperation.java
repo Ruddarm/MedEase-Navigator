@@ -126,6 +126,7 @@ public class DBOperation implements DBOpertaionInterface {
 
         } catch (SQLException ex) {
             Dbnotfy.setMsg("Patient Not added", -1);
+            System.out.println(ex);
             return false;
         }
     }

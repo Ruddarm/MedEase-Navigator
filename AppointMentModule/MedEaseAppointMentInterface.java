@@ -2,22 +2,16 @@
  * @author Ruddarm
  */
 package MedEaseNavigator.AppointMentModule;
-
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import com.mysql.cj.PingTarget;
-import com.mysql.cj.xdevapi.DbDoc;
-
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
-
 public class MedEaseAppointMentInterface {
     /*
      * 
