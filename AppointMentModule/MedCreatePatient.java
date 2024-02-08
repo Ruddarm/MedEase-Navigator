@@ -281,17 +281,17 @@ public class MedCreatePatient extends KeyAdapter implements ActionListener {
                     WeightFeild.setForeground(GUIUtil.WarningColor);
                 }
             }
-            // MedEasePatient pt=new MedEasePatient();
-            // pt.setStrPID(PidField.getText());
-            // pt.setName(NameField.getText());
-            // pt.setNumber(NumberField.getText());
-            // pt.setDOB(DOBfeild.getText());
-            // pt.setBlodGroup(GroupFeild.getText());
-            // pt.setHeight(Height.getText());
-            // pt.setWeight(Weight);
-            // pt.setGender(""+Genderopt.getSelectedItem());
-            // pt.setIsVlaid(true);
-            // DBO.InsertPatient(pt);
+            pt = new MedEasePatient();
+            pt.setStrPID(PidField.getText());
+            pt.setName(NameField.getText());
+            pt.setNumber(NumberField.getText());
+            pt.setDOB(DOBfeild.getText());
+            pt.setBlodGroup(GroupFeild.getText());
+            pt.setHeight(Height.getText());
+            pt.setWeight(Weight);
+            pt.setGender("" + Genderopt.getSelectedItem());
+            pt.setIsVlaid(true);
+            DBO.InsertPatient(pt);
 
         }
     }

@@ -43,6 +43,7 @@ public class MedDoctorDashBoard {
         ProfielBox.setBounds(135, 20, 150, 150);
         BackPannel.add(ProfielBox);
         InfoBox = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 5);
+        InfoBox.setLayout(null);
         // InfoBox.setBounds(305, 20, 1000, 150); for 15inch
         InfoBox.setBounds(305, 20, 850, 150);
         BackPannel.add(InfoBox);
@@ -128,6 +129,5 @@ public class MedDoctorDashBoard {
         jsp = new JScrollPane(MediclReportTable);
         jsp.setBounds(200, 180, 900, 250);
         BackPannel.add(jsp);
-
     }
 }
