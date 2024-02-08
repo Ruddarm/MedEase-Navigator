@@ -58,6 +58,11 @@ public class MedDoctorDashBoard {
         MedicalReportBtn.setBounds(500, 450, 150, 40);
         BackPannel.add(MedicalReportBtn);
 
+        Update = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
+        Update.setText("UPDATE");
+        Update.setBounds(790, 115, 100, 30);
+        InfoBox.add(Update);
+
         PID = new JLabel("PID");
         PID.setFont(GUIUtil.TimesBoldS2);
         PID.setBounds(10, 10, 100, 30);
@@ -80,18 +85,18 @@ public class MedDoctorDashBoard {
 
         Gender = new JLabel("Gender");
         Gender.setFont(GUIUtil.TimesBoldS2);
-        Gender.setBounds(180, 120, 100, 30);
+        Gender.setBounds(150, 120, 100, 30);
         InfoBox.add(Gender);
 
-        // BloodGrup = new JLabel("Blood Group");
-        // BloodGrup.setFont(GUIUtil.TimesBoldS2);
-        // BackPannel.setBounds(210, 120, 100, 30);
-        // InfoBox.add(BloodGrup);
+        BloodGrup = new JLabel("Blood Group");
+        BloodGrup.setFont(GUIUtil.TimesBoldS2);
+        BloodGrup.setBounds(260, 120, 120, 30);
+        InfoBox.add(BloodGrup);
 
-        // Heigh = new JLabel("Height");
-        // Heigh.setFont(GUIUtil.TimesBoldS2);
-        // Heigh.setBounds(210, 120, 100, 30);
-        // InfoBox.add(Heigh);
+        Heigh = new JLabel("Height");
+        Heigh.setFont(GUIUtil.TimesBoldS2);
+        Heigh.setBounds(370, 120, 100, 30);
+        InfoBox.add(Heigh);
 
         // Weight = new JLabel("Weight");
         // Weight.setFont(GUIUtil.TimesBoldS2);

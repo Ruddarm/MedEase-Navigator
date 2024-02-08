@@ -22,9 +22,11 @@ import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-public class MedCreatePatient implements ActionListener {
+public class MedCreatePatient extends KeyAdapter implements ActionListener {
 
     JDialog CreateDailog;
     JLabel CreateHeadingLabel, pid, PatientName, PatientNumber, DOB, Gender, Height, Weight, BloodGroup, Allergy;
@@ -152,6 +154,11 @@ public class MedCreatePatient implements ActionListener {
         BackPannel.add(Yearopt);
 
         // GENDER LABEL
+        DOBfeild = new JTextField();
+        DOBfeild.setBounds(15, 215, 120, 30);
+        DOBfeild.setFont(GUIUtil.TimesBold);
+        DOBfeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
         Gender = new JLabel("GENDER");
         Gender.setFont(GUIUtil.TimesBold);
         Gender.setBounds(305, 180, 100, 30);
@@ -183,6 +190,7 @@ public class MedCreatePatient implements ActionListener {
         HeightFeild.setBounds(15, 305, 120, 30);
         HeightFeild.setFont(GUIUtil.TimesBold);
         HeightFeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        HeightFeild.addKeyListener(this);
         BackPannel.add(HeightFeild);
 
         // WEIGHT LABEL
@@ -196,6 +204,7 @@ public class MedCreatePatient implements ActionListener {
         WeightFeild.setBounds(150, 305, 120, 30);
         WeightFeild.setFont(GUIUtil.TimesBold);
         WeightFeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        WeightFeild.addKeyListener(this);
         BackPannel.add(WeightFeild);
 
         // BLOODGRP LABEL
@@ -209,6 +218,7 @@ public class MedCreatePatient implements ActionListener {
         GroupFeild.setBounds(290, 305, 120, 30);
         GroupFeild.setFont(GUIUtil.TimesBold);
         GroupFeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        GroupFeild.addKeyListener(this);
         BackPannel.add(GroupFeild);
 
         // Allergy LABEL
@@ -230,23 +240,70 @@ public class MedCreatePatient implements ActionListener {
         AddPatientBtn.setText("Add");
         AddPatientBtn.setForeground(GUIUtil.WhiteClr);
         AddPatientBtn.setFont(GUIUtil.TimesBold);
+        AddPatientBtn.addActionListener(this);
+        AddPatientBtn.addKeyListener(this);
         BackPannel.add(AddPatientBtn);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if (e.getSource() == AddPatientBtn) {
             if (NameField.getText().trim().isEmpty()) {
                 // warn label
             }
             MedEasePatient pt = new MedEasePatient();
-            pt.setStrPID(PidField.getText());
-            pt.setName(NameField.getText());
-            pt.setNumber(NumberField.getText());
-            pt.setDOB(DOBfeild.getText());
-            pt.setBlodGroup(GroupFeild.getText());
-            // pt.setGender(Number);
+            int Weight = 0;
+            if (e.getSource() == AddPatientBtn) {
+
+                System.out.println("btn click");
+                if (NameField.getText().trim().isEmpty()) {
+                    // warn label
+                }
+                if (HeightFeild.getText().length() > 5) {
+                    System.out.println("true");
+                    HeightFeild.setForeground(GUIUtil.WarningColor);
+                    return;
+                }
+                if (GroupFeild.getText().length() > 3) {
+                    GroupFeild.setForeground(GUIUtil.WarningColor);
+                    return;
+                }
+                try {
+                    Weight = Integer.parseInt(WeightFeild.getText());
+
+                } catch (NumberFormatException ex) {
+                    System.out.println(ex);
+                    WeightFeild.setForeground(GUIUtil.WarningColor);
+                }
+            }
+            // MedEasePatient pt=new MedEasePatient();
+            // pt.setStrPID(PidField.getText());
+            // pt.setName(NameField.getText());
+            // pt.setNumber(NumberField.getText());
+            // pt.setDOB(DOBfeild.getText());
+            // pt.setBlodGroup(GroupFeild.getText());
+            // pt.setHeight(Height.getText());
+            // pt.setWeight(Weight);
+            // pt.setGender(""+Genderopt.getSelectedItem());
+            // pt.setIsVlaid(true);
+            // DBO.InsertPatient(pt);
+
         }
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        if (e.getSource() == HeightFeild) {
+            HeightFeild.setForeground(Color.black);
+        }
+        if (e.getSource() == WeightFeild) {
+            HeightFeild.setForeground(Color.BLACK);
+        }
+        if (e.getSource() == BloodGroup) {
+            BloodGroup.setForeground(Color.black);
+        }
+    }
+
 }
