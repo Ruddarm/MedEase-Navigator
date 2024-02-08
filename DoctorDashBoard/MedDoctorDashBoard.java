@@ -45,23 +45,58 @@ public class MedDoctorDashBoard {
         InfoBox = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 5);
         // InfoBox.setBounds(305, 20, 1000, 150); for 15inch
         InfoBox.setBounds(305, 20, 850, 150);
-
         BackPannel.add(InfoBox);
+
         SetMedicalReportTable();
         GetPatitentBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
         GetPatitentBtn.setText("Get Patient");
         GetPatitentBtn.setBounds(800, 450, 150, 40);
         BackPannel.add(GetPatitentBtn);
 
-        PID = new JLabel(PID);
-        PID.setFont(GUIUtil.TimesBold);
-        PID.setBounds(10, 20, 100, 30);
-        InfoBox.add(PID);
-
         MedicalReportBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
         MedicalReportBtn.setText("Medical Report");
         MedicalReportBtn.setBounds(500, 450, 150, 40);
         BackPannel.add(MedicalReportBtn);
+
+        PID = new JLabel("PID");
+        PID.setFont(GUIUtil.TimesBoldS2);
+        PID.setBounds(10, 10, 100, 30);
+        InfoBox.add(PID);
+
+        Name = new JLabel("Name");
+        Name.setFont(GUIUtil.TimesBoldS2);
+        Name.setBounds(10, 50, 100, 30);
+        InfoBox.add(Name);
+
+        Number = new JLabel("Number");
+        Number.setFont(GUIUtil.TimesBoldS2);
+        Number.setBounds(10, 90, 100, 30);
+        InfoBox.add(Number);
+
+        Age = new JLabel("Age");
+        Age.setFont(GUIUtil.TimesBoldS2);
+        Age.setBounds(110, 120, 100, 30);
+        InfoBox.add(Age);
+
+        Gender = new JLabel("Gender");
+        Gender.setFont(GUIUtil.TimesBoldS2);
+        Gender.setBounds(180, 120, 100, 30);
+        InfoBox.add(Gender);
+
+        // BloodGrup = new JLabel("Blood Group");
+        // BloodGrup.setFont(GUIUtil.TimesBoldS2);
+        // BackPannel.setBounds(210, 120, 100, 30);
+        // InfoBox.add(BloodGrup);
+
+        // Heigh = new JLabel("Height");
+        // Heigh.setFont(GUIUtil.TimesBoldS2);
+        // Heigh.setBounds(210, 120, 100, 30);
+        // InfoBox.add(Heigh);
+
+        // Weight = new JLabel("Weight");
+        // Weight.setFont(GUIUtil.TimesBoldS2);
+        // Weight.setBounds(110, 310, 100, 30);
+        // InfoBox.add(Weight);
 
     }
 
