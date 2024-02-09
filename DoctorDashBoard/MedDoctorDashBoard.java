@@ -91,18 +91,23 @@ public class MedDoctorDashBoard {
 
         BloodGrup = new JLabel("Blood Group");
         BloodGrup.setFont(GUIUtil.TimesBoldS2);
-        BloodGrup.setBounds(250, 120, 120, 30);
+        BloodGrup.setBounds(270, 120, 120, 30);
         InfoBox.add(BloodGrup);
 
         Heigh = new JLabel("Height");
         Heigh.setFont(GUIUtil.TimesBoldS2);
-        Heigh.setBounds(390, 120, 100, 30);
+        Heigh.setBounds(400, 120, 100, 30);
         InfoBox.add(Heigh);
 
         Weight = new JLabel("Weight");
         Weight.setFont(GUIUtil.TimesBoldS2);
-        Weight.setBounds(470, 120, 100, 30);
+        Weight.setBounds(490, 120, 100, 30);
         InfoBox.add(Weight);
+
+        Allergy = new JLabel("Allergy");
+        Allergy.setFont(GUIUtil.TimesBoldS2);
+        Allergy.setBounds(590, 120, 200, 30);
+        InfoBox.add(Allergy);
 
     }
 
