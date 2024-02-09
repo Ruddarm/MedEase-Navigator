@@ -11,9 +11,9 @@ public class AppointmenEventHandling  implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==appoint.AppointmentBtn&&appoint.Patient==null)
         {
-            new MedCreatePatient();
-        }else{
-            
+            new MedCreatePatient(appoint.DBO,appoint.Number);
+        }else if(e.getSource()==appoint.AppointmentBtn&&appoint.Patient!=null){
+            new ScheduleAppointment(appoint.DBO, appoint.Patient);
         }
     }
 }
