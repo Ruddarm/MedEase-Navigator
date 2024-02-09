@@ -25,9 +25,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.time.format.DateTimeFormatter;
 
 public class MedCreatePatient extends KeyAdapter implements ActionListener {
-
     JDialog CreateDailog;
     JLabel CreateHeadingLabel, pid, PatientName, PatientNumber, DOB, Gender, Height, Weight, BloodGroup, Allergy;
     MedPannel BackPannel;
@@ -37,6 +37,8 @@ public class MedCreatePatient extends KeyAdapter implements ActionListener {
     DBOperation DBO;
     JComboBox<String> Genderopt;
     JComboBox<String> Dateopt;
+    int intpid;
+
     JComboBox<String> Monthopt;
     JComboBox<String> Yearopt;
     DefaultListCellRenderer LR;
@@ -76,7 +78,8 @@ public class MedCreatePatient extends KeyAdapter implements ActionListener {
         PidField = new JTextField();
         PidField.setBounds(130, 20, 300, 30);
         PidField.setFont(GUIUtil.TimesBoldS2);
-        PidField.setText("PID" + DBO.GetLastPID());
+        intpid=DBO.GetLastPID();
+        PidField.setText("PID" + intpid);
         PidField.setEditable(false);
         // PidField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         BackPannel.add(PidField);
@@ -125,7 +128,7 @@ public class MedCreatePatient extends KeyAdapter implements ActionListener {
         LR = new DefaultListCellRenderer();
         LR.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
 
-        String Day[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "14", "15", "16", "17", "18",
+        String Day[] = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "14", "15", "16", "17", "18",
                 "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
         Dateopt = new JComboBox<String>(Day);
         Dateopt.setBounds(15, 215, 60, 30);
@@ -157,10 +160,10 @@ public class MedCreatePatient extends KeyAdapter implements ActionListener {
         BackPannel.add(Yearopt);
 
         // GENDER LABEL
-        DOBfeild = new JTextField();
-        DOBfeild.setBounds(15, 215, 120, 30);
-        DOBfeild.setFont(GUIUtil.TimesBold);
-        DOBfeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        // DOBfeild = new JTextField();
+        // DOBfeild.setBounds(15, 215, 120, 30);
+        // DOBfeild.setFont(GUIUtil.TimesBold);
+        // DOBfeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         Gender = new JLabel("GENDER");
         Gender.setFont(GUIUtil.TimesBold);
@@ -284,14 +287,24 @@ public class MedCreatePatient extends KeyAdapter implements ActionListener {
             pt = new MedEasePatient();
             pt.setStrPID(PidField.getText());
             pt.setName(NameField.getText());
+            pt.setPID(Weight);
             pt.setNumber(NumberField.getText());
-            pt.setDOB(DOBfeild.getText());
+            String mnth = ""+ (1+Monthopt.getSelectedIndex());
+            System.out.println(mnth);
+            String date= ""+Yearopt.getSelectedItem()+"-"+mnth+"-"+Dateopt.getSelectedItem();
+            pt.setDOB(date);
             pt.setBlodGroup(GroupFeild.getText());
-            pt.setHeight(Height.getText());
+            pt.setHeight(HeightFeild.getText());
             pt.setWeight(Weight);
             pt.setGender("" + Genderopt.getSelectedItem());
             pt.setIsVlaid(true);
-            DBO.InsertPatient(pt);
+            pt.setPID(intpid);
+            if(DBO.InsertPatient(pt)){  
+                
+                CreateDailog.dispose();
+                new ScheduleAppointment(DBO, pt);
+            }
+
 
         }
     }
