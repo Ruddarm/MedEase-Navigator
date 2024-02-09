@@ -38,11 +38,12 @@ public class MedEaseApp {
 
     public static void main(String[] args) {
         MedEaseApp app = new MedEaseApp();
+        System.out.println(LocalDate.now());
         /*
          * First we will setup connection with database
          */
         // Creating object of DBconnectivity
-        app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "Serene@123#",
+        app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "ruddarmsql",
                 app.MedEaseUtil.DBCon);
         // If true then connection Sucesfull
         if (!app.MedEaseUtil.DbConnectObj.setConnection()) {
@@ -54,7 +55,6 @@ public class MedEaseApp {
         }
         app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
-
         new MedEaseLogin(app.MedEaseUtil.DBO);
         app.MedEaseUtil.SetMainFrame();
         new MenuBar(app.MedEaseUtil.MedEaseFrmae);
