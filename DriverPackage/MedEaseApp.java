@@ -42,7 +42,7 @@ public class MedEaseApp {
          * First we will setup connection with database
          */
         // Creating object of DBconnectivity
-        app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "Serene@123#",
+        app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "niks",
                 app.MedEaseUtil.DBCon);
         // If true then connection Sucesfull
         if (!app.MedEaseUtil.DbConnectObj.setConnection()) {
