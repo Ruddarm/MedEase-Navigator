@@ -15,7 +15,7 @@ import MedEaseNavigator.UtilityModule.GUIUtil;
 public class WaitingInterface {
     MedPannel BackPannel;
     MedPannel FrontPannel;
-    JLabel WaitingLable;
+    JLabel WaitingList;
     JScrollPane jsp;
     JTable WattingTable;
     DefaultTableModel Dtm;
@@ -30,6 +30,13 @@ public class WaitingInterface {
         FrontPannel = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 0);
         FrontPannel.setBounds(0, 50, 500, 250);
         BackPannel.add(FrontPannel);
+
+        JLabel WaitingList = new JLabel("WAITING LIST");
+        WaitingList.setForeground(GUIUtil.WhiteClr);
+        WaitingList.setFont(GUIUtil.TimesBoldS2);
+        WaitingList.setBounds(190, 20, 200, 20);
+        BackPannel.add(WaitingList);
+
         SetWaitingTable();
 
     }
@@ -43,11 +50,10 @@ public class WaitingInterface {
         WattingTable = new JTable(Dtm);
         jsp = new JScrollPane(WattingTable);
         jsp.setBounds(0, 0, 500, 250);
-        FrontPannel.add(jsp);   
+        FrontPannel.add(jsp);
         for (int i = 0; i < WattingTable.getColumnCount(); i++) {
             WattingTable.getColumnModel().getColumn(i).setCellRenderer(DashBoardUtil.render);
         }
-
 
     }
 

@@ -17,9 +17,7 @@ public class AppointMentInterface {
     JTableHeader JTh;
     DefaultTableModel DTM;
     JScrollPane jsp;
-    String TabelHead[] = {
-    "PID", "Name", "Number", "Status", "Time Slot"
-    };
+    String TabelHead[] = { "PID", "Name", "Number", "Status", "Time Slot" };
 
     public AppointMentInterface(JFrame MedEaseFrame) {
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 20);
@@ -30,11 +28,12 @@ public class AppointMentInterface {
         FrontPannel.setLayout(null);
         BackPannel.add(FrontPannel);
         MedEaseFrame.add(BackPannel);
-        JLabel TodayLabel = new JLabel("Today's Appointment");
+        JLabel TodayLabel = new JLabel("TODAY'S APPOINTMENT");
         TodayLabel.setForeground(GUIUtil.WhiteClr);
         TodayLabel.setFont(GUIUtil.TimesBoldS2);
-        TodayLabel.setBounds(10, 20, 200, 20);
+        TodayLabel.setBounds(160, 20, 300, 20);
         BackPannel.add(TodayLabel);
+
         SetTable();
 
     }
