@@ -31,6 +31,11 @@ public class PaymentInterface {
         FrontPannel = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 0);
         FrontPannel.setBounds(0, 50, 500, 200);
         BackPannel.add(FrontPannel);
+        PaymentLble = new JLabel("PAYMENT");
+        PaymentLble.setForeground(GUIUtil.WhiteClr);
+        PaymentLble.setFont(GUIUtil.TimesBoldS2);
+        PaymentLble.setBounds(195, 20, 200, 20);
+        BackPannel.add(PaymentLble);
         SetPaymentTable();
 
     }
