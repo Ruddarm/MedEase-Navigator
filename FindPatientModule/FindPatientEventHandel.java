@@ -33,8 +33,6 @@ public class FindPatientEventHandel implements ActionListener {
                 new MedEaseAppointMentInterface(Patient,findpteint.DBO,Number);
             }
 
-        } else {
-
         }
 
     }

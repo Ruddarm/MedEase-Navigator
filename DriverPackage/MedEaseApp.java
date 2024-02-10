@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.PaymentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.WaitingInterface;
+import MedEaseNavigator.AppointMentModule.UpdateAppointStatus;
 import MedEaseNavigator.DataBaseModule.DBConnectivity;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.DoctorDashBoard.MedDoctorDashBoard;
@@ -63,7 +64,7 @@ public class MedEaseApp {
         new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
         new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
         new MedDoctorDashBoard();
-
+        new UpdateAppointStatus(null, null, null);
     }
 }
 

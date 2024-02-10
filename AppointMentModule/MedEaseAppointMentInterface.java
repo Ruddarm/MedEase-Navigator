@@ -68,13 +68,15 @@ public class MedEaseAppointMentInterface {
         PatientBox.add(AppointmentBtn);
 
         ViewBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.WhiteClr, null, 10);
-        ViewBtn.setText("View ");
+        ViewBtn.setText("View Details ");
         ViewBtn.setForeground(GUIUtil.WhiteClr);
         ViewBtn.setFont(GUIUtil.TimesBold);
         ViewBtn.setBounds(250,160,150,40);;
         PatientBox.add(ViewBtn);
         AppointmentEvenetHanldingObj = new AppointmenEventHandling(this);
         AppointmentBtn.addActionListener(AppointmentEvenetHanldingObj);
+        ViewBtn.addActionListener(AppointmentEvenetHanldingObj);
+
         if(Patient==null){
             ViewBtn.setVisible(false);
             WarngingLabel =new JLabel();

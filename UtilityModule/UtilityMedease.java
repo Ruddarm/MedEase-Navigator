@@ -30,7 +30,8 @@ public class UtilityMedease {
         MedEaseFrmae.getContentPane().setBackground(GUIUtil.Base_Background);
         MedEaseFrmae.setVisible(true);
         MedEaseFrmae.setLayout(null);
-        MedEaseFrmae.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        MedEaseFrmae.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        MedEaseFrmae.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /*
