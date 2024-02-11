@@ -190,7 +190,7 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(7, MedicalReport.getSymptoms());
             preparedQuery.setString(8, MedicalReport.getLabtest());
             preparedQuery.setString(9, MedicalReport.getStatus());
-            preparedQuery.setFloat(10, MedicalReport.getFees());
+            preparedQuery.setDouble(10, MedicalReport.getFees());
             preparedQuery.setString(11, "PID" + MedicalReport.getPID());
             preparedQuery.setString(12, "DOC" + MedicalReport.getDID());
 

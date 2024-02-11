@@ -66,7 +66,7 @@ public class MedEaseApp {
         new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
         // new MedDoctorDashBoard();
         // new UpdateAppointStatus(null, null, null);
-        new ViewMedicalReport(null, null);
+        new ViewMedicalReport(null, null,null);
     }
 }
 

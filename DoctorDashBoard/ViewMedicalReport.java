@@ -1,5 +1,7 @@
 package MedEaseNavigator.DoctorDashBoard;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
@@ -7,15 +9,17 @@ import java.awt.*;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.UtilityModule.GUIUtil;
+import MedEaseNavigator.UtilityModule.MedEaseDoctor;
+import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 
-public class ViewMedicalReport extends KeyAdapter {
+public class ViewMedicalReport extends KeyAdapter implements ActionListener {
     JDialog ViewBoxl;
     JTextField PidField, NameField, NumberFeild, MRIDFeild, DoctorName, FeesArea, PaidAmountArea;
     JTextArea ChiefArea, DiagnosisArea, PrescriptionArea, FollowUPAdivceArea, SymptompsArea, LabTestArea;
     JLabel ChiefLabel, Chiefmaxchar, DiagnosisLabel, Diagnosismaxchar, PrescriptionLabel, PrecriptionMaxChar,
             FollowUpAdviceLabel, FollowUPAdivceMaxChar, SymptomsLabel, SymptomsMaxChar, LabTestLabel, LabTextMaxChar,
-            StatusLabel, FeesLabel, PaidLabel;
+            StatusLabel, FeesLabel, PaidLabel, WarnLabel;
     Boolean view = false;
     DBOperation DBO;
     MedEasePatient pt;
@@ -32,14 +36,20 @@ public class ViewMedicalReport extends KeyAdapter {
     };
     Boolean isvalid = true;
     MedEaseBtn UpdateBtn;
+    MedEaseMedicalReport MedicalReport;
+    MedEaseDoctor Doc;
 
-    public ViewMedicalReport(MedEasePatient pt, DBOperation dbo) {
+    public ViewMedicalReport(MedEasePatient pt, DBOperation dbo, MedEaseDoctor doc) {
+        this.pt = pt;
+        this.DBO = dbo;
+        this.Doc = doc;
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 ViewBoxl = new JDialog();
                 // pt=pt;
                 // this.DBO=dbo;
+
                 ViewBoxl.setBounds(100, 0, 1000, 700);
                 ViewBoxl.getContentPane().setBackground(GUIUtil.Base_Background);
                 ViewBoxl.setLayout(null);
@@ -212,6 +222,12 @@ public class ViewMedicalReport extends KeyAdapter {
                 LabTestJSP.setBounds(10, 475, 810, 80);
                 JSPpane.add(LabTestJSP);
 
+                WarnLabel = new JLabel("Enter Valid amount");
+                WarnLabel.setForeground(GUIUtil.WarningColor);
+                WarnLabel.setFont(GUIUtil.TimesItalicwarn);
+                WarnLabel.setVisible(false);
+                WarnLabel.setBounds(480, 560, 150, 20);
+                JSPpane.add(WarnLabel);
                 StatusLabel = new JLabel("Status : ");
                 StatusLabel.setBounds(30, 585, 100, 30);
                 StatusLabel.setFont(GUIUtil.TimesBold);
@@ -236,6 +252,7 @@ public class ViewMedicalReport extends KeyAdapter {
                 JSPpane.add(PaidLabel);
 
                 PaidAmountArea = new JTextField();
+                PaidAmountArea.setText("0");
                 PaidAmountArea.setBounds(650, 585, 150, 30);
                 PaidAmountArea.setFont(GUIUtil.TimesBold);
                 JSPpane.add(PaidAmountArea);
@@ -306,14 +323,14 @@ public class ViewMedicalReport extends KeyAdapter {
         } else if (e.getSource() == FollowUPAdivceArea) {
             FollowUPText = FollowUPAdivceArea.getText();
             int len = FollowUPText.length();
-            if (len > 2000) {
+            if (len > 1000) {
                 FollowUPAdivceMaxChar.setForeground(GUIUtil.WarningColor);
                 isvalid = false;
             } else {
                 FollowUPAdivceMaxChar.setForeground(GUIUtil.BlackClr);
                 isvalid = true;
             }
-            FollowUPAdivceMaxChar.setText(len + "/2000");
+            FollowUPAdivceMaxChar.setText(len + "/1000");
         } else if (e.getSource() == LabTestArea) {
             LabTestText = FollowUPAdivceArea.getText();
             int len = LabTestText.length();
@@ -336,6 +353,39 @@ public class ViewMedicalReport extends KeyAdapter {
         PrescriptionArea.addKeyListener(this);
         FollowUPAdivceArea.addKeyListener(this);
         LabTestArea.addKeyListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        WarnLabel.setVisible(false);
+        if (e.getSource() == UpdateBtn & isvalid) {
+            double Fees;
+            double Paid;
+            try {
+                Fees = Double.parseDouble(FeesArea.getText());
+                Paid = Double.parseDouble(PaidAmountArea.getText());
+
+            } catch (NumberFormatException ex) {
+                // System.out.println("number error");
+                WarnLabel.setVisible(true);
+                return;
+            }
+            MedicalReport = new MedEaseMedicalReport();
+            MedicalReport.setMRID(MRIDFeild.getText());
+            MedicalReport.setPID(PidField.getText());
+            MedicalReport.setDID(Doc.getDID());
+            MedicalReport.setChiefcomplaint(ChiefArea.getText());
+            MedicalReport.setDiagnosis(DiagnosisArea.getText());
+            MedicalReport.setSymptoms(SymptompsArea.getText());
+            MedicalReport.setPrescription(PrescriptionArea.getText());
+            MedicalReport.setFollowupadvice(FollowUPAdivceArea.getText());
+            MedicalReport.setLabtest(LabTestArea.getText());
+            MedicalReport.setFees(Fees);
+            MedicalReport.setPaid(Paid);
+            
+            DBO.InsertMedicalHistory(MedicalReport);
+
+        }
     }
 
 }
