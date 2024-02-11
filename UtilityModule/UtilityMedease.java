@@ -31,7 +31,7 @@ public class UtilityMedease {
         MedEaseFrmae.setVisible(true);
         MedEaseFrmae.setLayout(null);
         MedEaseFrmae.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        MedEaseFrmae.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // MedEaseFrmae.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /*

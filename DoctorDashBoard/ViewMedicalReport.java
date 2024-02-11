@@ -1,39 +1,37 @@
 package MedEaseNavigator.DoctorDashBoard;
 
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
-
-import com.mysql.cj.jdbc.JdbcPreparedStatement;
-import com.mysql.cj.xdevapi.JsonArray;
-
 import java.awt.*;
-
-import javax.swing.*;
 import MedEaseNavigator.DataBaseModule.DBOperation;
-import MedEaseNavigator.MedEaseComponent.MedPannel;
+import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 
 public class ViewMedicalReport extends KeyAdapter {
     JDialog ViewBoxl;
-    JTextField PidField, NameField, NumberFeild, MRIDFeild, DoctorName;
-    JTextArea ChiefArea, DiagnosisArea, PrescriptionArea, FollowUPAdivceArea, SymptompsArea,LabTestArea;
+    JTextField PidField, NameField, NumberFeild, MRIDFeild, DoctorName, FeesArea, PaidAmountArea;
+    JTextArea ChiefArea, DiagnosisArea, PrescriptionArea, FollowUPAdivceArea, SymptompsArea, LabTestArea;
     JLabel ChiefLabel, Chiefmaxchar, DiagnosisLabel, Diagnosismaxchar, PrescriptionLabel, PrecriptionMaxChar,
-            FollowUpAdviceLabel, FollowUPAdivceMaxChar, SymptomsLabel, SymptomsMaxChar,LabTestLabel,LabTextMaxChar;
-
+            FollowUpAdviceLabel, FollowUPAdivceMaxChar, SymptomsLabel, SymptomsMaxChar, LabTestLabel, LabTextMaxChar,
+            StatusLabel, FeesLabel, PaidLabel;
     Boolean view = false;
     DBOperation DBO;
     MedEasePatient pt;
-    String chieftext, DaigText;
-    JScrollPane JSPBack, DiganosisJSP, PrescriptionJSP, FollowUPAdivceJSP, SymptompsJSP,LabTestJSP;
+    String chieftext, DaigText, SympText, FollowUPText, PrectptionText, LabTestText, FeesText, PaidText;
+    JScrollPane JSPBack, DiganosisJSP, PrescriptionJSP, FollowUPAdivceJSP, SymptompsJSP, LabTestJSP;
     JViewport viewp;
     JPanel JSPpane;
     JScrollBar jsb;
     JComboBox<String> StatusOpt;
-
+    String Option[] = {
+            "Open",
+            "Pending",
+            "Paid"
+    };
+    Boolean isvalid = true;
+    MedEaseBtn UpdateBtn;
 
     public ViewMedicalReport(MedEasePatient pt, DBOperation dbo) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -108,14 +106,13 @@ public class ViewMedicalReport extends KeyAdapter {
                 ChiefArea = new JTextArea();
                 ChiefArea.setBounds(75, 75, 830, 35);
                 ChiefArea.setFont(GUIUtil.TimesBoldS2);
-                addlistner();
                 ViewBoxl.add(ChiefArea);
                 /*
                  * setting jsp
                  */
                 viewp = new JViewport();
                 // JSPpane = new MedPannel(GUIUtil.MedEaseGrey, GUIUtil.WhiteClr, null, 0);
-                JSPpane =new JPanel();
+                JSPpane = new JPanel();
                 // JSPpane.setSize(830, 800);
                 JSPpane.setBackground(GUIUtil.MedEaseGrey);
                 JSPpane.setLayout(null);
@@ -198,20 +195,15 @@ public class ViewMedicalReport extends KeyAdapter {
                 FollowUPAdivceJSP.setBounds(10, 365, 810, 80);
                 JSPpane.add(FollowUPAdivceJSP);
 
-                JSPBack = new JScrollPane(JSPpane);
-                JSPBack.setBounds(75, 120, 850, 500);
-                JSPpane.setPreferredSize(new Dimension(830, 800));
-                ViewBoxl.add(JSPBack);
-
-                LabTestLabel=new JLabel();
+                LabTestLabel = new JLabel();
                 LabTestLabel = new JLabel("Lab Test");
                 LabTestLabel.setBounds(10, 450, 810, 20);
                 LabTestLabel.setFont(GUIUtil.TimesBold);
                 JSPpane.add(LabTestLabel);
-                LabTestLabel = new JLabel("0/200");
-                LabTestLabel.setBounds(750, 450, 100, 20);
-                LabTestLabel.setFont(GUIUtil.TimesItalicwarn);
-                JSPpane.add(LabTestLabel);
+                LabTextMaxChar = new JLabel("0/2000");
+                LabTextMaxChar.setBounds(750, 450, 100, 20);
+                LabTextMaxChar.setFont(GUIUtil.TimesItalicwarn);
+                JSPpane.add(LabTextMaxChar);
                 LabTestArea = new JTextArea();
                 LabTestArea.setLineWrap(true);
                 LabTestArea.setWrapStyleWord(true);
@@ -219,6 +211,46 @@ public class ViewMedicalReport extends KeyAdapter {
                 LabTestJSP = new JScrollPane(LabTestArea);
                 LabTestJSP.setBounds(10, 475, 810, 80);
                 JSPpane.add(LabTestJSP);
+
+                StatusLabel = new JLabel("Status : ");
+                StatusLabel.setBounds(30, 585, 100, 30);
+                StatusLabel.setFont(GUIUtil.TimesBold);
+                JSPpane.add(StatusLabel);
+                StatusOpt = new JComboBox<String>(Option);
+                StatusOpt.setBounds(140, 585, 100, 30);
+                JSPpane.add(StatusOpt);
+
+                FeesLabel = new JLabel("Fees Rs.");
+                FeesLabel.setBounds(250, 585, 100, 30);
+                FeesLabel.setFont(GUIUtil.TimesBold);
+                JSPpane.add(FeesLabel);
+
+                FeesArea = new JTextField("0");
+                FeesArea.setBounds(360, 585, 150, 30);
+                FeesArea.setFont(GUIUtil.TimesBold);
+                JSPpane.add(FeesArea);
+
+                PaidLabel = new JLabel("Paid  Rs. ");
+                PaidLabel.setBounds(530, 585, 100, 30);
+                PaidLabel.setFont(GUIUtil.TimesBold);
+                JSPpane.add(PaidLabel);
+
+                PaidAmountArea = new JTextField();
+                PaidAmountArea.setBounds(650, 585, 150, 30);
+                PaidAmountArea.setFont(GUIUtil.TimesBold);
+                JSPpane.add(PaidAmountArea);
+                UpdateBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 10);
+                UpdateBtn.setBounds(650, 660, 150, 40);
+                UpdateBtn.setText("Update");
+                UpdateBtn.setFont(GUIUtil.TimesBoldS2);
+                UpdateBtn.setForeground(GUIUtil.WhiteClr);
+                JSPpane.add(UpdateBtn);
+
+                JSPBack = new JScrollPane(JSPpane);
+                JSPBack.setBounds(75, 120, 850, 500);
+                JSPpane.setPreferredSize(new Dimension(830, 800));
+                ViewBoxl.add(JSPBack);
+                addlistner();
             }
         });
     }
@@ -230,13 +262,80 @@ public class ViewMedicalReport extends KeyAdapter {
             int len = chieftext.length();
             if (len > 150) {
                 Chiefmaxchar.setForeground(GUIUtil.WarningColor);
+                isvalid = false;
+            } else {
+                Chiefmaxchar.setForeground(GUIUtil.BlackClr);
+                isvalid = true;
             }
             Chiefmaxchar.setText(len + "/150");
+        } else if (e.getSource() == DiagnosisArea) {
+            DaigText = DiagnosisArea.getText();
+            int len = DaigText.length();
+            if (len > 4000) {
+                Diagnosismaxchar.setForeground(GUIUtil.WarningColor);
+                isvalid = false;
+            } else {
+                Diagnosismaxchar.setForeground(GUIUtil.BlackClr);
+                isvalid = false;
+            }
+            Diagnosismaxchar.setText(len + "/4000");
+        } else if (e.getSource() == SymptompsArea) {
+            SympText = DiagnosisArea.getText();
+            int len = SympText.length();
+            if (len > 1000) {
+                SymptomsMaxChar.setForeground(GUIUtil.WarningColor);
+                isvalid = false;
+            } else {
+                SymptomsMaxChar.setForeground(GUIUtil.BlackClr);
+                isvalid = true;
+            }
+            SymptomsMaxChar.setText(len + "/1000");
+
+        } else if (e.getSource() == PrescriptionArea) {
+            PrectptionText = PrescriptionArea.getText();
+            int len = PrectptionText.length();
+            if (len > 2000) {
+                PrecriptionMaxChar.setForeground(GUIUtil.WarningColor);
+                isvalid = false;
+            } else {
+                PrecriptionMaxChar.setForeground(GUIUtil.BlackClr);
+                isvalid = true;
+            }
+            PrecriptionMaxChar.setText(len + "/2000");
+
+        } else if (e.getSource() == FollowUPAdivceArea) {
+            FollowUPText = FollowUPAdivceArea.getText();
+            int len = FollowUPText.length();
+            if (len > 2000) {
+                FollowUPAdivceMaxChar.setForeground(GUIUtil.WarningColor);
+                isvalid = false;
+            } else {
+                FollowUPAdivceMaxChar.setForeground(GUIUtil.BlackClr);
+                isvalid = true;
+            }
+            FollowUPAdivceMaxChar.setText(len + "/2000");
+        } else if (e.getSource() == LabTestArea) {
+            LabTestText = FollowUPAdivceArea.getText();
+            int len = LabTestText.length();
+            if (len > 2000) {
+                LabTextMaxChar.setForeground(GUIUtil.WarningColor);
+                isvalid = false;
+            } else {
+                LabTextMaxChar.setForeground(GUIUtil.BlackClr);
+                isvalid = true;
+            }
+            LabTextMaxChar.setText(len + "/2000");
         }
+
     }
 
     public void addlistner() {
         ChiefArea.addKeyListener(this);
+        DiagnosisArea.addKeyListener(this);
+        SymptompsArea.addKeyListener(this);
+        PrescriptionArea.addKeyListener(this);
+        FollowUPAdivceArea.addKeyListener(this);
+        LabTestArea.addKeyListener(this);
     }
 
 }
