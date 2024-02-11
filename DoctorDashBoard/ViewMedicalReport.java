@@ -1,10 +1,12 @@
 package MedEaseNavigator.DoctorDashBoard;
+
+import java.awt.LayoutManager;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 import com.mysql.cj.xdevapi.JsonArray;
-
+import java.awt.LayoutManager;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
@@ -12,14 +14,16 @@ import MedEaseNavigator.UtilityModule.MedEasePatient;
 public class ViewMedicalReport extends KeyAdapter {
     JDialog ViewBoxl;
     JTextField PidField, NameField, NumberFeild, MRIDFeild, DoctorName;
-    JTextArea ChiefArea, DiagnosisArea, PrescriptionArea, FollowUPAdivceArea;
-    JLabel ChiefLabel, Chiefmaxchar,DiagnosisLabel,Diagnosismaxchar;
+    JTextArea ChiefArea, DiagnosisArea, PrescriptionArea, FollowUPAdivceArea,SymptompsArea;
+    JLabel ChiefLabel, Chiefmaxchar, DiagnosisLabel, Diagnosismaxchar, PrescriptionLabel, PrecriptionMaxChar,
+            FollowUpAdviceLabel, FollowUPAdivceMaxChar,SymptomsLabel,SymptomsMaxChar;
 
     Boolean view = false;
     DBOperation DBO;
     MedEasePatient pt;
-    String chieftext,DaigText;
-    JScrollPane JSPBack,DiganosisJSP;
+    String chieftext, DaigText;
+    JScrollPane JSPBack, DiganosisJSP, PrescriptionJSP, FollowUPAdivceJSP,SymptompsJSP;
+    JViewport viewp;
 
     public ViewMedicalReport(MedEasePatient pt, DBOperation dbo) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -99,20 +103,99 @@ public class ViewMedicalReport extends KeyAdapter {
                 /*
                  * setting jsp
                  */
-                JSPBack =new JScrollPane();
-                JSPBack.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-                JSPBack.setBounds(75, 120, 830, 500);
-                JSPBack.setLayout(null);
+                viewp=new JViewport();
+                
+                JSPBack = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                JSPBack.setWheelScrollingEnabled(true);
+                // JSPBack.setViewport(viewp);
+                JSPBack.setLayout(new ScrollPaneLayout());
+                // JSPBack.setViewport();
+                // JSPBack.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                
+                JSPBack.setBounds(75, 120, 850, 500);
+                // JSPBack.setBackground(GUIUtil.Dark_BLue);
+                // JSPBack.setLayout(new BorderLayout());
                 ViewBoxl.add(JSPBack);
                 /*
+                 * Diganosis area
+                 */
+                DiagnosisLabel = new JLabel("Diagnosis/Examniation");
+                DiagnosisLabel.setBounds(10, 5, 150, 20);
+                DiagnosisLabel.setFont(GUIUtil.TimesBold);
+                JSPBack.add(DiagnosisLabel);
+                Diagnosismaxchar = new JLabel("0/4000");
+                Diagnosismaxchar.setFont(GUIUtil.TimesItalicwarn);
+                Diagnosismaxchar.setBounds(750, 5, 100, 20);
+                JSPBack.add(Diagnosismaxchar);
+                DiagnosisArea = new JTextArea();
+                DiagnosisArea.setFont(GUIUtil.TimesBold);
+                DiagnosisArea.setLineWrap(true);
+                DiagnosisArea.setWrapStyleWord(true);
+                DiganosisJSP = new JScrollPane(DiagnosisArea);
+                DiganosisJSP.setBounds(10, 30, 810, 100);
+                JSPBack.add(DiganosisJSP);
+                /*
+                 * Prectption area
                  * 
                  */
-                
-                
+                SymptomsLabel=new JLabel("Symptoms");
+                SymptomsLabel.setBounds(10, 135, 100, 20);
+                SymptomsLabel.setFont(GUIUtil.TimesBold);
+                JSPBack.add(SymptomsLabel);
+                /*
+                 * Prescition max char
+                 */
+                SymptomsMaxChar= new JLabel("0/1000");
+                SymptomsMaxChar.setBounds(750, 135, 100, 20);
+                SymptomsMaxChar.setFont(GUIUtil.TimesItalicwarn);
+                JSPBack.add(SymptomsMaxChar);
+                /*
+                 * Prescption area
+                 */
+                SymptompsArea = new JTextArea();
+                SymptompsArea.setFont(GUIUtil.TimesBold);
+                SymptompsArea.setLineWrap(true);
+                SymptompsArea.setWrapStyleWord(true);
+                SymptompsJSP= new JScrollPane(SymptompsArea);
+                SymptompsJSP.setBounds(10, 160, 810, 80);
+                JSPBack.add(SymptompsJSP);
+                /*
+                 * Follow up advice
+                 */
+                PrescriptionLabel =new JLabel("Prescription");
+                PrescriptionLabel.setBounds(10, 245, 810, 20);
+                PrescriptionLabel.setFont(GUIUtil.TimesBold);
+                JSPBack.add(PrescriptionLabel);
+                PrecriptionMaxChar= new JLabel("0/2000");
+                PrecriptionMaxChar.setBounds(750, 245, 100, 20);
+                PrecriptionMaxChar.setFont(GUIUtil.TimesItalicwarn);
+                JSPBack.add(PrecriptionMaxChar);
+                PrescriptionArea=new JTextArea();
+                PrescriptionArea.setLineWrap(true);
+                PrescriptionArea.setWrapStyleWord(true);
+                PrescriptionArea.setFont(GUIUtil.TimesBold);
+                PrescriptionJSP=new JScrollPane(PrescriptionArea);
+                PrescriptionJSP.setBounds(10,265, 810, 70);
+                JSPBack.add(PrescriptionJSP);
 
+                FollowUpAdviceLabel =new JLabel("Follow Up Advice");
+                FollowUpAdviceLabel.setBounds(10, 340, 810, 20);
+                FollowUpAdviceLabel.setFont(GUIUtil.TimesBold);
+                JSPBack.add(FollowUpAdviceLabel);
+                FollowUPAdivceMaxChar= new JLabel("0/1000");
+                FollowUPAdivceMaxChar.setBounds(750, 340, 100, 20);
+                FollowUPAdivceMaxChar.setFont(GUIUtil.TimesItalicwarn);
+                JSPBack.add(FollowUPAdivceMaxChar);
+                FollowUPAdivceArea=new JTextArea();
+                FollowUPAdivceArea.setLineWrap(true);
+                FollowUPAdivceArea.setWrapStyleWord(true);
+                FollowUPAdivceArea.setFont(GUIUtil.TimesBold);
+                FollowUPAdivceJSP=new JScrollPane(FollowUPAdivceArea);
+                FollowUPAdivceJSP.setBounds(10,365, 810, 200);
+                JSPBack.add(FollowUPAdivceJSP);
+                
 
             }
-
 
         });
 
@@ -122,14 +205,15 @@ public class ViewMedicalReport extends KeyAdapter {
     public void keyTyped(KeyEvent e) {
         if (e.getSource() == ChiefArea) {
             chieftext = ChiefArea.getText();
-            int len =chieftext.length();
-            if (len>150) {
+            int len = chieftext.length();
+            if (len > 150) {
                 Chiefmaxchar.setForeground(GUIUtil.WarningColor);
             }
-            Chiefmaxchar.setText(len+"/150");
+            Chiefmaxchar.setText(len + "/150");
         }
     }
-    public void addlistner(){
+
+    public void addlistner() {
         ChiefArea.addKeyListener(this);
     }
 
