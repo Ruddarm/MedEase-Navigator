@@ -2,6 +2,9 @@ package MedEaseNavigator.DoctorDashBoard;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
+
+import com.mysql.cj.xdevapi.JsonArray;
+
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
@@ -10,11 +13,13 @@ public class ViewMedicalReport extends KeyAdapter {
     JDialog ViewBoxl;
     JTextField PidField, NameField, NumberFeild, MRIDFeild, DoctorName;
     JTextArea ChiefArea, DiagnosisArea, PrescriptionArea, FollowUPAdivceArea;
-    JLabel ChiefLabel, Chiefmaxchar;
+    JLabel ChiefLabel, Chiefmaxchar,DiagnosisLabel,Diagnosismaxchar;
+
     Boolean view = false;
     DBOperation DBO;
     MedEasePatient pt;
-    String chieftext;
+    String chieftext,DaigText;
+    JScrollPane JSPBack,DiganosisJSP;
 
     public ViewMedicalReport(MedEasePatient pt, DBOperation dbo) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -23,7 +28,7 @@ public class ViewMedicalReport extends KeyAdapter {
                 ViewBoxl = new JDialog();
                 // pt=pt;
                 // this.DBO=dbo;
-                ViewBoxl.setBounds(100, 0, 1000, 600);
+                ViewBoxl.setBounds(100, 0, 1000, 700);
                 ViewBoxl.getContentPane().setBackground(GUIUtil.Base_Background);
                 ViewBoxl.setLayout(null);
                 ViewBoxl.setVisible(true);
@@ -79,8 +84,8 @@ public class ViewMedicalReport extends KeyAdapter {
                 /*
                  * Chiefl label max character
                  */
-                Chiefmaxchar = new JLabel("0/300");
-                Chiefmaxchar.setBounds(755, 50, 100, 20);
+                Chiefmaxchar = new JLabel("0/150");
+                Chiefmaxchar.setBounds(800, 50, 100, 20);
                 Chiefmaxchar.setFont(GUIUtil.TimesItalicwarn);
                 ViewBoxl.add(Chiefmaxchar);
                 /*
@@ -88,9 +93,22 @@ public class ViewMedicalReport extends KeyAdapter {
                  */
                 ChiefArea = new JTextArea();
                 ChiefArea.setBounds(75, 75, 830, 35);
-                ChiefArea.setFont(GUIUtil.TimesBold);
+                ChiefArea.setFont(GUIUtil.TimesBoldS2);
                 addlistner();
                 ViewBoxl.add(ChiefArea);
+                /*
+                 * setting jsp
+                 */
+                JSPBack =new JScrollPane();
+                JSPBack.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                JSPBack.setBounds(75, 120, 830, 500);
+                JSPBack.setLayout(null);
+                ViewBoxl.add(JSPBack);
+                /*
+                 * 
+                 */
+                
+                
 
 
             }
@@ -108,7 +126,7 @@ public class ViewMedicalReport extends KeyAdapter {
             if (len>150) {
                 Chiefmaxchar.setForeground(GUIUtil.WarningColor);
             }
-            Chiefmaxchar.setText(len+"/300");
+            Chiefmaxchar.setText(len+"/150");
         }
     }
     public void addlistner(){
