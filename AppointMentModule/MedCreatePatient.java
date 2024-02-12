@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
+import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 
@@ -40,10 +41,12 @@ public class MedCreatePatient extends KeyAdapter implements ActionListener {
     JComboBox<String> Monthopt;
     JComboBox<String> Yearopt;
     DefaultListCellRenderer LR;
+    AdminInterface AdminInterface;
 
     String Number;
 
-    public MedCreatePatient(DBOperation dbo, String Number) {
+    public MedCreatePatient(DBOperation dbo, String Number, AdminInterface adminInterface) {
+        this.AdminInterface=adminInterface;
         this.Number = Number;
         this.DBO = dbo;
         CreateDailog = new JDialog();
@@ -301,7 +304,7 @@ public class MedCreatePatient extends KeyAdapter implements ActionListener {
             if(DBO.InsertPatient(pt)){  
                 
                 CreateDailog.dispose();
-                new ScheduleAppointment(DBO, pt);
+                new ScheduleAppointment(DBO, pt,AdminInterface);
             }
 
 

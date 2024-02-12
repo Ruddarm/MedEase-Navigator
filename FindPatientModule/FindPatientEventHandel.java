@@ -3,6 +3,8 @@ package MedEaseNavigator.FindPatientModule;
 import java.awt.event.*;
 
 import java.sql.ResultSet;
+
+import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AppointMentModule.MedEaseAppointMentInterface;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 import MedEaseNavigator.UtilityModule.UtilityMedease;
@@ -30,7 +32,7 @@ public class FindPatientEventHandel implements ActionListener {
                 } else {
                     Patient = null;
                 }
-                new MedEaseAppointMentInterface(Patient,findpteint.DBO,Number);
+                new MedEaseAppointMentInterface(Patient,findpteint.DBO,Number,findpteint.AdminInterfaceObj);
             }
 
         }

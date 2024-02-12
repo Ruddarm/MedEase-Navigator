@@ -18,6 +18,7 @@ public class UtilityMedease {
     public DBConnectivity DbConnectObj; // object to create Database and estabhlish connection with database
     public MedEaseNotify Notify;
     public DBOperation DBO;
+    public AdminInterface Admin;
 
     public UtilityMedease() {
         Notify = new MedEaseNotify();
@@ -31,6 +32,7 @@ public class UtilityMedease {
         MedEaseFrmae.setVisible(true);
         MedEaseFrmae.setLayout(null);
         MedEaseFrmae.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Admin = new AdminInterface();
         // MedEaseFrmae.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 

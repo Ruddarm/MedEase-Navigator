@@ -1,4 +1,14 @@
 package MedEaseNavigator.UtilityModule;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mysql.cj.protocol.Resultset;
+import com.mysql.cj.xdevapi.Result;
+
+import MedEaseNavigator.DataBaseModule.DBOperation;
+import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
+
 public class AppointMent {
     private String Date;
     private String TimeSlot;
@@ -6,8 +16,10 @@ public class AppointMent {
     private String Name;
     private String Status;
     private String intime;
+    private String Number;
     AppointMent nextAppointment;
-    
+
+
     public void setDate(java.lang.String string) {
         Date = string;
     }
@@ -19,7 +31,6 @@ public class AppointMent {
     public void setNextAppointment(AppointMent nextAppointment) {
         this.nextAppointment = nextAppointment;
     }
-    
 
     public void setPID(String pID) {
         PID = pID;
@@ -44,19 +55,36 @@ public class AppointMent {
     public String getPID() {
         return PID;
     }
+
     public String getIntime() {
         return intime;
-    }public AppointMent getNextAppointment() {
+    }
+
+    public AppointMent getNextAppointment() {
         return nextAppointment;
-    }public String getStatus() {
+    }
+
+    public String getStatus() {
         return Status;
-    }public void setIntime(String intime) {
+    }
+
+    public void setIntime(String intime) {
         this.intime = intime;
-    }public void setStatus(String status) {
+    }
+
+    public void setStatus(String status) {
         Status = status;
     }
 
-    public void CreateAppointmentList() {
-
+    public String getNumber() {
+        return Number;
     }
+
+    public void setNumber(String number) {
+        Number = number;
+    }
+    // 'PID111', '01:00:00', '2024-02-11', 'Schedule', '21:45:00', 'Ruddarm',
+    // '8369517140'
+
+
 }

@@ -154,45 +154,45 @@ public class MedEasePatient {
     // # MRID, Cheif_Complaint, Diagnosis, Prescription, FollowUp_Advice,
     // FollowUp_Date, Symptoms, Lab_Test, Status, Fees, Patient_ID, DID
 
-    public static boolean SetMedicalReport(MedEasePatient pt, ResultSet data){
-        if(pt.getReportHead()==null){
+    public static boolean SetMedicalReport(MedEasePatient pt, ResultSet data) {
+        if (pt.getReportHead() == null) {
             MedEaseMedicalReport onenode = new MedEaseMedicalReport();
-            try{
-            onenode.setMRID(data.getString(1));
-            onenode.setChiefcomplaint(data.getString(2));
-            onenode.setDiagnosis(data.getString(3));
-            onenode.setPrescription(data.getString(4));
-            onenode.setFollowupadvice(data.getString(5));   
-            onenode.setFollowupadvice(""+data.getDate(6));
-            onenode.setSymptoms(data.getString(7));
-            onenode.setLabtest(data.getString(8));
-            onenode.setStatus(data.getString(9));
-            onenode.setFees(data.getFloat(10));
-            onenode.setDID(data.getString(11));
-            onenode.setNextReport(null);
-            pt.setReportHead(onenode);
-            }catch(SQLException ex){
-                                System.out.println(ex);
+            try {
+                onenode.setMRID(data.getString(1));
+                onenode.setChiefcomplaint(data.getString(2));
+                onenode.setDiagnosis(data.getString(3));
+                onenode.setPrescription(data.getString(4));
+                onenode.setFollowupadvice(data.getString(5));
+                onenode.setFollowupadvice("" + data.getDate(6));
+                onenode.setSymptoms(data.getString(7));
+                onenode.setLabtest(data.getString(8));
+                onenode.setStatus(data.getString(9));
+                onenode.setFees(data.getFloat(10));
+                onenode.setDID(data.getString(11));
+                onenode.setNextReport(null);
+                pt.setReportHead(onenode);
+            } catch (SQLException ex) {
+                System.out.println(ex);
             }
-        }else{
+        } else {
             pt.setTemp(pt.getReportHead());
-            MedEaseMedicalReport newnode =new MedEaseMedicalReport();
-            try{
-            newnode.setMRID(data.getString(1));
-            newnode.setChiefcomplaint(data.getString(2));
-            newnode.setDiagnosis(data.getString(3));
-            newnode.setPrescription(data.getString(4));
-            newnode.setFollowupadvice(data.getString(5));   
-            newnode.setFollowupadvice(""+data.getDate(6));
-            newnode.setSymptoms(data.getString(7));
-            newnode.setLabtest(data.getString(8));
-            newnode.setStatus(data.getString(9));
-            newnode.setFees(data.getFloat(10));
-            newnode.setDID(data.getString(11));
-            newnode.setNextReport(null);
-            pt.getTemp().setNextReport(newnode);
-            pt.setTemp(newnode);    
-            }catch(SQLException ex){
+            MedEaseMedicalReport newnode = new MedEaseMedicalReport();
+            try {
+                newnode.setMRID(data.getString(1));
+                newnode.setChiefcomplaint(data.getString(2));
+                newnode.setDiagnosis(data.getString(3));
+                newnode.setPrescription(data.getString(4));
+                newnode.setFollowupadvice(data.getString(5));
+                newnode.setFollowupadvice("" + data.getDate(6));
+                newnode.setSymptoms(data.getString(7));
+                newnode.setLabtest(data.getString(8));
+                newnode.setStatus(data.getString(9));
+                newnode.setFees(data.getFloat(10));
+                newnode.setDID(data.getString(11));
+                newnode.setNextReport(null);
+                pt.getTemp().setNextReport(newnode);
+                pt.setTemp(newnode);
+            } catch (SQLException ex) {
                 System.out.println(ex);
             }
         }

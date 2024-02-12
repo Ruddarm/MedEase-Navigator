@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
+import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 public class MedEaseAppointMentInterface {
@@ -25,8 +26,10 @@ public class MedEaseAppointMentInterface {
     MedEasePatient Patient;
     String Number;
     AppointmenEventHandling AppointmentEvenetHanldingObj;
+    AdminInterface AdminInterfaceObj;
 
-    public MedEaseAppointMentInterface(MedEasePatient pt,DBOperation dbo,String Number) {
+    public MedEaseAppointMentInterface(MedEasePatient pt,DBOperation dbo,String Number,AdminInterface AdminInterface) {
+        this.AdminInterfaceObj=AdminInterface;
         this.DBO=dbo;
         PatientBox = new JDialog();
         this.Number=Number;

@@ -1,6 +1,6 @@
 /* This is Our Main Class from where our software will start it is like engine of our software
  * @author Ruddarm
- * @author 
+ * @author Soumya Vinod
  * .
  * .
  * 
@@ -29,6 +29,7 @@ import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
+import MedEaseNavigator.UtilityModule.MedQueue;
 import MedEaseNavigator.UtilityModule.UtilityMedease;
 
 public class MedEaseApp {
@@ -57,16 +58,32 @@ public class MedEaseApp {
         }
         app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
-        // new MedEaseLogin(app.MedEaseUtil.DBO);
+        new MedEaseLogin(app.MedEaseUtil.DBO);
         app.MedEaseUtil.SetMainFrame();
+
+        // while (TodayQueue.Head!=null) {
+        // System.out.println(TodayQueue.Head.getName());
+        // TodayQueue.Head= TodayQueue.Head.getNextAppointment();
+        // }
         new MenuBar(app.MedEaseUtil.MedEaseFrmae);
-        new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO);
-        new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
-        new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
-        new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
-        // new MedDoctorDashBoard();
-        // new UpdateAppointStatus(null, null, null);
-        new ViewMedicalReport(null, null,null);
+        app.MedEaseUtil.Admin.AppointmentInterfaceObj = new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae,
+                app.MedEaseUtil.DBO);
+
+        // AppointMent ap =new AppointMent();
+        // ap.setPID("PID111");
+        // ap.setName("Ruddarm");
+        // ap.setNumber("8369517140");
+        // ap.setStatus("Schedule");
+        // ap.setTimeSlot("1:45 am");
+        // ap.setNextAppointment(null);
+        // AppointementI.SetTable(TodayQueue.Head);
+        app.MedEaseUtil.Admin.WaitingInterfaceObj = new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
+        app.MedEaseUtil.Admin.PaymentInterfaceObj = new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
+        new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO, app.MedEaseUtil.Admin);
+
+        new MedDoctorDashBoard();
+        new UpdateAppointStatus(null, null, null);
+        new ViewMedicalReport(null, null, null);
     }
 }
 
