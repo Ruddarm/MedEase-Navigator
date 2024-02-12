@@ -6,7 +6,7 @@ public class MedEaseMedicalReport {
     private String diagnosis;
     private String prescription;
     private String followupadvice;
-    private String followupdate;
+    private String ReportDate;
     private String symptoms;
     private String labtest;
     private String status;
@@ -33,8 +33,8 @@ public class MedEaseMedicalReport {
     public String getFollowupadvice() {
         return followupadvice;
     }
-    public String getFollowupdate() {
-        return followupdate;
+    public String getReportDate() {
+        return ReportDate;
     }
     public Boolean getIsVlaid() {
         return IsVlaid;
@@ -79,8 +79,8 @@ public class MedEaseMedicalReport {
     public void setFollowupadvice(String followupadvice) {
         this.followupadvice = followupadvice;
     }
-    public void setFollowupdate(String followupdate) {
-        this.followupdate = followupdate;
+    public void setReportDate(String ReportDate) {
+        this.ReportDate = ReportDate;
     }
     public void setIsVlaid(Boolean isVlaid) {
         IsVlaid = isVlaid;

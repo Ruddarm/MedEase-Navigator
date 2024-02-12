@@ -180,19 +180,20 @@ public class DBOperation implements DBOpertaionInterface {
             // INSERT INTO medical_history VALUES ('MRID11','Fever','viral fever
             // ','Crocine','Nothing','null','high
             // temprature','no','close','700','PID111','DOC123')
-            preparedQuery = DBcon.prepareStatement(" INSERT INTO medical_history VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            preparedQuery = DBcon.prepareStatement(" INSERT INTO medical_history VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             preparedQuery.setString(1, "MRID" + MedicalReport.getMRID());
             preparedQuery.setString(2, MedicalReport.getChiefcomplaint());
             preparedQuery.setString(3, MedicalReport.getDiagnosis());
             preparedQuery.setString(4, MedicalReport.getPrescription());
             preparedQuery.setString(5, MedicalReport.getFollowupadvice());
-            preparedQuery.setString(6, MedicalReport.getFollowupdate());
+            preparedQuery.setString(6, MedicalReport.getReportDate());
             preparedQuery.setString(7, MedicalReport.getSymptoms());
             preparedQuery.setString(8, MedicalReport.getLabtest());
             preparedQuery.setString(9, MedicalReport.getStatus());
             preparedQuery.setDouble(10, MedicalReport.getFees());
-            preparedQuery.setString(11, "PID" + MedicalReport.getPID());
-            preparedQuery.setString(12, "DOC" + MedicalReport.getDID());
+            preparedQuery.setDouble(11, MedicalReport.getPaid());
+            preparedQuery.setString(12, "PID" + MedicalReport.getPID());
+            preparedQuery.setString(13, "DOC" + MedicalReport.getDID());
 
             preparedQuery.executeUpdate();
             DBcon.commit();

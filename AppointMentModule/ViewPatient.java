@@ -3,8 +3,6 @@ package MedEaseNavigator.AppointMentModule;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.text.View;
 import javax.swing.JTable;
 
 import MedEaseNavigator.DataBaseModule.DBOperation;

@@ -119,11 +119,12 @@ public class DBConnectivity {
                     "   Diagnosis          varchar(4000)    DEFAULT null," +
                     "   Prescription       varchar(1000)    DEFAULT null," +
                     "   FollowUp_Advice    varchar(500)    DEFAULT null," +
-                    "   FollowUp_Date      Date    DEFAULT null," +
+                    "   ReportDate      Date    DEFAULT null," +
                     "   Symptoms           varchar(500)    DEFAULT null," +
                     "   Lab_Test           varchar(1500)    DEFAULT null," +
                     "   Status             varchar(20)    DEFAULT null," +
-                    "   Fees               int    DEFAULT null," +
+                    "   Fees               double    DEFAULT null," +
+                    "   Paid_Amount         double    DEFault null,"+
                     "   Patient_ID         varchar(40)     ," +
                     "   DID                varchar(40)," +
                     "   FOREIGN KEY(Patient_ID) REFERENCES PATIENT(Patient_ID)," +
@@ -208,5 +209,6 @@ public class DBConnectivity {
             return false;
         }
     }
+    
 
 }

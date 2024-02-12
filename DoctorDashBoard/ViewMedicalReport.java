@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+
 import javax.swing.*;
 import java.awt.*;
 import MedEaseNavigator.DataBaseModule.DBOperation;
@@ -379,10 +381,15 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
             MedicalReport.setSymptoms(SymptompsArea.getText());
             MedicalReport.setPrescription(PrescriptionArea.getText());
             MedicalReport.setFollowupadvice(FollowUPAdivceArea.getText());
+            MedicalReport.setReportDate(""+LocalDate.now());
             MedicalReport.setLabtest(LabTestArea.getText());
             MedicalReport.setFees(Fees);
             MedicalReport.setPaid(Paid);
-            
+            if(Fees==Paid){
+                MedicalReport.setStatus(StatusOpt.getItemAt(2));
+            }else{
+                MedicalReport.setStatus(StatusOpt.getItemAt(1));
+            }
             DBO.InsertMedicalHistory(MedicalReport);
 
         }
