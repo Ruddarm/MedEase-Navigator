@@ -33,9 +33,9 @@ public class ScheduleAppointment implements ActionListener {
     String day[] = { "AM", "PM" };
     AdminInterface AddminInterfaceObj;
 
-    ScheduleAppointment(DBOperation DBO, MedEasePatient Pt,AdminInterface AddminInterfaceObj)  {
+    ScheduleAppointment(DBOperation DBO, MedEasePatient Pt, AdminInterface AddminInterfaceObj) {
         this.DBO = DBO;
-        this.AddminInterfaceObj=AddminInterfaceObj;
+        this.AddminInterfaceObj = AddminInterfaceObj;
         this.PT = Pt;
         ScheduleAppointBox = new JDialog();
         ScheduleAppointBox.setBounds(100, 50, 300, 350);
@@ -118,8 +118,8 @@ public class ScheduleAppointment implements ActionListener {
             appoint.setIntime("" + LocalTime.now().format(formatr));
             DBO.ScheduleAppointment(appoint);
             ScheduleAppointBox.dispose();
-            AddminInterfaceObj.AppointmentInterfaceObj.SetTable();
-            
+            AddminInterfaceObj.AppointmentInterfaceObj.UpdateTable();
+
         }
 
     }

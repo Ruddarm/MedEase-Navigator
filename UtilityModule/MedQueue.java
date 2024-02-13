@@ -2,8 +2,9 @@ package MedEaseNavigator.UtilityModule;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-
+import java.sql.Time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
@@ -25,6 +26,7 @@ public class MedQueue {
      * To add patient in queue
      */
     public void CreateAppointmentList() {
+        DateTimeFormatter formatr = DateTimeFormatter.ofPattern("hh:mm a");
         try {
              this.temp = Head;
             while (AppointData.next() != false) {
@@ -32,7 +34,8 @@ public class MedQueue {
                 if (Head == null) {
                     AppointMent Nodeone = new AppointMent();
                     Nodeone.setPID(AppointData.getString(1));
-                    Nodeone.setTimeSlot(AppointData.getString(2));
+                    Time Time = AppointData.getTime(2);
+                    Nodeone.setTimeSlot(""+Time);
                     Nodeone.setDate(AppointData.getString(3));
                     Nodeone.setStatus(AppointData.getString(4));
                     Nodeone.setIntime(AppointData.getString(5));

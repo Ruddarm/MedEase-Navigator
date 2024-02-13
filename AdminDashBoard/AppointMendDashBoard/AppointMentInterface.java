@@ -19,13 +19,14 @@ public class AppointMentInterface {
     JLabel TodayLabel;
 
     JTableHeader JTh;
-
+    DefaultTableModel DTM;
     JScrollPane jsp;
     String TabelHead[] = { "PID", "Name", "Number", "Status", "Time Slot" };
     String AppointMentData[];
     AppointMent Appointment;
     MedQueue TodayQueue;
     DBOperation DBO;
+    JTable AppointMentTable;
 
     public AppointMentInterface(JFrame MedEaseFrame, DBOperation DBO) {
         this.DBO = DBO;
@@ -51,21 +52,23 @@ public class AppointMentInterface {
     public void SetTable() {
 
         TodayQueue.GetAppointmentData();
+        TodayQueue.Head=null;
         TodayQueue.CreateAppointmentList();
-
         this.Appointment = TodayQueue.Head;
-        DefaultTableModel DTM = new DefaultTableModel();
+        DTM = new DefaultTableModel();
         for (String string : TabelHead) {
             DTM.addColumn(string);
         }
+        
         AppointMent temp = Appointment;
+
         while (temp != null) {
-            String appointdata[] = { temp.getPID(), temp.getName(), temp.getStatus(), temp.getTimeSlot() };
+            String appointdata[] = { temp.getPID(), temp.getName(),temp.getNumber(), temp.getStatus(), temp.getTimeSlot() };
             System.out.println(temp.getName());
             DTM.addRow(appointdata);
             temp = temp.getNextAppointment();
         }
-        JTable AppointMentTable = new JTable(DTM);
+        AppointMentTable = new JTable(DTM);
         AppointMentTable.getColumnModel().getColumn(0).setMinWidth(80);
         AppointMentTable.getColumnModel().getColumn(0).setMaxWidth(50);
 
@@ -76,6 +79,35 @@ public class AppointMentInterface {
         // for (int i = 0; i < TabelHead.length; i++) {
         // AppointMentTable.getColumnModel().getColumn(i).setMinWidth(150);
         // }
+
+    }
+
+    public void UpdateTable() {
+        FrontPannel.remove(jsp);
+        FrontPannel.repaint();
+        SetTable();
+        // for (int i = 0; i < DTM.getRowCount(); i++) {
+        //     DTM.removeRow(i);
+        // }
+        
+        // TodayQueue.GetAppointmentData();
+        // TodayQueue.Head=null;
+        // TodayQueue.CreateAppointmentList();
+        // AppointMent temp = Appointment;
+        // while (temp != null) {
+        //     String appointdata[] = { temp.getPID(), temp.getName(), temp.getStatus(), temp.getTimeSlot() };
+        //     System.out.println(temp.getName());
+        //     DTM.addRow(appointdata);
+        //     temp = temp.getNextAppointment();
+        // }
+        // AppointMentTable = new JTable(DTM);
+        // AppointMentTable.getColumnModel().getColumn(0).setMinWidth(80);
+        // AppointMentTable.getColumnModel().getColumn(0).setMaxWidth(50);
+
+        // // AppointMentTable.setBounds(0, 0, 600, 400);
+        // jsp = new JScrollPane(AppointMentTable);
+        // jsp.setBounds(0, 0, 600, 350);
+        // FrontPannel.add(jsp);
 
     }
 }
