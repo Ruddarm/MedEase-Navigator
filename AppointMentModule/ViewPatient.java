@@ -36,6 +36,7 @@ public class ViewPatient {
         ViewBox.getContentPane().setBackground(GUIUtil.Dark_BLue);
         ViewBox.setVisible(true);
         ViewBox.setResizable(false);
+
         /*
          * Setting profile box pannel
          */
@@ -55,7 +56,7 @@ public class ViewPatient {
         ReportPannel = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 10);
         ReportPannel.setBounds(20, 190, 780, 300);
         ViewBox.add(ReportPannel);
-        
+
         /*
          * 
          */

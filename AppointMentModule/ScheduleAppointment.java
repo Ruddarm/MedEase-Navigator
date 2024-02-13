@@ -25,7 +25,6 @@ public class ScheduleAppointment implements ActionListener {
     JLabel HeadingLabel, PIDLabel, PNameLabel, PNumberLabel, hrsLabel, Minlabe, Am_PMLabel;
     MedEaseBtn Schedule;
     MedEasePatient PT;
-
     JComboBox<Integer> Hrs;
     JComboBox<String> Day, Min;
     Integer hrs[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };

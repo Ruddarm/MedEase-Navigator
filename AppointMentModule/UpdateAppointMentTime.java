@@ -1,6 +1,8 @@
 package MedEaseNavigator.AppointMentModule;
 
-import javax.swing.*;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
@@ -9,9 +11,9 @@ import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ActionListener;;
 
-public class UpdateAppointStatus implements ActionListener {
+public class UpdateAppointMentTime implements ActionListener {
     JDialog UpdateBox;
     MedCreatePatient pt;
     AppointMent appoint;
@@ -30,7 +32,7 @@ public class UpdateAppointStatus implements ActionListener {
             "Cancel",
     };
 
-    public UpdateAppointStatus(AppointMent appoint, DBOperation dbo, MedCreatePatient pt) {
+    public UpdateAppointMentTime(AppointMent appoint, DBOperation dbo, MedCreatePatient pt) {
         this.appoint = appoint;
         this.DBO = dbo;
         this.pt = pt;
@@ -52,4 +54,5 @@ public class UpdateAppointStatus implements ActionListener {
         }
     }
 
+   
 }
