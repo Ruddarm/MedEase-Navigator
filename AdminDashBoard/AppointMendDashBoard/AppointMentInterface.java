@@ -1,6 +1,5 @@
 package MedEaseNavigator.AdminDashBoard.AppointMendDashBoard;
 
-import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;

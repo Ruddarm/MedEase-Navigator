@@ -9,15 +9,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.TableColumnModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedQueue;
 
-public class WaitingInterface {
+
+public class WaitingInterface implements TableColumnModelListener {
     MedPannel BackPannel;
     MedPannel FrontPannel;
     JLabel WaitingList;
@@ -69,13 +75,52 @@ public class WaitingInterface {
             }
         }
         WattingTable = new JTable(Dtm);
+        WattingTable.setBackground(GUIUtil.WhiteClr);
+        WattingTable.setFont(GUIUtil.TimesBold);
+        WattingTable.setCellSelectionEnabled(true);
+        WattingTable.setRowSelectionAllowed(false);
+        WattingTable.setColumnSelectionAllowed(false);
+        
+        WattingTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TableColumnModel colummodel = WattingTable.getColumnModel();
+        colummodel.addColumnModelListener(this);
         jsp = new JScrollPane(WattingTable);
         jsp.setBounds(0, 0, 500, 250);
         FrontPannel.add(jsp);
-        for (int i = 0; i < WattingTable.getColumnCount(); i++) {
-            WattingTable.getColumnModel().getColumn(i).setCellRenderer(DashBoardUtil.render);
-        }
+        // for (int i = 0; i < WattingTable.getColumnCount(); i++) {
+        //     WattingTable.getColumnModel().getColumn(i).setCellRenderer(DashBoardUtil.render);
+        // }
 
+    }
+
+    @Override
+    public void columnAdded(TableColumnModelEvent e) {
+        // TODO Auto-generated method stub
+        // throw new UnsupportedOperationException("Unimplemented method 'columnAdded'");
+    }
+
+    @Override
+    public void columnRemoved(TableColumnModelEvent e) {
+        // TODO Auto-generated method stub
+        // throw new UnsupportedOperationException("Unimplemented method 'columnRemoved'");
+    }
+
+    @Override
+    public void columnMoved(TableColumnModelEvent e) {
+        // TODO Auto-generated method stub
+        // throw new UnsupportedOperationException("Unimplemented method 'columnMoved'");
+    }
+
+    @Override
+    public void columnMarginChanged(ChangeEvent e) {
+        // TODO Auto-generated method stub
+        // throw new UnsupportedOperationException("Unimplemented method 'columnMarginChanged'");
+    }
+
+    @Override
+    public void columnSelectionChanged(ListSelectionEvent e) {
+        // TODO Auto-generated method stub
+        // throw new UnsupportedOperationException("Unimplemented method 'columnSelectionChanged'");
     }
     
 
