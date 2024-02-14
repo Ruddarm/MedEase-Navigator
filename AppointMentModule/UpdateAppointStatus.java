@@ -11,13 +11,13 @@ import MedEaseNavigator.UtilityModule.GUIUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UpdateAppointStatus implements ActionListener{
+public class UpdateAppointStatus implements ActionListener {
     JDialog UpdateBox;
     MedCreatePatient pt;
     AppointMent appoint;
     DBOperation DBO;
     MedPannel infoPannel;
-    JLabel NameLabel, PIDLabel, NumberLabe, Status_lable;
+    JLabel PID, Name, Number, Status_lable;
     JComboBox<String> StatusOpt;
     MedEaseBtn Update;
     String opt[] = {
@@ -42,13 +42,29 @@ public class UpdateAppointStatus implements ActionListener{
         infoPannel = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 0);
         infoPannel.setBounds(0, 50, 400, 400);
         UpdateBox.add(infoPannel);
-        
+
+        PID = new JLabel("PID");
+        PID.setFont(GUIUtil.TimesBoldS2);
+        PID.setBounds(10, 10, 100, 30);
+        infoPannel.add(PID);
+
+        Name = new JLabel("Name");
+        Name.setFont(GUIUtil.TimesBoldS2);
+        Name.setBounds(10, 50, 100, 30);
+        infoPannel.add(Name);
+
+        Number = new JLabel("Number");
+        Number.setFont(GUIUtil.TimesBoldS2);
+        Number.setBounds(10, 90, 100, 30);
+        infoPannel.add(Number);
+
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==Update){
-            DBO.UpdateAppointment(""+StatusOpt.getSelectedItem());
-        }    
+        if (e.getSource() == Update) {
+            DBO.UpdateAppointment("" + StatusOpt.getSelectedItem());
+        }
     }
-    
+
 }

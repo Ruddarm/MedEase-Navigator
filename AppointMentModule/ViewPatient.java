@@ -1,6 +1,7 @@
 package MedEaseNavigator.AppointMentModule;
 
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
@@ -18,6 +19,7 @@ public class ViewPatient {
     JScrollPane jsp;
     DefaultTableModel Dtm;
     JTable MediclReportTable;
+    JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy;
     String PatientHead[] = {
             "PID",
             "Name",
@@ -49,13 +51,59 @@ public class ViewPatient {
         InfoPannel = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 10);
         InfoPannel.setBounds(180, 20, 620, 150);
         ViewBox.add(InfoPannel);
+
+        PID = new JLabel("PID");
+        PID.setFont(GUIUtil.TimesBoldS2);
+        PID.setBounds(10, 10, 100, 30);
+        InfoPannel.add(PID);
+
+        Name = new JLabel("Name");
+        Name.setFont(GUIUtil.TimesBoldS2);
+        Name.setBounds(10, 50, 100, 30);
+        InfoPannel.add(Name);
+
+        Number = new JLabel("Number");
+        Number.setFont(GUIUtil.TimesBoldS2);
+        Number.setBounds(10, 90, 100, 30);
+        InfoPannel.add(Number);
+
+        Age = new JLabel("Age");
+        Age.setFont(GUIUtil.TimesBoldS2);
+        Age.setBounds(80, 120, 100, 30);
+        InfoPannel.add(Age);
+
+        Gender = new JLabel("Gender");
+        Gender.setFont(GUIUtil.TimesBoldS2);
+        Gender.setBounds(150, 120, 100, 30);
+        InfoPannel.add(Gender);
+
+        BloodGrup = new JLabel("Blood Group");
+        BloodGrup.setFont(GUIUtil.TimesBoldS2);
+        BloodGrup.setBounds(240, 120, 120, 30);
+        InfoPannel.add(BloodGrup);
+
+        Heigh = new JLabel("Height");
+        Heigh.setFont(GUIUtil.TimesBoldS2);
+        Heigh.setBounds(365, 120, 100, 30);
+        InfoPannel.add(Heigh);
+
+        Weight = new JLabel("Weight");
+        Weight.setFont(GUIUtil.TimesBoldS2);
+        Weight.setBounds(455, 120, 100, 30);
+        InfoPannel.add(Weight);
+
+        Allergy = new JLabel("Allergy");
+        Allergy.setFont(GUIUtil.TimesBoldS2);
+        Allergy.setBounds(545, 120, 200, 30);
+        InfoPannel.add(Allergy);
+
         /*
          * Settting Report Pannel
          */
         ReportPannel = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 10);
         ReportPannel.setBounds(20, 190, 780, 300);
         ViewBox.add(ReportPannel);
-        
+
         /*
          * 
          */
