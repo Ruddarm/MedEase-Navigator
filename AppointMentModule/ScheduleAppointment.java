@@ -3,8 +3,6 @@ package MedEaseNavigator.AppointMentModule;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-
-import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;

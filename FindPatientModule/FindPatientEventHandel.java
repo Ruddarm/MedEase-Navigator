@@ -3,8 +3,6 @@ package MedEaseNavigator.FindPatientModule;
 import java.awt.event.*;
 
 import java.sql.ResultSet;
-
-import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AppointMentModule.MedEaseAppointMentInterface;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 import MedEaseNavigator.UtilityModule.UtilityMedease;
