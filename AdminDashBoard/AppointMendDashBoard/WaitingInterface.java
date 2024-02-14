@@ -56,11 +56,17 @@ public class WaitingInterface implements TableColumnModelListener {
     }
 
     public void SetWaitingTable() {
-        Dtm = new DefaultTableModel();
+        Dtm = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
         WaitingQueue.GetWaitingAppointmentData();
         WaitingQueue.Head = null;
         WaitingQueue.CreateAppointmentList();
-
+        
         for (String string : TableHead) {
             Dtm.addColumn(string);
         }
@@ -80,7 +86,6 @@ public class WaitingInterface implements TableColumnModelListener {
         WattingTable.setCellSelectionEnabled(true);
         WattingTable.setRowSelectionAllowed(false);
         WattingTable.setColumnSelectionAllowed(false);
-        
         WattingTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TableColumnModel colummodel = WattingTable.getColumnModel();
         colummodel.addColumnModelListener(this);
