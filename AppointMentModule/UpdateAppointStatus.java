@@ -21,13 +21,13 @@ public class UpdateAppointStatus implements ActionListener {
     JComboBox<String> StatusOpt;
     MedEaseBtn Update;
     String opt[] = {
-            "Schedule",
-            "In",
-            "Current",
-            "Next",
-            "Payment",
-            "Waiting",
-            "Cancel",
+            "SCHEDULE",
+            "IN",
+            "CURRENT",
+            "NEXT",
+            "PAYMENT",
+            "WAITING",
+            "CANCEL",
     };
 
     public UpdateAppointStatus(AppointMent appoint, DBOperation dbo, MedCreatePatient pt) {
@@ -68,11 +68,10 @@ public class UpdateAppointStatus implements ActionListener {
         Status_lable.setBounds(10, 170, 100, 30);
         infoPannel.add(Status_lable);
 
-        // String status[] = { "-", "IN", "OUT" };
-        // StatusOpt = new JComboBox<String>(status);
-        // StatusOpt.setBounds(50, 210, 50, 25);
-        // StatusOpt.setFont(GUIUtil.TimesBold);
-        // infoPannel.add(StatusOpt);
+        StatusOpt = new JComboBox<String>(opt);
+        StatusOpt.setBounds(100, 170, 200, 30);
+        StatusOpt.setFont(GUIUtil.TimesBold);
+        infoPannel.add(StatusOpt);
 
     }
 
