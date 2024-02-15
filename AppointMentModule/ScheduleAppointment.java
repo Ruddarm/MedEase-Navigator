@@ -3,8 +3,6 @@ package MedEaseNavigator.AppointMentModule;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-
-import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
@@ -25,7 +23,6 @@ public class ScheduleAppointment implements ActionListener {
     JLabel HeadingLabel, PIDLabel, PNameLabel, PNumberLabel, hrsLabel, Minlabe, Am_PMLabel;
     MedEaseBtn Schedule;
     MedEasePatient PT;
-
     JComboBox<Integer> Hrs;
     JComboBox<String> Day, Min;
     Integer hrs[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };

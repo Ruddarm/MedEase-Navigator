@@ -2,6 +2,7 @@
  * @author Ruddarm
  */
 package MedEaseNavigator.AppointMentModule;
+
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
@@ -13,6 +14,7 @@ import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
+
 public class MedEaseAppointMentInterface {
     /*
      * 
@@ -20,7 +22,7 @@ public class MedEaseAppointMentInterface {
      */
     JDialog PatientBox;
     MedPannel logoBox, InfoBox;
-    JLabel Plogo, PIDLabel, NameLabel, NumberLabel,WarngingLabel;
+    JLabel Plogo, PIDLabel, NameLabel, NumberLabel, WarngingLabel;
     DBOperation DBO;
     MedEaseBtn AppointmentBtn, ViewBtn;
     MedEasePatient Patient;
@@ -28,12 +30,13 @@ public class MedEaseAppointMentInterface {
     AppointmenEventHandling AppointmentEvenetHanldingObj;
     AdminInterface AdminInterfaceObj;
 
-    public MedEaseAppointMentInterface(MedEasePatient pt,DBOperation dbo,String Number,AdminInterface AdminInterface) {
-        this.AdminInterfaceObj=AdminInterface;
-        this.DBO=dbo;
+    public MedEaseAppointMentInterface(MedEasePatient pt, DBOperation dbo, String Number,
+            AdminInterface AdminInterface) {
+        this.AdminInterfaceObj = AdminInterface;
+        this.DBO = dbo;
         PatientBox = new JDialog();
-        this.Number=Number;
-        this.Patient= pt;
+        this.Number = Number;
+        this.Patient = pt;
         PatientBox.setBounds(100, 50, 600, 250);
         PatientBox.setVisible(true);
         PatientBox.getContentPane().setBackground(GUIUtil.Base_Background);
@@ -54,15 +57,15 @@ public class MedEaseAppointMentInterface {
         /*
          * 
          */
-        InfoBox =new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr   , null, 10);
+        InfoBox = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 10);
         InfoBox.setBounds(170, 20, 400, 130);
         InfoBox.setLayout(null);
         PatientBox.add(InfoBox);
 
         AppointmentBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 10);
-        if(Patient!=null){
+        if (Patient != null) {
             AppointmentBtn.setText("Book Appointment");
-        }else{
+        } else {
             AppointmentBtn.setText("Add Patient");
         }
         AppointmentBtn.setForeground(GUIUtil.WhiteClr);
@@ -74,39 +77,41 @@ public class MedEaseAppointMentInterface {
         ViewBtn.setText("View Details ");
         ViewBtn.setForeground(GUIUtil.WhiteClr);
         ViewBtn.setFont(GUIUtil.TimesBold);
-        ViewBtn.setBounds(250,160,150,40);;
+        ViewBtn.setBounds(250, 160, 150, 40);
+        ;
         PatientBox.add(ViewBtn);
         AppointmentEvenetHanldingObj = new AppointmenEventHandling(this);
         AppointmentBtn.addActionListener(AppointmentEvenetHanldingObj);
         ViewBtn.addActionListener(AppointmentEvenetHanldingObj);
 
-        if(Patient==null){
+        if (Patient == null) {
             ViewBtn.setVisible(false);
-            WarngingLabel =new JLabel();
+            WarngingLabel = new JLabel();
             WarngingLabel.setText("Patient Not Found");
             WarngingLabel.setForeground(GUIUtil.WarningColor);
             WarngingLabel.setFont(GUIUtil.TimesBold);
             WarngingLabel.setBounds(100, 50, 200, 30);
             System.out.println("Code was here");
             InfoBox.add(WarngingLabel);
-        }else{
+        } else {
             SetPatientDetials();
         }
     }
-    public void SetPatientDetials(){
-        PIDLabel=new JLabel(Patient.getStrPID());
+
+    public void SetPatientDetials() {
+        PIDLabel = new JLabel(Patient.getStrPID());
         PIDLabel.setFont(GUIUtil.TimesBold);
         PIDLabel.setBounds(30, 10, 150, 20);
         InfoBox.add(PIDLabel);
-        NameLabel=new JLabel(Patient.getName());
+        NameLabel = new JLabel(Patient.getName());
         NameLabel.setFont(GUIUtil.TimesBold);
         NameLabel.setBounds(30, 35, 150, 20);
         InfoBox.add(NameLabel);
-        NumberLabel=new JLabel(Patient.getNumber());
+        NumberLabel = new JLabel(Patient.getNumber());
         NumberLabel.setFont(GUIUtil.TimesBold);
         NumberLabel.setBounds(30, 60, 150, 20);
         InfoBox.add(NumberLabel);
-        NameLabel=new JLabel();
+        NameLabel = new JLabel();
     }
-    
+
 }

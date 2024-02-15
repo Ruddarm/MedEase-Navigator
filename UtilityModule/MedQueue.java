@@ -22,11 +22,15 @@ public class MedQueue {
     public void GetAppointmentData(){
             AppointData = DBO.GetTodayAppointment();
     }
+    public void GetWaitingAppointmentData(){
+        AppointData= DBO.GetWaitingAppointMent();
+    }
+
     /*
      * To add patient in queue
      */
     public void CreateAppointmentList() {
-        DateTimeFormatter formatr = DateTimeFormatter.ofPattern("hh:mm a");
+        // DateTimeFormatter formatr = DateTimeFormatter.ofPattern("hh:mm a");
         try {
              this.temp = Head;
             while (AppointData.next() != false) {

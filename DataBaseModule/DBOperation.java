@@ -453,7 +453,7 @@ public class DBOperation implements DBOpertaionInterface {
             // SELECT *from appointment WHERE Date = '2024-02-04'
             preparedQuery = DBcon.prepareStatement("SELECT appointment.*, patient.name AS patient_name , patient.Number as patientNumber\r\n" + //
                                 "FROM appointment\r\n" + //
-                                "INNER JOIN patient ON appointment.patient_id = patient.patient_id WHERE Date= ? ORDER  BY Time asc;");
+                                "INNER JOIN patient ON appointment.patient_id = patient.patient_id WHERE Date= ? && Status = 'Schedule' ORDER  BY Time asc;");
             preparedQuery.setString(1, "" + LocalDate.now());
             data = preparedQuery.executeQuery();
             return data;
@@ -464,6 +464,22 @@ public class DBOperation implements DBOpertaionInterface {
 
     }
 
+    public ResultSet GetWaitingAppointMent() {
+
+        try {
+            // SELECT *from appointment WHERE Date = '2024-02-04'
+            preparedQuery = DBcon.prepareStatement("SELECT appointment.*, patient.name AS patient_name , patient.Number as patientNumber\r\n" + //
+                                "FROM appointment\r\n" + //
+                                "INNER JOIN patient ON appointment.patient_id = patient.patient_id WHERE Date= ? && (Status = 'IN' || Status='Waiting' || Status='NEXT' || Status='Current') ORDER  BY Time asc;");
+            preparedQuery.setString(1, "" + LocalDate.now());
+            data = preparedQuery.executeQuery();
+            return data;
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error in Today Appointmetn method", 1);
+            return null;
+        }
+
+    }
     public boolean UpdateAppointment(String Status, int PID) {
 
         try {

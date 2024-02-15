@@ -77,10 +77,9 @@ public class MedEaseApp {
         // ap.setTimeSlot("1:45 am");
         // ap.setNextAppointment(null);
         // AppointementI.SetTable(TodayQueue.Head);
-        app.MedEaseUtil.Admin.WaitingInterfaceObj = new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
+        app.MedEaseUtil.Admin.WaitingInterfaceObj = new WaitingInterface(app.MedEaseUtil.MedEaseFrmae,app.MedEaseUtil.DBO);
         app.MedEaseUtil.Admin.PaymentInterfaceObj = new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
         new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO, app.MedEaseUtil.Admin);
-
         new MedDoctorDashBoard();
         new UpdateAppointStatus(null, null, null);
         new ViewMedicalReport(null, null, null);

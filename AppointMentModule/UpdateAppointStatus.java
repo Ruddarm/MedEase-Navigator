@@ -43,6 +43,7 @@ public class UpdateAppointStatus implements ActionListener {
         infoPannel.setBounds(0, 50, 400, 400);
         UpdateBox.add(infoPannel);
 
+<<<<<<< HEAD
         PID = new JLabel("PID");
         PID.setFont(GUIUtil.TimesBoldS2);
         PID.setBounds(10, 10, 100, 30);
@@ -74,6 +75,8 @@ public class UpdateAppointStatus implements ActionListener {
         // StatusOpt.setFont(GUIUtil.TimesBold);
         // infoPannel.add(StatusOpt);
 
+=======
+>>>>>>> 204036c35ffffbc5f45574ef0b077d3b197d78f4
     }
 
     @Override
