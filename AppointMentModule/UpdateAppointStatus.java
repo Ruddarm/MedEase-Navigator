@@ -8,6 +8,7 @@ import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -48,12 +49,12 @@ public class UpdateAppointStatus implements ActionListener {
         PID.setBounds(10, 10, 100, 30);
         infoPannel.add(PID);
 
-        Name = new JLabel("Name");
+        Name = new JLabel("NAME");
         Name.setFont(GUIUtil.TimesBoldS2);
         Name.setBounds(10, 50, 100, 30);
         infoPannel.add(Name);
 
-        Number = new JLabel("Number");
+        Number = new JLabel("NUMBER");
         Number.setFont(GUIUtil.TimesBoldS2);
         Number.setBounds(10, 90, 100, 30);
         infoPannel.add(Number);
@@ -69,9 +70,18 @@ public class UpdateAppointStatus implements ActionListener {
         infoPannel.add(Status_lable);
 
         StatusOpt = new JComboBox<String>(opt);
-        StatusOpt.setBounds(100, 170, 200, 30);
+        StatusOpt.setBounds(110, 170, 200, 30);
         StatusOpt.setFont(GUIUtil.TimesBold);
         infoPannel.add(StatusOpt);
+
+        Update = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
+        Update.setBounds(110, 210, 80, 30);
+        Update.setText("LOGIN");
+        Update.setForeground(Color.white);
+        Update.setFont(GUIUtil.TimesBold);
+        // Update.addActionListener();
+        // Update.addKeyListener();
+        infoPannel.add(Update);
 
     }
 
