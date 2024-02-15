@@ -69,10 +69,11 @@ public class UpdateAppointStatus implements ActionListener {
         infoPannel.add(Status_lable);
 
         // String status[] = { "-", "IN", "OUT" };
-        // StatusOpt = new JComboBox<String>(status);
-        // StatusOpt.setBounds(50, 210, 50, 25);
-        // StatusOpt.setFont(GUIUtil.TimesBold);
-        // infoPannel.add(StatusOpt);
+        StatusOpt = new JComboBox<String>(opt);
+        StatusOpt.setBounds(110, 170, 150, 25);
+        StatusOpt.setFont(GUIUtil.TimesBold);
+        infoPannel.add(StatusOpt);
+        
 
     }
 

@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MedDoctorDashBoard implements ActionListener {
     DocDasBoarUtil docDasBoarUtil = new DocDasBoarUtil();
@@ -161,14 +162,22 @@ public class MedDoctorDashBoard implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == GetPatitentBtn) {
             ResultSet AppointData = DBO.GetNextPatient();
-            MedEasePatient pt = new MedEasePatient();
+            AppointMent appoinment = new AppointMent();
             
+            MedEasePatient pt = new MedEasePatient();
+            try{
+            appoinment.setNumber(AppointData.getString(7));
+
+            }catch(SQLException ex){
+
+            }
+            MedEasePatient.SetPTData(pt, DBO.GetPatient(appoinment.getNumber()));
             if (PTdata!=null) {
                 Patient= new MedEasePatient();
                 MedEasePatient.SetPTData(Patient, PTdata);
                 SetPtINfo();
             }
-
+            
                                             
 
 
