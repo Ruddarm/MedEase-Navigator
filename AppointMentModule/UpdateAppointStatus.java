@@ -43,7 +43,6 @@ public class UpdateAppointStatus implements ActionListener {
         infoPannel.setBounds(0, 50, 400, 400);
         UpdateBox.add(infoPannel);
 
-<<<<<<< HEAD
         PID = new JLabel("PID");
         PID.setFont(GUIUtil.TimesBoldS2);
         PID.setBounds(10, 10, 100, 30);
@@ -59,24 +58,22 @@ public class UpdateAppointStatus implements ActionListener {
         Number.setBounds(10, 90, 100, 30);
         infoPannel.add(Number);
 
-        // time = new JLabel("TIME");
-        // time.setFont(GUIUtil.TimesBoldS2);
-        // time.setBounds(10, 130, 100, 30);
-        // infoPannel.add(time);
+        time = new JLabel("TIME");
+        time.setFont(GUIUtil.TimesBoldS2);
+        time.setBounds(10, 130, 100, 30);
+        infoPannel.add(time);
 
-        // Status_lable = new JLabel("STATUS");
-        // Status_lable.setFont(GUIUtil.TimesBoldS2);
-        // Status_lable.setBounds(10, 170, 100, 30);
-        // infoPannel.add(Status_lable);
+        Status_lable = new JLabel("STATUS");
+        Status_lable.setFont(GUIUtil.TimesBoldS2);
+        Status_lable.setBounds(10, 170, 100, 30);
+        infoPannel.add(Status_lable);
 
-        // String status[] = {"-","IN","OUT"}
+        // String status[] = { "-", "IN", "OUT" };
         // StatusOpt = new JComboBox<String>(status);
         // StatusOpt.setBounds(50, 210, 50, 25);
         // StatusOpt.setFont(GUIUtil.TimesBold);
         // infoPannel.add(StatusOpt);
 
-=======
->>>>>>> 204036c35ffffbc5f45574ef0b077d3b197d78f4
     }
 
     @Override
