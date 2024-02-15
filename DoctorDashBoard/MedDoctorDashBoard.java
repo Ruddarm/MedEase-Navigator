@@ -1,14 +1,24 @@
 package MedEaseNavigator.DoctorDashBoard;
 
+import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
+import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
+import MedEaseNavigator.UtilityModule.MedEasePatient;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import com.mysql.cj.xdevapi.Result;
+
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class MedDoctorDashBoard {
+public class MedDoctorDashBoard implements ActionListener {
     DocDasBoarUtil docDasBoarUtil = new DocDasBoarUtil();
     MedPannel BackPannel, ProfielBox, InfoBox;
     /*
@@ -23,8 +33,12 @@ public class MedDoctorDashBoard {
     JTable MediclReportTable;
     DefaultTableModel Dtm;
     JScrollPane jsp;
+    MedEasePatient Patient;
     MedEaseBtn GetPatitentBtn, MedicalReportBtn;
+    ResultSet PTdata;
+    DBOperation DBO;
     String PatientHead[] = {
+
             "PID",
             "Name",
             "Number",
@@ -35,7 +49,8 @@ public class MedDoctorDashBoard {
 
     };
 
-    public MedDoctorDashBoard() {
+    public MedDoctorDashBoard(DBOperation DBO) {
+        this.DBO = DBO;
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 0);
         BackPannel.setBounds(0, 100, 1440, 500);
         docDasBoarUtil.DoctorFrame.add(BackPannel);
@@ -52,6 +67,7 @@ public class MedDoctorDashBoard {
         GetPatitentBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
         GetPatitentBtn.setText("Get Patient");
         GetPatitentBtn.setBounds(800, 450, 150, 40);
+        GetPatitentBtn.addActionListener(this);
         BackPannel.add(GetPatitentBtn);
 
         MedicalReportBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
@@ -104,15 +120,22 @@ public class MedDoctorDashBoard {
         Weight.setBounds(490, 120, 100, 30);
         InfoBox.add(Weight);
 
-        Allergy = new JLabel("Allergy");
-        Allergy.setFont(GUIUtil.TimesBoldS2);
-        Allergy.setBounds(590, 120, 200, 30);
-        InfoBox.add(Allergy);
+        // Allergy = new JLabel("Allergy");
+        // Allergy.setFont(GUIUtil.TimesBoldS2);
+        // Allergy.setBounds(590, 120, 200, 30);
+        // InfoBox.add(Allergy);
 
     }
 
     /* A methoto to set Patient Info */
     public void SetPtINfo() {
+        Name.setText(Patient.getName());
+        Number.setText(Patient.getNumber());
+        Gender.setText(Patient.getGender());
+        Age.setText(Patient.getDOB());
+        BloodGrup.setText(Patient.getBlodGroup());
+        Heigh.setText(Patient.getHeight());
+        Weight.setText(""+Patient.getWeight());
 
     }
 
@@ -133,5 +156,32 @@ public class MedDoctorDashBoard {
         jsp = new JScrollPane(MediclReportTable);
         jsp.setBounds(200, 180, 900, 250);
         BackPannel.add(jsp);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == GetPatitentBtn) {
+            ResultSet AppointData = DBO.GetNextPatient();
+            AppointMent appoinment = new AppointMent();
+            
+            MedEasePatient pt = new MedEasePatient();
+            try{
+            appoinment.setNumber(AppointData.getString(7));
+
+            }catch(SQLException ex){
+
+            }
+            MedEasePatient.SetPTData(pt, DBO.GetPatient(appoinment.getNumber()));
+            if (PTdata!=null) {
+                Patient= new MedEasePatient();
+                MedEasePatient.SetPTData(Patient, PTdata);
+                SetPtINfo();
+            }
+            
+                                            
+
+
+        }
+
     }
 }

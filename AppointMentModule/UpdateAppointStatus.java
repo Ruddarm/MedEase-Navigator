@@ -69,6 +69,7 @@ public class UpdateAppointStatus implements ActionListener {
         Status_lable.setBounds(10, 170, 100, 30);
         infoPannel.add(Status_lable);
 
+<<<<<<< HEAD
         StatusOpt = new JComboBox<String>(opt);
         StatusOpt.setBounds(110, 170, 200, 30);
         StatusOpt.setFont(GUIUtil.TimesBold);
@@ -82,6 +83,14 @@ public class UpdateAppointStatus implements ActionListener {
         // Update.addActionListener();
         // Update.addKeyListener();
         infoPannel.add(Update);
+=======
+        // String status[] = { "-", "IN", "OUT" };
+        StatusOpt = new JComboBox<String>(opt);
+        StatusOpt.setBounds(110, 170, 150, 25);
+        StatusOpt.setFont(GUIUtil.TimesBold);
+        infoPannel.add(StatusOpt);
+        
+>>>>>>> af3647dadebf32314bba6cb4b8e72f8e08dc896d
 
     }
 

@@ -46,7 +46,7 @@ public class MedEaseApp {
          * First we will setup connection with database
          */
         // Creating object of DBconnectivity
-        app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "Serene@123#",
+        app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "ruddarmsql",
                 app.MedEaseUtil.DBCon);
         // If true then connection Sucesfull
         if (!app.MedEaseUtil.DbConnectObj.setConnection()) {
@@ -80,7 +80,7 @@ public class MedEaseApp {
         app.MedEaseUtil.Admin.WaitingInterfaceObj = new WaitingInterface(app.MedEaseUtil.MedEaseFrmae,app.MedEaseUtil.DBO);
         app.MedEaseUtil.Admin.PaymentInterfaceObj = new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
         new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO, app.MedEaseUtil.Admin);
-        new MedDoctorDashBoard();
+        new MedDoctorDashBoard(app.MedEaseUtil.DBO);
         new UpdateAppointStatus(null, null, null);
         new ViewMedicalReport(null, null, null);
     }
