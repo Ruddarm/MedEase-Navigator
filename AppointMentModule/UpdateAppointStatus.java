@@ -17,7 +17,7 @@ public class UpdateAppointStatus implements ActionListener {
     AppointMent appoint;
     DBOperation DBO;
     MedPannel infoPannel;
-    JLabel NameLabel, PIDLabel, NumberLabe, Status_lable;
+    JLabel PID, Name, Number, Status_lable, time;
     JComboBox<String> StatusOpt;
     MedEaseBtn Update;
     String opt[] = {
@@ -42,6 +42,37 @@ public class UpdateAppointStatus implements ActionListener {
         infoPannel = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 0);
         infoPannel.setBounds(0, 50, 400, 400);
         UpdateBox.add(infoPannel);
+
+        PID = new JLabel("PID");
+        PID.setFont(GUIUtil.TimesBoldS2);
+        PID.setBounds(10, 10, 100, 30);
+        infoPannel.add(PID);
+
+        Name = new JLabel("Name");
+        Name.setFont(GUIUtil.TimesBoldS2);
+        Name.setBounds(10, 50, 100, 30);
+        infoPannel.add(Name);
+
+        Number = new JLabel("Number");
+        Number.setFont(GUIUtil.TimesBoldS2);
+        Number.setBounds(10, 90, 100, 30);
+        infoPannel.add(Number);
+
+        time = new JLabel("TIME");
+        time.setFont(GUIUtil.TimesBoldS2);
+        time.setBounds(10, 130, 100, 30);
+        infoPannel.add(time);
+
+        Status_lable = new JLabel("STATUS");
+        Status_lable.setFont(GUIUtil.TimesBoldS2);
+        Status_lable.setBounds(10, 170, 100, 30);
+        infoPannel.add(Status_lable);
+
+        // String status[] = { "-", "IN", "OUT" };
+        // StatusOpt = new JComboBox<String>(status);
+        // StatusOpt.setBounds(50, 210, 50, 25);
+        // StatusOpt.setFont(GUIUtil.TimesBold);
+        // infoPannel.add(StatusOpt);
 
     }
 
