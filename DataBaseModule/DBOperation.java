@@ -51,10 +51,10 @@ public class DBOperation implements DBOpertaionInterface {
     }
 
     @Override
-    public ResultSet GetMedicalReport(int PID) {
+    public ResultSet GetMedicalReport(String PID) {
         try {
             preparedQuery = DBcon.prepareStatement("Select *from Medical_history where patient_ID =?");
-            preparedQuery.setString(1, "PID" + PID);
+            preparedQuery.setString(1,  PID);
             data = preparedQuery.executeQuery();
             if (data.next() != false) {
                 return data;

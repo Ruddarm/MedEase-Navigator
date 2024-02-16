@@ -48,7 +48,7 @@ public interface DBOpertaionInterface {
      * 
      * @return ResultSet //Result Set of Medical Report
      */
-    public ResultSet GetMedicalReport(int PID);
+    public ResultSet GetMedicalReport(String PID);
 
     /*
      * Get AppointMent Schedule

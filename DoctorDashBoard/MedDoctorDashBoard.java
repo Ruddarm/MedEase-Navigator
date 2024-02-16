@@ -5,12 +5,11 @@ import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
+import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import com.mysql.cj.xdevapi.Result;
-
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionEvent;
@@ -28,7 +27,7 @@ public class MedDoctorDashBoard implements ActionListener {
     /*
      * Patitent information
      */
-    JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy;
+    JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy,NotFondLabel;
     MedEaseBtn Update, Next, CreateMedicalReport;
     JTable MediclReportTable;
     DefaultTableModel Dtm;
@@ -63,7 +62,7 @@ public class MedDoctorDashBoard implements ActionListener {
         InfoBox.setBounds(305, 20, 850, 150);
         BackPannel.add(InfoBox);
 
-        SetMedicalReportTable();
+        SetMedicalReportTable("",null);
         GetPatitentBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
         GetPatitentBtn.setText("Get Patient");
         GetPatitentBtn.setBounds(800, 450, 150, 40);
@@ -139,11 +138,20 @@ public class MedDoctorDashBoard implements ActionListener {
 
     }
 
-    public void SetMedicalReportTable() {
+    public void SetMedicalReportTable(String PID,MedEasePatient PT) {
         Dtm = new DefaultTableModel();
         for (String string : PatientHead) {
             Dtm.addColumn(string);
+        }  
+        ResultSet MedicalReport= DBO.GetMedicalReport(PID);
+        PT.setReportHead(null);
+        MedEasePatient.SetMedicalReport(PT, PTdata);
+        MedEaseMedicalReport Temp= PT.getReportHead();
+        while (Temp!=null) {
+            
+            
         }
+
         MediclReportTable = new JTable(Dtm);
         MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
         MediclReportTable.getColumnModel().getColumn(1).setMinWidth(150);
@@ -167,7 +175,7 @@ public class MedDoctorDashBoard implements ActionListener {
             MedEasePatient pt = new MedEasePatient();
             try{
             appoinment.setNumber(AppointData.getString(7));
-
+        
             }catch(SQLException ex){
 
             }
@@ -176,11 +184,8 @@ public class MedDoctorDashBoard implements ActionListener {
                 Patient= new MedEasePatient();
                 MedEasePatient.SetPTData(Patient, PTdata);
                 SetPtINfo();
+
             }
-            
-                                            
-
-
         }
 
     }
