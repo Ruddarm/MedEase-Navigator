@@ -175,16 +175,14 @@ public class MedDoctorDashBoard implements ActionListener {
             MedEasePatient pt = new MedEasePatient();
             try{
             appoinment.setNumber(AppointData.getString(7));
-        
             }catch(SQLException ex){
 
             }
             MedEasePatient.SetPTData(pt, DBO.GetPatient(appoinment.getNumber()));
-            if (PTdata!=null) {
+            if () {
                 Patient= new MedEasePatient();
                 MedEasePatient.SetPTData(Patient, PTdata);
                 SetPtINfo();
-
             }
         }
 
