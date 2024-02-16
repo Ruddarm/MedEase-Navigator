@@ -80,6 +80,7 @@ public class MedEaseApp {
         app.MedEaseUtil.Admin.WaitingInterfaceObj = new WaitingInterface(app.MedEaseUtil.MedEaseFrmae,
                 app.MedEaseUtil.DBO);
         app.MedEaseUtil.Admin.PaymentInterfaceObj = new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
+        app.MedEaseUtil.Admin.AppointmentInterfaceObj.setWaittable(app.MedEaseUtil.Admin.WaitingInterfaceObj);
         new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO, app.MedEaseUtil.Admin);
         new MedDoctorDashBoard(app.MedEaseUtil.DBO);
         new UpdateAppointStatus(null, null, null);

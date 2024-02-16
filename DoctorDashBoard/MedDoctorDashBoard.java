@@ -27,7 +27,7 @@ public class MedDoctorDashBoard implements ActionListener {
     /*
      * Patitent information
      */
-    JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy,NotFondLabel;
+    JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy, NotFondLabel;
     MedEaseBtn Update, Next, CreateMedicalReport;
     JTable MediclReportTable;
     DefaultTableModel Dtm;
@@ -62,7 +62,7 @@ public class MedDoctorDashBoard implements ActionListener {
         InfoBox.setBounds(305, 20, 850, 150);
         BackPannel.add(InfoBox);
 
-        SetMedicalReportTable("",null);
+        SetMedicalReportTable("", null);
         GetPatitentBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
         GetPatitentBtn.setText("Get Patient");
         GetPatitentBtn.setBounds(800, 450, 150, 40);
@@ -134,22 +134,21 @@ public class MedDoctorDashBoard implements ActionListener {
         Age.setText(Patient.getDOB());
         BloodGrup.setText(Patient.getBlodGroup());
         Heigh.setText(Patient.getHeight());
-        Weight.setText(""+Patient.getWeight());
+        Weight.setText("" + Patient.getWeight());
 
     }
 
-    public void SetMedicalReportTable(String PID,MedEasePatient PT) {
+    public void SetMedicalReportTable(String PID, MedEasePatient PT) {
         Dtm = new DefaultTableModel();
         for (String string : PatientHead) {
             Dtm.addColumn(string);
-        }  
-        ResultSet MedicalReport= DBO.GetMedicalReport(PID);
+        }
+        ResultSet MedicalReport = DBO.GetMedicalReport(PID);
         PT.setReportHead(null);
         MedEasePatient.SetMedicalReport(PT, PTdata);
-        MedEaseMedicalReport Temp= PT.getReportHead();
-        while (Temp!=null) {
-            
-            
+        MedEaseMedicalReport Temp = PT.getReportHead();
+        while (Temp != null) {
+
         }
 
         MediclReportTable = new JTable(Dtm);
@@ -171,19 +170,19 @@ public class MedDoctorDashBoard implements ActionListener {
         if (e.getSource() == GetPatitentBtn) {
             ResultSet AppointData = DBO.GetNextPatient();
             AppointMent appoinment = new AppointMent();
-            
+
             MedEasePatient pt = new MedEasePatient();
-            try{
-            appoinment.setNumber(AppointData.getString(7));
-            }catch(SQLException ex){
+            try {
+                appoinment.setNumber(AppointData.getString(7));
+            } catch (SQLException ex) {
 
             }
             MedEasePatient.SetPTData(pt, DBO.GetPatient(appoinment.getNumber()));
-            if () {
-                Patient= new MedEasePatient();
-                MedEasePatient.SetPTData(Patient, PTdata);
-                SetPtINfo();
-            }
+
+            Patient = new MedEasePatient();
+            MedEasePatient.SetPTData(Patient, PTdata);
+            SetPtINfo();
+
         }
 
     }

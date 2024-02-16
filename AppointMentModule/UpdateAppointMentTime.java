@@ -50,7 +50,7 @@ public class UpdateAppointMentTime implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == Update) {
-            DBO.UpdateAppointment("" + StatusOpt.getSelectedItem());
+            // DBO.UpdateAppointment();
         }
     }
 

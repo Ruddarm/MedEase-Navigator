@@ -2,6 +2,7 @@ package MedEaseNavigator.AppointMentModule;
 
 import javax.swing.*;
 
+import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.WaitingInterface;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
@@ -21,20 +22,20 @@ public class UpdateAppointStatus implements ActionListener {
     JLabel PID, Name, Number, Status_lable, time, PID_L, Name_L, Number_L, time_L;
     JComboBox<String> StatusOpt;
     MedEaseBtn Update;
+    WaitingInterface Waittable;
     String opt[] = {
             "SCHEDULE",
             "IN",
-            "CURRENT",
-            "NEXT",
-            "PAYMENT",
-            "WAITING",
+            // "CURRENT",
+            // "PAYMENT",
+            // "WAITING",
             "CANCEL",
     };
 
-    public UpdateAppointStatus(AppointMent appoint, DBOperation dbo, MedCreatePatient pt) {
+    public UpdateAppointStatus(AppointMent appoint, DBOperation dbo, WaitingInterface waittable) {
         this.appoint = appoint;
         this.DBO = dbo;
-        this.pt = pt;
+        this.Waittable = waittable;
         UpdateBox = new JDialog();
         UpdateBox.setBounds(200, 100, 400, 450);
         UpdateBox.getContentPane().setBackground(GUIUtil.Dark_BLue);
@@ -51,7 +52,7 @@ public class UpdateAppointStatus implements ActionListener {
 
         PID_L = new JLabel("PID");
         PID_L.setFont(GUIUtil.TimesBoldS2);
-        PID_L.setBounds(110, 10, 200, 30);
+        PID_L.setBounds(120, 10, 200, 30);
         infoPannel.add(PID_L);
 
         Name = new JLabel("NAME");
@@ -61,7 +62,7 @@ public class UpdateAppointStatus implements ActionListener {
 
         Name_L = new JLabel("NAME");
         Name_L.setFont(GUIUtil.TimesBoldS2);
-        Name_L.setBounds(110, 50, 200, 30);
+        Name_L.setBounds(120, 50, 200, 30);
         infoPannel.add(Name_L);
 
         Number = new JLabel("NUMBER");
@@ -71,7 +72,7 @@ public class UpdateAppointStatus implements ActionListener {
 
         Number_L = new JLabel("NUMBER");
         Number_L.setFont(GUIUtil.TimesBoldS2);
-        Number_L.setBounds(10, 90, 100, 30);
+        Number_L.setBounds(120, 90, 100, 30);
         infoPannel.add(Number_L);
 
         time = new JLabel("TIME");
@@ -81,7 +82,7 @@ public class UpdateAppointStatus implements ActionListener {
 
         time_L = new JLabel("TIME");
         time_L.setFont(GUIUtil.TimesBoldS2);
-        time_L.setBounds(10, 130, 100, 30);
+        time_L.setBounds(120, 130, 100, 30);
         infoPannel.add(time_L);
 
         Status_lable = new JLabel("STATUS");
@@ -91,7 +92,9 @@ public class UpdateAppointStatus implements ActionListener {
 
         StatusOpt = new JComboBox<String>(opt);
         StatusOpt.setBounds(110, 170, 200, 30);
-        StatusOpt.setFont(GUIUtil.TimesBold);
+        StatusOpt.setFont(GUIUtil.TimesBoldS2);
+        System.out.println(StatusOpt);
+        // StatusOpt
         infoPannel.add(StatusOpt);
 
         Update = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
@@ -99,21 +102,40 @@ public class UpdateAppointStatus implements ActionListener {
         Update.setText("UPDATE");
         Update.setForeground(Color.white);
         Update.setFont(GUIUtil.TimesBold);
+        Update.addActionListener(this);
         // Update.addActionListener();
         // Update.addKeyListener();
         infoPannel.add(Update);
 
         // String status[] = { "-", "IN", "OUT" };
-        StatusOpt = new JComboBox<String>(opt);
-        StatusOpt.setBounds(110, 170, 150, 25);
-        StatusOpt.setFont(GUIUtil.TimesBold);
-        infoPannel.add(StatusOpt);
+        // StatusOpt = new JComboBox<String>(opt);
+        // StatusOpt.setBounds(110, 170, 150, 25);
+        // StatusOpt.setFont(GUIUtil.TimesBold);
+        // infoPannel.add(StatusOpt);
+        if (appoint != null) {
+            setinfo();
+        }
+    }
+
+    public void setinfo() {
+        PID_L.setText(appoint.getPID());
+        Name_L.setText(appoint.getName());
+        Number_L.setText(appoint.getNumber());
+        time_L.setText(appoint.getTimeSlot());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == Update) {
-            DBO.UpdateAppointment("" + StatusOpt.getSelectedItem());
+            appoint.setStatus("" + StatusOpt.getSelectedItem());
+            // System.out.println(StatusOpt);
+            // System.out.println(StatusOpt.gets)s;
+            // System.out.println(""+
+            // StatusOpt.getSelectedItem());
+
+            DBO.UpdateAppointment(appoint);
+            setinfo();
+            Waittable.SetWaitingTable();
         }
     }
 
