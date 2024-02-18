@@ -84,7 +84,7 @@ public class AppointMentInterface implements TableColumnModelListener {
         while (temp != null) {
             String appointdata[] = { temp.getPID(), temp.getName(), temp.getNumber(), temp.getStatus(),
                     temp.getTimeSlot() };
-            System.out.println(temp.getName());
+            // System.out.println(temp.getName());
             DTM.addRow(appointdata);
             temp = temp.getNextAppointment();
         }
@@ -127,7 +127,7 @@ public class AppointMentInterface implements TableColumnModelListener {
                 appointment.setNumber(""+AppointMentTable.getValueAt(row,2));
                 appointment.setStatus(""+AppointMentTable.getValueAt(row, 3));
                 appointment.setTimeSlot(""+AppointMentTable.getValueAt(row, 4));    
-                new UpdateAppointStatus(appointment, DBO, waittable);
+                new UpdateAppointStatus(appointment, DBO, waittable,this);
                 AppointMentTable.clearSelection();
             } else if (row != -1 && AppointMentTable.getSelectedColumn() == 4) {
                 String Pnumber = "" + AppointMentTable.getValueAt(row, 0);

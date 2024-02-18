@@ -34,7 +34,7 @@ public class WaitingInterface implements TableColumnModelListener {
     DBOperation DBO;
     MedQueue WaitingQueue;
     String TableHead[] = {
-            "PID", "Name", "Number", "Status", "Time Slot"
+            "PID", "Name", "Number", "Status", "In_Time"
     };
 
     public WaitingInterface(JFrame MedFrame, DBOperation DBO) {
@@ -74,8 +74,8 @@ public class WaitingInterface implements TableColumnModelListener {
         while (temp != null) {
             while (temp != null) {
                 String appointdata[] = { temp.getPID(), temp.getName(), temp.getNumber(), temp.getStatus(),
-                        temp.getTimeSlot() };
-                System.out.println(temp.getName());
+                        temp.getIntime() };
+                // System.out.println(temp.getName());
                 Dtm.addRow(appointdata);
                 temp = temp.getNextAppointment();
             }
@@ -127,6 +127,10 @@ public class WaitingInterface implements TableColumnModelListener {
         // TODO Auto-generated method stub
         // throw new UnsupportedOperationException("Unimplemented method 'columnSelectionChanged'");
     }
-    
+    public void UpdateTabel(){
+        FrontPannel.remove(jsp);
+        FrontPannel.repaint();;
+        SetWaitingTable();
+    }
 
 }
