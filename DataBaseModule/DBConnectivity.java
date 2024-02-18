@@ -124,7 +124,7 @@ public class DBConnectivity {
                     "   Lab_Test           varchar(1500)    DEFAULT null," +
                     "   Status             varchar(20)    DEFAULT null," +
                     "   Fees               double    DEFAULT null," +
-                    "   Paid_Amount         double    DEFault null,"+
+                    "   Paid_Amount         double    DEFault null," +
                     "   Patient_ID         varchar(40)     ," +
                     "   DID                varchar(40)," +
                     "   FOREIGN KEY(Patient_ID) REFERENCES PATIENT(Patient_ID)," +
@@ -209,6 +209,5 @@ public class DBConnectivity {
             return false;
         }
     }
-    
 
 }

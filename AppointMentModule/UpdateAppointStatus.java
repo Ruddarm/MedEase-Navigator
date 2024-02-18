@@ -7,11 +7,9 @@ import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.WaitingInterface;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
-import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,11 +34,12 @@ public class UpdateAppointStatus implements ActionListener {
             "CANCEL",
     };
 
-    public UpdateAppointStatus(AppointMent appoint, DBOperation dbo, WaitingInterface waittable, AppointMentInterface Api) {
+    public UpdateAppointStatus(AppointMent appoint, DBOperation dbo, WaitingInterface waittable,
+            AppointMentInterface Api) {
         this.appoint = appoint;
         this.DBO = dbo;
         this.Waittable = waittable;
-        this.AppointmentInterface= Api;
+        this.AppointmentInterface = Api;
         UpdateBox = new JDialog();
         UpdateBox.setBounds(200, 100, 400, 450);
         UpdateBox.getContentPane().setBackground(GUIUtil.Dark_BLue);
@@ -131,19 +130,14 @@ public class UpdateAppointStatus implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DateTimeFormatter formatr = DateTimeFormatter.ofPattern("hh:mm a");
         if (e.getSource() == Update) {
             appoint.setStatus("" + StatusOpt.getSelectedItem());
-            // System.out.println(StatusOpt);
-            // System.out.println(StatusOpt.gets)s;
-            // System.out.println(""+)
-            // StatusOpt.getSelectedItem());
-            appoint.setIntime(""+LocalTime.now());
+            appoint.setIntime("" + LocalTime.now());
             DBO.UpdateAppointment(appoint);
             setinfo();
             Waittable.UpdateTabel();
             AppointmentInterface.UpdateTable();
-            
+
         }
     }
 

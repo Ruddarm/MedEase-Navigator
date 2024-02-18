@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import com.mysql.cj.xdevapi.Result;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+
+import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -61,8 +63,8 @@ public class MedDoctorDashBoard implements ActionListener {
         // InfoBox.setBounds(305, 20, 1000, 150); for 15inch
         InfoBox.setBounds(305, 20, 850, 150);
         BackPannel.add(InfoBox);
-
-        SetMedicalReportTable("", null);
+        Patient= new MedEasePatient();
+        SetMedicalReportTable("", Patient);
         GetPatitentBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
         GetPatitentBtn.setText("Get Patient");
         GetPatitentBtn.setBounds(800, 450, 150, 40);
@@ -145,7 +147,7 @@ public class MedDoctorDashBoard implements ActionListener {
         }
         ResultSet MedicalReport = DBO.GetMedicalReport(PID);
         PT.setReportHead(null);
-        MedEasePatient.SetMedicalReport(PT, PTdata);
+        // MedEasePatient.SetMedicalReport(PT, PTdata);
         MedEaseMedicalReport Temp = PT.getReportHead();
         while (Temp != null) {
 
@@ -174,7 +176,7 @@ public class MedDoctorDashBoard implements ActionListener {
             MedEasePatient pt = new MedEasePatient();
             try {
                 appoinment.setNumber(AppointData.getString(7));
-            } catch (SQLException ex) {
+            }  catch (SQLException ex) {
 
             }
             MedEasePatient.SetPTData(pt, DBO.GetPatient(appoinment.getNumber()));

@@ -34,7 +34,7 @@ public class WaitingInterface implements TableColumnModelListener {
     DBOperation DBO;
     MedQueue WaitingQueue;
     String TableHead[] = {
-            "PID", "Name", "Number", "Status", "Time Slot"
+            "PID", "Name", "Number", "Status", "In_Time"
     };
 
     public WaitingInterface(JFrame MedFrame, DBOperation DBO) {
@@ -74,7 +74,7 @@ public class WaitingInterface implements TableColumnModelListener {
         while (temp != null) {
             while (temp != null) {
                 String appointdata[] = { temp.getPID(), temp.getName(), temp.getNumber(), temp.getStatus(),
-                        temp.getTimeSlot() };
+                        temp.getIntime() };
                 // System.out.println(temp.getName());
                 Dtm.addRow(appointdata);
                 temp = temp.getNextAppointment();
