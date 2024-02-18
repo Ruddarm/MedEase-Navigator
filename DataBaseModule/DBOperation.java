@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.MedEaseDoctor;
@@ -80,10 +81,11 @@ public class DBOperation implements DBOpertaionInterface {
     public boolean UpdateAppointment(AppointMent Appointment) {
 
         try {
-            preparedQuery = DBcon.prepareStatement("Update appointment set status= ? where date = ? && patient_id = ?");
+            preparedQuery = DBcon.prepareStatement("Update appointment set status= ? , IN_TIME = ? where date = ? && patient_id = ?");
             preparedQuery.setString(1, Appointment.getStatus());
-            preparedQuery.setString(2, "" + LocalDate.now());
-            preparedQuery.setString(3, Appointment.getPID());
+            preparedQuery.setString(2, Appointment.getIntime());
+            preparedQuery.setString(3, "" + LocalDate.now());
+            preparedQuery.setString(4, Appointment.getPID());
             System.out.println(preparedQuery);
 
             preparedQuery.executeUpdate();

@@ -10,7 +10,8 @@ import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
-
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -130,13 +131,14 @@ public class UpdateAppointStatus implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        DateTimeFormatter formatr = DateTimeFormatter.ofPattern("hh:mm a");
         if (e.getSource() == Update) {
             appoint.setStatus("" + StatusOpt.getSelectedItem());
             // System.out.println(StatusOpt);
             // System.out.println(StatusOpt.gets)s;
-            // System.out.println(""+
+            // System.out.println(""+)
             // StatusOpt.getSelectedItem());
-
+            appoint.setIntime(""+LocalTime.now());
             DBO.UpdateAppointment(appoint);
             setinfo();
             Waittable.UpdateTabel();
