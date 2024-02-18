@@ -2,10 +2,12 @@ package MedEaseNavigator.AppointMentModule;
 
 import javax.swing.*;
 
+import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.WaitingInterface;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
+import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 
@@ -22,6 +24,7 @@ public class UpdateAppointStatus implements ActionListener {
     JLabel PID, Name, Number, Status_lable, time, PID_L, Name_L, Number_L, time_L;
     JComboBox<String> StatusOpt;
     MedEaseBtn Update;
+    AppointMentInterface AppointmentInterface;
     WaitingInterface Waittable;
     String opt[] = {
             "SCHEDULE",
@@ -32,10 +35,11 @@ public class UpdateAppointStatus implements ActionListener {
             "CANCEL",
     };
 
-    public UpdateAppointStatus(AppointMent appoint, DBOperation dbo, WaitingInterface waittable) {
+    public UpdateAppointStatus(AppointMent appoint, DBOperation dbo, WaitingInterface waittable, AppointMentInterface Api) {
         this.appoint = appoint;
         this.DBO = dbo;
         this.Waittable = waittable;
+        this.AppointmentInterface= Api;
         UpdateBox = new JDialog();
         UpdateBox.setBounds(200, 100, 400, 450);
         UpdateBox.getContentPane().setBackground(GUIUtil.Dark_BLue);
@@ -135,7 +139,9 @@ public class UpdateAppointStatus implements ActionListener {
 
             DBO.UpdateAppointment(appoint);
             setinfo();
-            Waittable.SetWaitingTable();
+            Waittable.UpdateTabel();
+            AppointmentInterface.UpdateTable();
+            
         }
     }
 

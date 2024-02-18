@@ -489,7 +489,7 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery = DBcon.prepareStatement(
                     "SELECT appointment.*, patient.name AS patient_name , patient.Number as patientNumber\r\n" + //
                             "FROM appointment\r\n" + //
-                            "INNER JOIN patient ON appointment.patient_id = patient.patient_id WHERE Date= ? && (Status = 'IN' || Status='Waiting' || Status='NEXT' || Status='Current') ORDER  BY Time asc;");
+                            "INNER JOIN patient ON appointment.patient_id = patient.patient_id WHERE Date= ? && (Status = 'IN' || Status='Waiting' || Status='NEXT' || Status='Current') ORDER  BY IN_time asc;");
             preparedQuery.setString(1, "" + LocalDate.now());
             data = preparedQuery.executeQuery();
             return data;

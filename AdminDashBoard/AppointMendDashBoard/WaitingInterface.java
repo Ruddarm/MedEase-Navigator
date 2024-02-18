@@ -75,7 +75,7 @@ public class WaitingInterface implements TableColumnModelListener {
             while (temp != null) {
                 String appointdata[] = { temp.getPID(), temp.getName(), temp.getNumber(), temp.getStatus(),
                         temp.getTimeSlot() };
-                System.out.println(temp.getName());
+                // System.out.println(temp.getName());
                 Dtm.addRow(appointdata);
                 temp = temp.getNextAppointment();
             }
@@ -127,6 +127,10 @@ public class WaitingInterface implements TableColumnModelListener {
         // TODO Auto-generated method stub
         // throw new UnsupportedOperationException("Unimplemented method 'columnSelectionChanged'");
     }
-    
+    public void UpdateTabel(){
+        FrontPannel.remove(jsp);
+        FrontPannel.repaint();;
+        SetWaitingTable();
+    }
 
 }
