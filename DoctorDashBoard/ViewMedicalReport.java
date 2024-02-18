@@ -41,10 +41,13 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
     MedEaseMedicalReport MedicalReport;
     MedEaseDoctor Doc;
 
-    public ViewMedicalReport(MedEasePatient pt, DBOperation dbo, MedEaseDoctor doc) {
+
+    public ViewMedicalReport(MedEasePatient pt, DBOperation dbo, MedEaseDoctor doc, MedEaseMedicalReport MedicalReport,Boolean editable) {
         this.pt = pt;
         this.DBO = dbo;
         this.Doc = doc;
+        this.view=editable;
+        this.MedicalReport=MedicalReport;
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -270,9 +273,39 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
                 JSPpane.setPreferredSize(new Dimension(830, 800));
                 ViewBoxl.add(JSPBack);
                 addlistner();
+                if(pt!=null){
+                    SetPTdata();
+                    SetMedicalReport();
+                }
+                
+                
             }
         });
     }
+
+    public void SetPTdata(){
+        PidField.setText(pt.getStrPID());
+        NameField.setText(pt.getName());
+        NumberFeild.setText(pt.getNumber());
+    }
+    public void SetMedicalReport(){
+        if(view==true){
+            String MRID= "MRID"+DBO.GetLastMID();
+            MRIDFeild.setText(MRID);
+        }else{
+            MRIDFeild.setText(MedicalReport.getMRID());
+            ChiefArea.setText(MedicalReport.getChiefcomplaint());
+            ChiefArea.setEditable(false);
+            DiagnosisArea.setText(MedicalReport.getDiagnosis());
+            DiagnosisArea.setEditable(false);
+            SymptompsArea.setText(MedicalReport.getSymptoms());
+            SymptompsArea.setEditable(false);
+            PrescriptionArea.setText(MedicalReport.getPrescription());
+            PrescriptionArea.setEditable(false);
+            
+        }
+    }
+
 
     @Override
     public void keyTyped(KeyEvent e) {
