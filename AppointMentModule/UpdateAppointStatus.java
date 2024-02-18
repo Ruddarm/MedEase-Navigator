@@ -27,7 +27,7 @@ public class UpdateAppointStatus implements ActionListener {
     WaitingInterface Waittable;
     String opt[] = {
             "SCHEDULE",
-            "IN",
+            "WAITING",
             // "CURRENT",
             // "PAYMENT",
             // "WAITING",
