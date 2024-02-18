@@ -31,7 +31,7 @@ public class MedDoctorDashBoard implements ActionListener {
      */
     JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy, NotFondLabel;
     MedEaseBtn Update, Next, CreateMedicalReport;
-    JTable MediclReportTable;
+    // JTable MediclReportTable;
     DefaultTableModel Dtm;
     JScrollPane jsp;
     MedEasePatient Patient;
@@ -40,12 +40,12 @@ public class MedDoctorDashBoard implements ActionListener {
     DBOperation DBO;
     String PatientHead[] = {
 
-            "PID",
-            "Name",
-            "Number",
+            // "PID",
+            // "Name",
+            // "Number",
             "MRID",
-            "Chief Complaint",
             "Date",
+            "Chief Complaint",
             "Doctor Name"
 
     };
@@ -63,8 +63,8 @@ public class MedDoctorDashBoard implements ActionListener {
         // InfoBox.setBounds(305, 20, 1000, 150); for 15inch
         InfoBox.setBounds(305, 20, 850, 150);
         BackPannel.add(InfoBox);
-        Patient= new MedEasePatient();
-        SetMedicalReportTable("", Patient);
+        Patient = new MedEasePatient();
+        SetMedicalReportTable(Patient);
         GetPatitentBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
         GetPatitentBtn.setText("Get Patient");
         GetPatitentBtn.setBounds(800, 450, 150, 40);
@@ -98,12 +98,12 @@ public class MedDoctorDashBoard implements ActionListener {
 
         Age = new JLabel("Age");
         Age.setFont(GUIUtil.TimesBoldS2);
-        Age.setBounds(110, 120, 100, 30);
+        Age.setBounds(80, 120, 100, 30);
         InfoBox.add(Age);
 
         Gender = new JLabel("Gender");
         Gender.setFont(GUIUtil.TimesBoldS2);
-        Gender.setBounds(180, 120, 100, 30);
+        Gender.setBounds(210, 120, 100, 30);
         InfoBox.add(Gender);
 
         BloodGrup = new JLabel("Blood Group");
@@ -130,6 +130,7 @@ public class MedDoctorDashBoard implements ActionListener {
 
     /* A methoto to set Patient Info */
     public void SetPtINfo() {
+        PID.setText(Patient.getStrPID());
         Name.setText(Patient.getName());
         Number.setText(Patient.getNumber());
         Gender.setText(Patient.getGender());
@@ -140,28 +141,43 @@ public class MedDoctorDashBoard implements ActionListener {
 
     }
 
-    public void SetMedicalReportTable(String PID, MedEasePatient PT) {
-        Dtm = new DefaultTableModel();
+    public void SetMedicalReportTable(MedEasePatient PT) {
+        Dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         for (String string : PatientHead) {
             Dtm.addColumn(string);
         }
-        ResultSet MedicalReport = DBO.GetMedicalReport(PID);
-        PT.setReportHead(null);
-        // MedEasePatient.SetMedicalReport(PT, PTdata);
-        MedEaseMedicalReport Temp = PT.getReportHead();
-        while (Temp != null) {
-
+        ResultSet MedicalReport = DBO.GetMedicalReport(PT.getStrPID());
+        if (MedicalReport != null) {
+            PT.setReportHead(null);
+            MedEasePatient.SetMedicalReport(PT, MedicalReport);
+            MedEaseMedicalReport Temp = PT.getReportHead();
+            while (Temp != null) {
+                String row[] = {
+                        Temp.getMRID(),
+                        Temp.getReportDate(),
+                        Temp.getChiefcomplaint(),
+                        Temp.getDID(),
+                };
+                // System.out.println(Temp.getMRID());
+                // System.out.println(row[1]);
+                Temp = Temp.getNext();
+                Dtm.addRow(row);
+            }
         }
-
-        MediclReportTable = new JTable(Dtm);
+        JTable MediclReportTable = new JTable(Dtm);
+        // MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
+        // MediclReportTable.getColumnModel().getColumn(1).setMinWidth(150);
+        // MediclReportTable.getColumnModel().getColumn().setMaxWidth(200);
+        // MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(150);
         MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
-        MediclReportTable.getColumnModel().getColumn(1).setMinWidth(150);
-        MediclReportTable.getColumnModel().getColumn(1).setMaxWidth(200);
-        MediclReportTable.getColumnModel().getColumn(2).setMaxWidth(150);
+        MediclReportTable.getColumnModel().getColumn(1).setMaxWidth(150);
+        MediclReportTable.getColumnModel().getColumn(2).setMinWidth(500);
         MediclReportTable.getColumnModel().getColumn(3).setMaxWidth(100);
-        MediclReportTable.getColumnModel().getColumn(5).setMaxWidth(150);
-        MediclReportTable.getColumnModel().getColumn(6).setMinWidth(50);
-        MediclReportTable.getColumnModel().getColumn(6).setMaxWidth(100);
         jsp = new JScrollPane(MediclReportTable);
         jsp.setBounds(200, 180, 900, 250);
         BackPannel.add(jsp);
@@ -170,22 +186,29 @@ public class MedDoctorDashBoard implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == GetPatitentBtn) {
-            ResultSet AppointData = DBO.GetNextPatient();
-            AppointMent appoinment = new AppointMent();
 
-            MedEasePatient pt = new MedEasePatient();
-            try {
-                appoinment.setNumber(AppointData.getString(7));
-            }  catch (SQLException ex) {
+            GetPtFunction();
+        }
 
-            }
-            MedEasePatient.SetPTData(pt, DBO.GetPatient(appoinment.getNumber()));
+    }
 
-            Patient = new MedEasePatient();
-            MedEasePatient.SetPTData(Patient, PTdata);
-            SetPtINfo();
+    public void GetPtFunction() {
+        ResultSet AppointData = DBO.GetNextPatient();
+        String number = "";
+        try {
+            number = AppointData.getString(7);
+        } catch (SQLException ex) {
 
         }
+        Patient = new MedEasePatient();
+        ResultSet PTdata = DBO.GetPatient(number);
+        if (PTdata != null) {
+            MedEasePatient.SetPTData(Patient, PTdata);
+            SetPtINfo();
+        }
+        BackPannel.remove(jsp);
+        BackPannel.repaint();
+        SetMedicalReportTable(Patient);
 
     }
 }

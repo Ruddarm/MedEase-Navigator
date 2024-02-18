@@ -163,12 +163,14 @@ public class MedEasePatient {
                 onenode.setDiagnosis(data.getString(3));
                 onenode.setPrescription(data.getString(4));
                 onenode.setFollowupadvice(data.getString(5));
-                onenode.setFollowupadvice("" + data.getDate(6));
+                onenode.setReportDate("" + data.getDate(6));
                 onenode.setSymptoms(data.getString(7));
                 onenode.setLabtest(data.getString(8));
                 onenode.setStatus(data.getString(9));
                 onenode.setFees(data.getFloat(10));
-                onenode.setDID(data.getString(11));
+                onenode.setPaid(data.getDouble(11));
+                onenode.setPID(data.getString(12));
+                onenode.setDID(data.getString(13));
                 onenode.setNextReport(null);
                 pt.setReportHead(onenode);
             } catch (SQLException ex) {
@@ -183,12 +185,14 @@ public class MedEasePatient {
                 newnode.setDiagnosis(data.getString(3));
                 newnode.setPrescription(data.getString(4));
                 newnode.setFollowupadvice(data.getString(5));
-                newnode.setFollowupadvice("" + data.getDate(6));
+                newnode.setReportDate("" + data.getDate(6));
                 newnode.setSymptoms(data.getString(7));
                 newnode.setLabtest(data.getString(8));
                 newnode.setStatus(data.getString(9));
                 newnode.setFees(data.getFloat(10));
-                newnode.setDID(data.getString(11));
+                newnode.setPaid(data.getDouble(11));
+                newnode.setPID(data.getString(12));
+                newnode.setDID(data.getString(13));
                 newnode.setNextReport(null);
                 pt.getTemp().setNextReport(newnode);
                 pt.setTemp(newnode);
