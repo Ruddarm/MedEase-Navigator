@@ -29,7 +29,9 @@ public class MedDoctorDashBoard implements ActionListener {
     /*
      * Patitent information
      */
-    JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy, NotFondLabel;
+    JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy, NotFondLabel, PID_L, Name_L,
+            Age_L,
+            Number_L;
     MedEaseBtn Update, Next, CreateMedicalReport;
     // JTable MediclReportTable;
     DefaultTableModel Dtm;
@@ -81,24 +83,44 @@ public class MedDoctorDashBoard implements ActionListener {
         Update.setBounds(720, 115, 100, 30);
         InfoBox.add(Update);
 
+        PID_L = new JLabel("Patient ID   : ");
+        PID_L.setFont(GUIUtil.TimesBoldS2);
+        PID_L.setBounds(10, 10, 120, 30);
+        InfoBox.add(PID_L);
+
         PID = new JLabel("PID");
         PID.setFont(GUIUtil.TimesBoldS2);
-        PID.setBounds(10, 10, 100, 30);
+        PID.setBounds(150, 10, 100, 30);
         InfoBox.add(PID);
+
+        Name_L = new JLabel("Name           :");
+        Name_L.setFont(GUIUtil.TimesBoldS2);
+        Name_L.setBounds(10, 50, 120, 30);
+        InfoBox.add(Name_L);
 
         Name = new JLabel("Name");
         Name.setFont(GUIUtil.TimesBoldS2);
-        Name.setBounds(10, 50, 100, 30);
+        Name.setBounds(150, 50, 200, 30);
         InfoBox.add(Name);
+
+        Number_L = new JLabel("Number        :");
+        Number_L.setFont(GUIUtil.TimesBoldS2);
+        Number_L.setBounds(10, 90, 120, 30);
+        InfoBox.add(Number_L);
 
         Number = new JLabel("Number");
         Number.setFont(GUIUtil.TimesBoldS2);
-        Number.setBounds(10, 90, 100, 30);
+        Number.setBounds(150, 90, 200, 30);
         InfoBox.add(Number);
 
-        Age = new JLabel("Age");
+        Age_L = new JLabel("AGE  : ");
+        Age_L.setFont(GUIUtil.TimesBoldS2);
+        Age_L.setBounds(80, 120, 100, 30);
+        InfoBox.add(Age_L);
+
+        Age = new JLabel("  AGE  ");
         Age.setFont(GUIUtil.TimesBoldS2);
-        Age.setBounds(80, 120, 100, 30);
+        Age.setBounds(140, 120, 100, 30);
         InfoBox.add(Age);
 
         Gender = new JLabel("Gender");
