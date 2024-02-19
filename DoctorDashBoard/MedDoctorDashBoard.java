@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MedDoctorDashBoard   implements ActionListener, TableColumnModelListener {
+public class MedDoctorDashBoard implements ActionListener, TableColumnModelListener {
     DocDasBoarUtil docDasBoarUtil = new DocDasBoarUtil();
     MedPannel BackPannel, ProfielBox, InfoBox;
     /*
@@ -33,6 +33,9 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
      * Patitent information
      */
     JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy, NotFondLabel, PID_L, Name_L,
+            Height_L, Weight_L,
+            BloodGrup_L,
+            Gender_L,
             Age_L,
             Number_L;
     MedEaseBtn Update, Next, CreateMedicalReport;
@@ -55,7 +58,7 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
 
     };
 
-    public MedDoctorDashBoard(DBOperation DBO)  {
+    public MedDoctorDashBoard(DBOperation DBO) {
         this.DBO = DBO;
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 0);
         BackPannel.setBounds(0, 100, 1440, 500);
@@ -84,7 +87,7 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
 
         Update = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
         Update.setText("UPDATE");
-        Update.setBounds(720, 115, 100, 30);
+        Update.setBounds(740, 115, 100, 30);
         InfoBox.add(Update);
 
         PID_L = new JLabel("Patient ID   : ");
@@ -119,32 +122,52 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
 
         Age_L = new JLabel("AGE  : ");
         Age_L.setFont(GUIUtil.TimesBoldS2);
-        Age_L.setBounds(80, 120, 100, 30);
+        Age_L.setBounds(30, 120, 100, 30);
         InfoBox.add(Age_L);
 
         Age = new JLabel("  AGE  ");
         Age.setFont(GUIUtil.TimesBoldS2);
-        Age.setBounds(140, 120, 100, 30);
+        Age.setBounds(100, 120, 100, 30);
         InfoBox.add(Age);
+
+        Gender_L = new JLabel("GENDER  :");
+        Gender_L.setFont(GUIUtil.TimesBoldS2);
+        Gender_L.setBounds(200, 120, 100, 30);
+        InfoBox.add(Gender_L);
 
         Gender = new JLabel("Gender");
         Gender.setFont(GUIUtil.TimesBoldS2);
-        Gender.setBounds(210, 120, 100, 30);
+        Gender.setBounds(300, 120, 100, 30);
         InfoBox.add(Gender);
+
+        BloodGrup_L = new JLabel("BLOOD GRP :");
+        BloodGrup_L.setFont(GUIUtil.TimesBoldS2);
+        BloodGrup_L.setBounds(330, 120, 180, 30);
+        InfoBox.add(BloodGrup_L);
 
         BloodGrup = new JLabel("Blood Group");
         BloodGrup.setFont(GUIUtil.TimesBoldS2);
-        BloodGrup.setBounds(270, 120, 120, 30);
+        BloodGrup.setBounds(460, 120, 120, 30);
         InfoBox.add(BloodGrup);
+
+        Height_L = new JLabel("HEIGHT :");
+        Height_L.setFont(GUIUtil.TimesBoldS2);
+        Height_L.setBounds(490, 120, 100, 30);
+        InfoBox.add(Height_L);
 
         Heigh = new JLabel("Height");
         Heigh.setFont(GUIUtil.TimesBoldS2);
-        Heigh.setBounds(400, 120, 100, 30);
+        Heigh.setBounds(580, 120, 100, 30);
         InfoBox.add(Heigh);
+
+        Weight_L = new JLabel("WEIGHT :");
+        Weight_L.setFont(GUIUtil.TimesBoldS2);
+        Weight_L.setBounds(620, 120, 100, 30);
+        InfoBox.add(Weight_L);
 
         Weight = new JLabel("Weight");
         Weight.setFont(GUIUtil.TimesBoldS2);
-        Weight.setBounds(490, 120, 100, 30);
+        Weight.setBounds(710, 120, 100, 30);
         InfoBox.add(Weight);
 
         // Allergy = new JLabel("Allergy");
@@ -195,7 +218,7 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
                 Dtm.addRow(row);
             }
         }
-         MediclReportTable = new JTable(Dtm);
+        MediclReportTable = new JTable(Dtm);
         // MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
         // MediclReportTable.getColumnModel().getColumn(1).setMinWidth(150);
         // MediclReportTable.getColumnModel().getColumn().setMaxWidth(200);
@@ -218,8 +241,8 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
         if (e.getSource() == GetPatitentBtn) {
 
             GetPtFunction();
-        }else if(e.getSource()==MedicalReportBtn){
-            new ViewMedicalReport(Patient, DBO, null,null,true);
+        } else if (e.getSource() == MedicalReportBtn) {
+            new ViewMedicalReport(Patient, DBO, null, null, true);
         }
 
     }
@@ -247,32 +270,36 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
     @Override
     public void columnAdded(TableColumnModelEvent e) {
         // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnAdded'");
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'columnAdded'");
     }
 
     @Override
     public void columnRemoved(TableColumnModelEvent e) {
         // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnRemoved'");
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'columnRemoved'");
     }
 
     @Override
     public void columnMoved(TableColumnModelEvent e) {
         // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnMoved'");
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'columnMoved'");
     }
 
     @Override
     public void columnMarginChanged(ChangeEvent e) {
         // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnMarginChanged'");
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'columnMarginChanged'");
     }
 
     @Override
     public void columnSelectionChanged(ListSelectionEvent e) {
         // TODO Auto-generated method stub
-        if(!e.getValueIsAdjusting()){
-            // int row = 
+        if (!e.getValueIsAdjusting()) {
+            // int row =
         }
     }
 }
