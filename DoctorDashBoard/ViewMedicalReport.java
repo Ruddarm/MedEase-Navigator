@@ -293,6 +293,7 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
             INTMID++;
             String MRID = "MRID" + INTMID;
             MRIDFeild.setText(MRID);
+
         } else {
             MRIDFeild.setText(MedicalReport.getMRID());
             ChiefArea.setText(MedicalReport.getChiefcomplaint());
@@ -313,6 +314,7 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
             StatusOpt.setActionCommand(MedicalReport.getStatus());
             PaidAmountArea.setText("Rs : "+MedicalReport.getPaid());
             PaidAmountArea.setEditable(false);
+            UpdateBtn.setEnabled(false);
         }
     }
 
@@ -441,3 +443,10 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
     }
 
 }
+
+
+
+
+
+
+

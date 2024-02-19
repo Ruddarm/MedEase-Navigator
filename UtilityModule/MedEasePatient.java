@@ -177,9 +177,10 @@ public class MedEasePatient {
                         onenode.setDID(data.getString(13));
                         onenode.setNextReport(null);
                         pt.setReportHead(onenode);
+                        pt.setTemp(pt.getReportHead());
+
                         i++;
                     } else {
-                        pt.setTemp(pt.getReportHead());
                         MedEaseMedicalReport newnode = new MedEaseMedicalReport();
                         newnode.setMRID(data.getString(1));
                         newnode.setChiefcomplaint(data.getString(2));

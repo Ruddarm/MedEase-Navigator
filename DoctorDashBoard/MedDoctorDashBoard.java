@@ -24,7 +24,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MedDoctorDashBoard   implements ActionListener, TableColumnModelListener {
+public class MedDoctorDashBoard implements ActionListener, TableColumnModelListener {
     DocDasBoarUtil docDasBoarUtil = new DocDasBoarUtil();
     MedPannel BackPannel, ProfielBox, InfoBox;
     /*
@@ -40,7 +40,7 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
     DefaultTableModel Dtm;
     JScrollPane jsp;
     MedEasePatient Patient;
-    MedEaseBtn GetPatitentBtn, MedicalReportBtn;
+    MedEaseBtn GetPatitentBtn, MedicalReportBtn ,CloseAppointmentBtn;
     ResultSet PTdata;
     DBOperation DBO;
     MedEaseMedicalReport Temp;
@@ -56,7 +56,7 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
 
     };
 
-    public MedDoctorDashBoard(DBOperation DBO)  {
+    public MedDoctorDashBoard(DBOperation DBO) {
         this.DBO = DBO;
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 0);
         BackPannel.setBounds(0, 100, 1440, 500);
@@ -71,18 +71,22 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
         BackPannel.add(InfoBox);
         Patient = new MedEasePatient();
         SetMedicalReportTable(Patient);
-        GetPatitentBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
+
+        GetPatitentBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 5);
         GetPatitentBtn.setText("Get Patient");
         GetPatitentBtn.setBounds(800, 450, 150, 40);
         GetPatitentBtn.addActionListener(this);
         BackPannel.add(GetPatitentBtn);
-
-        MedicalReportBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
+        MedicalReportBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 5);
         MedicalReportBtn.setText("Medical Report");
-        MedicalReportBtn.setBounds(500, 450, 150, 40);
+        MedicalReportBtn.setBounds(600, 450, 150, 40);
         MedicalReportBtn.addActionListener(this);
         BackPannel.add(MedicalReportBtn);
-
+        CloseAppointmentBtn = new MedEaseBtn(GUIUtil.RedClr, GUIUtil.RedClr, null, 5);
+        CloseAppointmentBtn.setText("Close");
+        CloseAppointmentBtn.setBounds(1000, 450, 150, 40);
+        CloseAppointmentBtn.addActionListener(this);
+        BackPannel.add(CloseAppointmentBtn);
         Update = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
         Update.setText("UPDATE");
         Update.setBounds(720, 115, 100, 30);
@@ -163,7 +167,7 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
             PT.setReportHead(null);
             MedEasePatient.SetMedicalReport(PT, MedicalReport);
             MedEaseMedicalReport Temp = PT.getReportHead();
-            int n=0;
+            int n = 0;
             while (Temp != null) {
                 String row[] = {
                         Temp.getMRID(),
@@ -177,10 +181,10 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
                 Temp = Temp.getNext();
                 Dtm.addRow(row);
             }
-            System.out.println("Total row "+n);
+            System.out.println("Total row " + n);
         }
 
-         MediclReportTable = new JTable(Dtm);
+        MediclReportTable = new JTable(Dtm);
         // MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
         // MediclReportTable.getColumnModel().getColumn(1).setMinWidth(150);
         // MediclReportTable.getColumnModel().getColumn().setMaxWidth(200);
@@ -203,10 +207,11 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == GetPatitentBtn) {
-
             GetPtFunction();
-        }else if(e.getSource()==MedicalReportBtn){
-            new ViewMedicalReport(Patient, DBO, null,null,true);
+            
+        } else if (e.getSource() == MedicalReportBtn) {
+            new ViewMedicalReport(Patient, DBO, null, null, true);
+
         }
 
     }
@@ -234,40 +239,44 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
     @Override
     public void columnAdded(TableColumnModelEvent e) {
         // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnAdded'");
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'columnAdded'");
     }
 
     @Override
     public void columnRemoved(TableColumnModelEvent e) {
         // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnRemoved'");
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'columnRemoved'");
     }
 
     @Override
     public void columnMoved(TableColumnModelEvent e) {
         // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnMoved'");
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'columnMoved'");
     }
 
     @Override
     public void columnMarginChanged(ChangeEvent e) {
         // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnMarginChanged'");
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'columnMarginChanged'");
     }
 
     @Override
     public void columnSelectionChanged(ListSelectionEvent e) {
         // TODO Auto-generated method stub
-        if(!e.getValueIsAdjusting()){
+        if (!e.getValueIsAdjusting()) {
             int row = MediclReportTable.getSelectedRow();
-            if(row!=-1 && MediclReportTable.getSelectedColumn()==0){
-                int i= 0;
-                Temp= Patient.getReportHead();
-                while (i<row) {
-                    Temp= Temp.getNext();
+            if (row != -1 && MediclReportTable.getSelectedColumn() == 0) {
+                int i = 0;
+                Temp = Patient.getReportHead();
+                while (i < row) {
+                    Temp = Temp.getNext();
                     i++;
                 }
-                new ViewMedicalReport(Patient,DBO,null,Temp,false); 
+                new ViewMedicalReport(Patient, DBO, null, Temp, false);
                 MediclReportTable.clearSelection();
 
             }
