@@ -164,12 +164,13 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
             Dtm.addColumn(string);
         }
         if (PT != null) {
+            System.out.println("Ye oth nala niklaa");
             ResultSet MedicalReport = DBO.GetMedicalReport(PT.getStrPID());
             if (MedicalReport != null) {
                 PT.setReportHead(null);
                 MedEasePatient.SetMedicalReport(PT, MedicalReport);
                 MedEaseMedicalReport Temp = PT.getReportHead();
-                int n = 0;
+                // int n = 0;
                 while (Temp != null) {
                     String row[] = {
                             Temp.getMRID(),
@@ -179,11 +180,11 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
                     };
                     // System.out.println(Temp.getMRID());
                     // System.out.println(row[1]);
-                    n++;
+                    // n++;
                     Temp = Temp.getNext();
                     Dtm.addRow(row);
                 }
-                System.out.println("Total row " + n);
+                // System.out.println("Total row " + n);
             }
         }
 
@@ -292,7 +293,6 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         // throw new UnsupportedOperationException("Unimplemented method
         // 'columnMarginChanged'");
     }
-
     @Override
     public void columnSelectionChanged(ListSelectionEvent e) {
         // TODO Auto-generated method stub
@@ -307,7 +307,6 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
                 }
                 new ViewMedicalReport(Patient, DBO, null, Temp, false);
                 MediclReportTable.clearSelection();
-
             }
         }
     }
