@@ -41,6 +41,7 @@ public class UpdateAppointStatus implements ActionListener {
         this.Waittable = waittable;
         this.AppointmentInterface = Api;
         UpdateBox = new JDialog();
+        UpdateBox.setBounds(200, 100, 400, 350);
         UpdateBox.setBounds(200, 100, 400, 370);
         UpdateBox.getContentPane().setBackground(GUIUtil.Dark_BLue);
         UpdateBox.setLayout(null);

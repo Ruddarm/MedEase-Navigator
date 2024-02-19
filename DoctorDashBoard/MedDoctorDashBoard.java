@@ -3,20 +3,21 @@ package MedEaseNavigator.DoctorDashBoard;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
+import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import com.mysql.cj.xdevapi.Result;
+import javax.swing.table.TableColumnModel;
 import javax.swing.JLabel;
+import java.time.LocalTime;
 import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.TableColumnModelEvent;
 import javax.swing.event.TableColumnModelListener;
-import java.awt.Paint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -43,9 +44,11 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
     DefaultTableModel Dtm;
     JScrollPane jsp;
     MedEasePatient Patient;
-    MedEaseBtn GetPatitentBtn, MedicalReportBtn;
+    MedEaseBtn GetPatitentBtn, MedicalReportBtn, CloseAppointmentBtn;
     ResultSet PTdata;
     DBOperation DBO;
+    MedEaseMedicalReport Temp;
+    MedEaseNotify Notify;
     String PatientHead[] = {
 
             // "PID",
@@ -73,18 +76,22 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         BackPannel.add(InfoBox);
         Patient = new MedEasePatient();
         SetMedicalReportTable(Patient);
-        GetPatitentBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
+
+        GetPatitentBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 5);
         GetPatitentBtn.setText("Get Patient");
         GetPatitentBtn.setBounds(800, 450, 150, 40);
         GetPatitentBtn.addActionListener(this);
         BackPannel.add(GetPatitentBtn);
-
-        MedicalReportBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
+        MedicalReportBtn = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 5);
         MedicalReportBtn.setText("Medical Report");
-        MedicalReportBtn.setBounds(500, 450, 150, 40);
+        MedicalReportBtn.setBounds(600, 450, 150, 40);
         MedicalReportBtn.addActionListener(this);
         BackPannel.add(MedicalReportBtn);
-
+        CloseAppointmentBtn = new MedEaseBtn(GUIUtil.RedClr, GUIUtil.RedClr, null, 5);
+        CloseAppointmentBtn.setText("Close");
+        CloseAppointmentBtn.setBounds(1000, 450, 150, 40);
+        CloseAppointmentBtn.addActionListener(this);
+        BackPannel.add(CloseAppointmentBtn);
         Update = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
         Update.setText("UPDATE");
         Update.setBounds(740, 115, 100, 30);
@@ -169,6 +176,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         Weight.setFont(GUIUtil.TimesBoldS2);
         Weight.setBounds(710, 120, 100, 30);
         InfoBox.add(Weight);
+        Notify = new MedEaseNotify();
 
         // Allergy = new JLabel("Allergy");
         // Allergy.setFont(GUIUtil.TimesBoldS2);
@@ -200,22 +208,28 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         for (String string : PatientHead) {
             Dtm.addColumn(string);
         }
-        ResultSet MedicalReport = DBO.GetMedicalReport(PT.getStrPID());
-        if (MedicalReport != null) {
-            PT.setReportHead(null);
-            MedEasePatient.SetMedicalReport(PT, MedicalReport);
-            MedEaseMedicalReport Temp = PT.getReportHead();
-            while (Temp != null) {
-                String row[] = {
-                        Temp.getMRID(),
-                        Temp.getReportDate(),
-                        Temp.getChiefcomplaint(),
-                        Temp.getDID(),
-                };
-                // System.out.println(Temp.getMRID());
-                // System.out.println(row[1]);
-                Temp = Temp.getNext();
-                Dtm.addRow(row);
+        if (PT != null) {
+            System.out.println("Ye oth nala niklaa");
+            ResultSet MedicalReport = DBO.GetMedicalReport(PT.getStrPID());
+            if (MedicalReport != null) {
+                PT.setReportHead(null);
+                MedEasePatient.SetMedicalReport(PT, MedicalReport);
+                MedEaseMedicalReport Temp = PT.getReportHead();
+                // int n = 0;
+                while (Temp != null) {
+                    String row[] = {
+                            Temp.getMRID(),
+                            Temp.getReportDate(),
+                            Temp.getChiefcomplaint(),
+                            Temp.getDID(),
+                    };
+                    // System.out.println(Temp.getMRID());
+                    // System.out.println(row[1]);
+                    // n++;
+                    Temp = Temp.getNext();
+                    Dtm.addRow(row);
+                }
+                // System.out.println("Total row " + n);
             }
         }
         MediclReportTable = new JTable(Dtm);
@@ -230,19 +244,43 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         MediclReportTable.setRowSelectionAllowed(false);
         MediclReportTable.setColumnSelectionAllowed(false);
         MediclReportTable.setCellSelectionEnabled(true);
+        TableColumnModel colummodel = MediclReportTable.getColumnModel();
+        colummodel.addColumnModelListener(this);
 
         jsp = new JScrollPane(MediclReportTable);
         jsp.setBounds(200, 180, 900, 250);
         BackPannel.add(jsp);
     }
 
+    public void restdata() {
+        PID.setText("PID");
+        Name.setText("Name");
+        Number.setText("Number");
+        Age.setText("Age");
+        BloodGrup.setText("BLood Gruop");
+        Heigh.setText("Height");
+        Weight.setText("Weight");
+        Gender.setText("Gender");
+        SetMedicalReportTable(null);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == GetPatitentBtn) {
-
             GetPtFunction();
+
         } else if (e.getSource() == MedicalReportBtn) {
             new ViewMedicalReport(Patient, DBO, null, null, true);
+
+        } else if (e.getSource() == CloseAppointmentBtn) {
+            if (Patient != null) {
+                AppointMent appoint = new AppointMent();
+                appoint.setPID(Patient.getStrPID());
+                appoint.setIntime("" + LocalTime.now());
+                appoint.setStatus("PAYMENT");
+                DBO.UpdateAppointment(appoint);
+                restdata();
+            }
         }
 
     }
@@ -250,10 +288,15 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
     public void GetPtFunction() {
         ResultSet AppointData = DBO.GetNextPatient();
         String number = "";
-        try {
-            number = AppointData.getString(7);
-        } catch (SQLException ex) {
+        if (AppointData != null) {
+            try {
+                number = AppointData.getString(7);
+            } catch (SQLException ex) {
 
+            }
+        } else {
+            Notify.setMsg("Patient Not found", -1);
+            return;
         }
         Patient = new MedEasePatient();
         ResultSet PTdata = DBO.GetPatient(number);
@@ -292,6 +335,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
     public void columnMarginChanged(ChangeEvent e) {
         // TODO Auto-generated method stub
         // throw new UnsupportedOperationException("Unimplemented method
+        //
         // 'columnMarginChanged'");
     }
 
@@ -299,7 +343,17 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
     public void columnSelectionChanged(ListSelectionEvent e) {
         // TODO Auto-generated method stub
         if (!e.getValueIsAdjusting()) {
-            // int row =
+            int row = MediclReportTable.getSelectedRow();
+            if (row != -1 && MediclReportTable.getSelectedColumn() == 0) {
+                int i = 0;
+                Temp = Patient.getReportHead();
+                while (i < row) {
+                    Temp = Temp.getNext();
+                    i++;
+                }
+                new ViewMedicalReport(Patient, DBO, null, Temp, false);
+                MediclReportTable.clearSelection();
+            }
         }
     }
 }

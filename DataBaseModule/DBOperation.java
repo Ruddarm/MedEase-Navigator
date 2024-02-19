@@ -60,7 +60,7 @@ public class DBOperation implements DBOpertaionInterface {
             if (data.next() != false) {
                 return data;
             } else {
-                Dbnotfy.setMsg("No Medical History", -1);
+                // Dbnotfy.setMsg("No Medical History", -1);
                 return null;
             }
 
@@ -81,7 +81,8 @@ public class DBOperation implements DBOpertaionInterface {
     public boolean UpdateAppointment(AppointMent Appointment) {
 
         try {
-            preparedQuery = DBcon.prepareStatement("Update appointment set status= ? , IN_TIME = ? where date = ? && patient_id = ?");
+            preparedQuery = DBcon.prepareStatement(
+                    "Update appointment set status= ? , IN_TIME = ? where date = ? && patient_id = ?");
             preparedQuery.setString(1, Appointment.getStatus());
             preparedQuery.setString(2, Appointment.getIntime());
             preparedQuery.setString(3, "" + LocalDate.now());
@@ -200,7 +201,7 @@ public class DBOperation implements DBOpertaionInterface {
             // ','Crocine','Nothing','null','high
             // temprature','no','close','700','PID111','DOC123')
             preparedQuery = DBcon.prepareStatement(" INSERT INTO medical_history VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            preparedQuery.setString(1, "MRID" + MedicalReport.getMRID());
+            preparedQuery.setString(1, MedicalReport.getMRID());
             preparedQuery.setString(2, MedicalReport.getChiefcomplaint());
             preparedQuery.setString(3, MedicalReport.getDiagnosis());
             preparedQuery.setString(4, MedicalReport.getPrescription());
@@ -211,8 +212,8 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(9, MedicalReport.getStatus());
             preparedQuery.setDouble(10, MedicalReport.getFees());
             preparedQuery.setDouble(11, MedicalReport.getPaid());
-            preparedQuery.setString(12, "PID" + MedicalReport.getPID());
-            preparedQuery.setString(13, "DOC" + MedicalReport.getDID());
+            preparedQuery.setString(12, MedicalReport.getPID());
+            preparedQuery.setString(13, MedicalReport.getDID());
 
             preparedQuery.executeUpdate();
             DBcon.commit();

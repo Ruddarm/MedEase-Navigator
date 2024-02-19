@@ -31,6 +31,7 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
     JPanel JSPpane;
     JScrollBar jsb;
     JComboBox<String> StatusOpt;
+    int INTMID;
     String Option[] = {
             "Open",
             "Pending",
@@ -41,13 +42,13 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
     MedEaseMedicalReport MedicalReport;
     MedEaseDoctor Doc;
 
-
-    public ViewMedicalReport(MedEasePatient pt, DBOperation dbo, MedEaseDoctor doc, MedEaseMedicalReport MedicalReport,Boolean editable) {
+    public ViewMedicalReport(MedEasePatient pt, DBOperation dbo, MedEaseDoctor doc, MedEaseMedicalReport MedicalReport,
+            Boolean editable) {
         this.pt = pt;
         this.DBO = dbo;
         this.Doc = doc;
-        this.view=editable;
-        this.MedicalReport=MedicalReport;
+        this.view = editable;
+        this.MedicalReport = MedicalReport;
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -267,32 +268,33 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
                 UpdateBtn.setFont(GUIUtil.TimesBoldS2);
                 UpdateBtn.setForeground(GUIUtil.WhiteClr);
                 JSPpane.add(UpdateBtn);
-
                 JSPBack = new JScrollPane(JSPpane);
                 JSPBack.setBounds(75, 120, 850, 500);
                 JSPpane.setPreferredSize(new Dimension(830, 800));
                 ViewBoxl.add(JSPBack);
                 addlistner();
-                if(pt!=null){
+                if (pt != null) {
                     SetPTdata();
                     SetMedicalReport();
                 }
-                
-                
             }
         });
     }
 
-    public void SetPTdata(){
+    public void SetPTdata() {
         PidField.setText(pt.getStrPID());
         NameField.setText(pt.getName());
         NumberFeild.setText(pt.getNumber());
     }
-    public void SetMedicalReport(){
-        if(view==true){
-            String MRID= "MRID"+DBO.GetLastMID();
+
+    public void SetMedicalReport() {
+        if (view == true) {
+            INTMID = DBO.GetLastMID();
+            INTMID++;
+            String MRID = "MRID" + INTMID;
             MRIDFeild.setText(MRID);
-        }else{
+
+        } else {
             MRIDFeild.setText(MedicalReport.getMRID());
             ChiefArea.setText(MedicalReport.getChiefcomplaint());
             ChiefArea.setEditable(false);
@@ -302,10 +304,19 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
             SymptompsArea.setEditable(false);
             PrescriptionArea.setText(MedicalReport.getPrescription());
             PrescriptionArea.setEditable(false);
-            
+            FollowUPAdivceArea.setText(MedicalReport.getFollowupadvice());
+            FollowUPAdivceArea.setEditable(false);
+        
+            LabTestArea.setText(MedicalReport.getLabtest());
+            LabTestArea.setEditable(false);
+            FeesArea.setText("Rs : "+MedicalReport.getFees());
+            FeesArea.setEditable(false);
+            StatusOpt.setActionCommand(MedicalReport.getStatus());
+            PaidAmountArea.setText("Rs : "+MedicalReport.getPaid());
+            PaidAmountArea.setEditable(false);
+            UpdateBtn.setEnabled(false);
         }
     }
-
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -388,6 +399,7 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
         PrescriptionArea.addKeyListener(this);
         FollowUPAdivceArea.addKeyListener(this);
         LabTestArea.addKeyListener(this);
+        UpdateBtn.addActionListener(this);
     }
 
     @Override
@@ -408,24 +420,33 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
             MedicalReport = new MedEaseMedicalReport();
             MedicalReport.setMRID(MRIDFeild.getText());
             MedicalReport.setPID(PidField.getText());
-            MedicalReport.setDID(Doc.getDID());
+            MedicalReport.setDID("DID01");
             MedicalReport.setChiefcomplaint(ChiefArea.getText());
             MedicalReport.setDiagnosis(DiagnosisArea.getText());
             MedicalReport.setSymptoms(SymptompsArea.getText());
             MedicalReport.setPrescription(PrescriptionArea.getText());
             MedicalReport.setFollowupadvice(FollowUPAdivceArea.getText());
-            MedicalReport.setReportDate(""+LocalDate.now());
+            MedicalReport.setReportDate("" + LocalDate.now());
             MedicalReport.setLabtest(LabTestArea.getText());
             MedicalReport.setFees(Fees);
             MedicalReport.setPaid(Paid);
-            if(Fees==Paid){
+            if (Fees == Paid) {
                 MedicalReport.setStatus(StatusOpt.getItemAt(2));
-            }else{
+            } else {
                 MedicalReport.setStatus(StatusOpt.getItemAt(1));
             }
-            DBO.InsertMedicalHistory(MedicalReport);
+            if(DBO.InsertMedicalHistory(MedicalReport)){
+                DBO.UPdateMID(INTMID);
+            }
 
         }
     }
 
 }
+
+
+
+
+
+
+
