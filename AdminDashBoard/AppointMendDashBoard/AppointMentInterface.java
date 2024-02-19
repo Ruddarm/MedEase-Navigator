@@ -14,7 +14,7 @@ import MedEaseNavigator.AppointMentModule.UpdateAppointStatus;
 import MedEaseNavigator.AppointMentModule.ViewPatient;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
-import MedEaseNavigator.UtilityModule.AdminInterface;
+// import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
