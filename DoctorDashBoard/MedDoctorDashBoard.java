@@ -9,6 +9,8 @@ import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
 import com.mysql.cj.xdevapi.Result;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -41,6 +43,7 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
     MedEaseBtn GetPatitentBtn, MedicalReportBtn;
     ResultSet PTdata;
     DBOperation DBO;
+    MedEaseMedicalReport Temp;
     String PatientHead[] = {
 
             // "PID",
@@ -160,6 +163,7 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
             PT.setReportHead(null);
             MedEasePatient.SetMedicalReport(PT, MedicalReport);
             MedEaseMedicalReport Temp = PT.getReportHead();
+            int n=0;
             while (Temp != null) {
                 String row[] = {
                         Temp.getMRID(),
@@ -169,10 +173,13 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
                 };
                 // System.out.println(Temp.getMRID());
                 // System.out.println(row[1]);
+                n++;
                 Temp = Temp.getNext();
                 Dtm.addRow(row);
             }
+            System.out.println("Total row "+n);
         }
+
          MediclReportTable = new JTable(Dtm);
         // MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
         // MediclReportTable.getColumnModel().getColumn(1).setMinWidth(150);
@@ -185,6 +192,8 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
         MediclReportTable.setRowSelectionAllowed(false);
         MediclReportTable.setColumnSelectionAllowed(false);
         MediclReportTable.setCellSelectionEnabled(true);
+        TableColumnModel colummodel = MediclReportTable.getColumnModel();
+        colummodel.addColumnModelListener(this);
 
         jsp = new JScrollPane(MediclReportTable);
         jsp.setBounds(200, 180, 900, 250);
@@ -250,7 +259,18 @@ public class MedDoctorDashBoard   implements ActionListener, TableColumnModelLis
     public void columnSelectionChanged(ListSelectionEvent e) {
         // TODO Auto-generated method stub
         if(!e.getValueIsAdjusting()){
-            // int row = 
+            int row = MediclReportTable.getSelectedRow();
+            if(row!=-1 && MediclReportTable.getSelectedColumn()==0){
+                int i= 0;
+                Temp= Patient.getReportHead();
+                while (i<row) {
+                    Temp= Temp.getNext();
+                    i++;
+                }
+                new ViewMedicalReport(Patient,DBO,null,Temp,false); 
+                MediclReportTable.clearSelection();
+
+            }
         }
     }
 }

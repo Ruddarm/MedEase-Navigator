@@ -136,7 +136,8 @@ public class UpdateAppointStatus implements ActionListener {
             DBO.UpdateAppointment(appoint);
             setinfo();
             Waittable.UpdateTabel();
-            AppointmentInterface.UpdateTable();
+            AppointmentInterface.UpdateTable(); 
+            
 
         }
     }
