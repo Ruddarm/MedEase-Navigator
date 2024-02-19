@@ -117,7 +117,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         Name.setBounds(150, 50, 200, 30);
         InfoBox.add(Name);
 
-        Number_L = new JLabel("Number        :");
+        Number_L = new JLabel("Number       :");
         Number_L.setFont(GUIUtil.TimesBoldS2);
         Number_L.setBounds(10, 90, 120, 30);
         InfoBox.add(Number_L);
@@ -127,12 +127,12 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         Number.setBounds(150, 90, 200, 30);
         InfoBox.add(Number);
 
-        Age_L = new JLabel("AGE  : ");
+        Age_L = new JLabel("DOB : ");
         Age_L.setFont(GUIUtil.TimesBoldS2);
         Age_L.setBounds(30, 120, 100, 30);
         InfoBox.add(Age_L);
 
-        Age = new JLabel("  AGE  ");
+        Age = new JLabel("   ");
         Age.setFont(GUIUtil.TimesBoldS2);
         Age.setBounds(100, 120, 100, 30);
         InfoBox.add(Age);
@@ -142,7 +142,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         Gender_L.setBounds(200, 120, 100, 30);
         InfoBox.add(Gender_L);
 
-        Gender = new JLabel("Gender");
+        Gender = new JLabel(" ");
         Gender.setFont(GUIUtil.TimesBoldS2);
         Gender.setBounds(300, 120, 100, 30);
         InfoBox.add(Gender);
@@ -152,7 +152,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         BloodGrup_L.setBounds(330, 120, 180, 30);
         InfoBox.add(BloodGrup_L);
 
-        BloodGrup = new JLabel("Blood Group");
+        BloodGrup = new JLabel(" ");
         BloodGrup.setFont(GUIUtil.TimesBoldS2);
         BloodGrup.setBounds(460, 120, 120, 30);
         InfoBox.add(BloodGrup);
@@ -162,7 +162,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         Height_L.setBounds(490, 120, 100, 30);
         InfoBox.add(Height_L);
 
-        Heigh = new JLabel("Height");
+        Heigh = new JLabel(" ");
         Heigh.setFont(GUIUtil.TimesBoldS2);
         Heigh.setBounds(580, 120, 100, 30);
         InfoBox.add(Heigh);
@@ -172,7 +172,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         Weight_L.setBounds(620, 120, 100, 30);
         InfoBox.add(Weight_L);
 
-        Weight = new JLabel("Weight");
+        Weight = new JLabel(" ");
         Weight.setFont(GUIUtil.TimesBoldS2);
         Weight.setBounds(710, 120, 100, 30);
         InfoBox.add(Weight);
