@@ -60,7 +60,7 @@ public class DBOperation implements DBOpertaionInterface {
             if (data.next() != false) {
                 return data;
             } else {
-                Dbnotfy.setMsg("No Medical History", -1);
+                // Dbnotfy.setMsg("No Medical History", -1);
                 return null;
             }
 
