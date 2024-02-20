@@ -117,7 +117,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         Name.setBounds(150, 50, 200, 30);
         InfoBox.add(Name);
 
-        Number_L = new JLabel("Number       :");
+        Number_L = new JLabel("Number      :");
         Number_L.setFont(GUIUtil.TimesBoldS2);
         Number_L.setBounds(10, 90, 120, 30);
         InfoBox.add(Number_L);
@@ -253,14 +253,14 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
     }
 
     public void restdata() {
-        PID.setText("PID");
-        Name.setText("Name");
-        Number.setText("Number");
-        Age.setText("Age");
-        BloodGrup.setText("BLood Gruop");
-        Heigh.setText("Height");
-        Weight.setText("Weight");
-        Gender.setText("Gender");
+        PID.setText(" ");
+        Name.setText(" ");
+        Number.setText(" ");
+        Age.setText(" ");
+        BloodGrup.setText(" ");
+        Heigh.setText(" ");
+        Weight.setText(" ");
+        Gender.setText(" ");
         SetMedicalReportTable(null);
     }
 
