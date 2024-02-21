@@ -33,7 +33,12 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
     /*
      * Patitent information
      */
-    JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy, NotFondLabel;
+    JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy, NotFondLabel, PID_L, Name_L,
+            Height_L, Weight_L,
+            BloodGrup_L,
+            Gender_L,
+            Age_L,
+            Number_L;
     MedEaseBtn Update, Next, CreateMedicalReport;
     JTable MediclReportTable;
     DefaultTableModel Dtm;
@@ -89,47 +94,87 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         BackPannel.add(CloseAppointmentBtn);
         Update = new MedEaseBtn(GUIUtil.Base_Background, GUIUtil.Base_Background, null, 10);
         Update.setText("UPDATE");
-        Update.setBounds(720, 115, 100, 30);
+        Update.setBounds(740, 115, 100, 30);
         InfoBox.add(Update);
+
+        PID_L = new JLabel("Patient ID   : ");
+        PID_L.setFont(GUIUtil.TimesBoldS2);
+        PID_L.setBounds(10, 10, 120, 30);
+        InfoBox.add(PID_L);
 
         PID = new JLabel("PID");
         PID.setFont(GUIUtil.TimesBoldS2);
-        PID.setBounds(10, 10, 100, 30);
+        PID.setBounds(150, 10, 100, 30);
         InfoBox.add(PID);
+
+        Name_L = new JLabel("Name           :");
+        Name_L.setFont(GUIUtil.TimesBoldS2);
+        Name_L.setBounds(10, 50, 120, 30);
+        InfoBox.add(Name_L);
 
         Name = new JLabel("Name");
         Name.setFont(GUIUtil.TimesBoldS2);
-        Name.setBounds(10, 50, 100, 30);
+        Name.setBounds(150, 50, 200, 30);
         InfoBox.add(Name);
+
+        Number_L = new JLabel("Number      :");
+        Number_L.setFont(GUIUtil.TimesBoldS2);
+        Number_L.setBounds(10, 90, 120, 30);
+        InfoBox.add(Number_L);
 
         Number = new JLabel("Number");
         Number.setFont(GUIUtil.TimesBoldS2);
-        Number.setBounds(10, 90, 100, 30);
+        Number.setBounds(150, 90, 200, 30);
         InfoBox.add(Number);
 
-        Age = new JLabel("Age");
+        Age_L = new JLabel("DOB : ");
+        Age_L.setFont(GUIUtil.TimesBoldS2);
+        Age_L.setBounds(30, 120, 100, 30);
+        InfoBox.add(Age_L);
+
+        Age = new JLabel("   ");
         Age.setFont(GUIUtil.TimesBoldS2);
-        Age.setBounds(80, 120, 100, 30);
+        Age.setBounds(100, 120, 100, 30);
         InfoBox.add(Age);
 
-        Gender = new JLabel("Gender");
+        Gender_L = new JLabel("GENDER  :");
+        Gender_L.setFont(GUIUtil.TimesBoldS2);
+        Gender_L.setBounds(200, 120, 100, 30);
+        InfoBox.add(Gender_L);
+
+        Gender = new JLabel(" ");
         Gender.setFont(GUIUtil.TimesBoldS2);
-        Gender.setBounds(210, 120, 100, 30);
+        Gender.setBounds(300, 120, 100, 30);
         InfoBox.add(Gender);
 
-        BloodGrup = new JLabel("Blood Group");
+        BloodGrup_L = new JLabel("BLOOD GRP :");
+        BloodGrup_L.setFont(GUIUtil.TimesBoldS2);
+        BloodGrup_L.setBounds(330, 120, 180, 30);
+        InfoBox.add(BloodGrup_L);
+
+        BloodGrup = new JLabel(" ");
         BloodGrup.setFont(GUIUtil.TimesBoldS2);
-        BloodGrup.setBounds(270, 120, 120, 30);
+        BloodGrup.setBounds(460, 120, 120, 30);
         InfoBox.add(BloodGrup);
 
-        Heigh = new JLabel("Height");
+        Height_L = new JLabel("HEIGHT :");
+        Height_L.setFont(GUIUtil.TimesBoldS2);
+        Height_L.setBounds(490, 120, 100, 30);
+        InfoBox.add(Height_L);
+
+        Heigh = new JLabel(" ");
         Heigh.setFont(GUIUtil.TimesBoldS2);
-        Heigh.setBounds(400, 120, 100, 30);
+        Heigh.setBounds(580, 120, 100, 30);
         InfoBox.add(Heigh);
 
-        Weight = new JLabel("Weight");
+        Weight_L = new JLabel("WEIGHT :");
+        Weight_L.setFont(GUIUtil.TimesBoldS2);
+        Weight_L.setBounds(620, 120, 100, 30);
+        InfoBox.add(Weight_L);
+
+        Weight = new JLabel(" ");
         Weight.setFont(GUIUtil.TimesBoldS2);
-        Weight.setBounds(490, 120, 100, 30);
+        Weight.setBounds(710, 120, 100, 30);
         InfoBox.add(Weight);
         Notify = new MedEaseNotify();
 
@@ -187,7 +232,6 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
                 // System.out.println("Total row " + n);
             }
         }
-
         MediclReportTable = new JTable(Dtm);
         // MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
         // MediclReportTable.getColumnModel().getColumn(1).setMinWidth(150);
@@ -209,14 +253,14 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
     }
 
     public void restdata() {
-        PID.setText("PID");
-        Name.setText("Name");
-        Number.setText("Number");
-        Age.setText("Age");
-        BloodGrup.setText("BLood Gruop");
-        Heigh.setText("Height");
-        Weight.setText("Weight");
-        Gender.setText("Gender");
+        PID.setText(" ");
+        Name.setText(" ");
+        Number.setText(" ");
+        Age.setText(" ");
+        BloodGrup.setText(" ");
+        Heigh.setText(" ");
+        Weight.setText(" ");
+        Gender.setText(" ");
         SetMedicalReportTable(null);
     }
 
@@ -232,7 +276,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
             if (Patient != null) {
                 AppointMent appoint = new AppointMent();
                 appoint.setPID(Patient.getStrPID());
-                appoint.setIntime(""+ LocalTime.now());
+                appoint.setIntime("" + LocalTime.now());
                 appoint.setStatus("PAYMENT");
                 DBO.UpdateAppointment(appoint);
                 restdata();
@@ -281,6 +325,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
     @Override
     public void columnMarginChanged(ChangeEvent e) {
     }
+
     @Override
     public void columnSelectionChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {

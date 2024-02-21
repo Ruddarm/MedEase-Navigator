@@ -42,6 +42,7 @@ public class UpdateAppointStatus implements ActionListener {
         this.AppointmentInterface = Api;
         UpdateBox = new JDialog();
         UpdateBox.setBounds(200, 100, 400, 350);
+        UpdateBox.setBounds(200, 100, 400, 370);
         UpdateBox.getContentPane().setBackground(GUIUtil.Dark_BLue);
         UpdateBox.setLayout(null);
         UpdateBox.setVisible(true);
@@ -136,8 +137,7 @@ public class UpdateAppointStatus implements ActionListener {
             DBO.UpdateAppointment(appoint);
             setinfo();
             Waittable.UpdateTabel();
-            AppointmentInterface.UpdateTable(); 
-            
+            AppointmentInterface.UpdateTable();
 
         }
     }
