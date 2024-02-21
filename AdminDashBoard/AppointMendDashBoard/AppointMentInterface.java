@@ -114,7 +114,6 @@ public class AppointMentInterface implements TableColumnModelListener {
 
     @Override
     public void columnSelectionChanged(ListSelectionEvent e) {
-        // TODO Auto-generated method stub
         if (!e.getValueIsAdjusting()) {
             int row = AppointMentTable.getSelectedRow();
             if (row != -1 && AppointMentTable.getSelectedColumn() == 3) {
@@ -151,20 +150,16 @@ public class AppointMentInterface implements TableColumnModelListener {
 
     @Override
     public void columnMarginChanged(ChangeEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void columnMoved(TableColumnModelEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void columnRemoved(TableColumnModelEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     public void UpdateTable() {

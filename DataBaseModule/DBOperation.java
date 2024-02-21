@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.MedEaseDoctor;
@@ -73,7 +72,6 @@ public class DBOperation implements DBOpertaionInterface {
 
     @Override
     public ResultSet GetAppointmentSchedule(String Date) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'GetAppointmentSchedule'");
     }
 

@@ -6,29 +6,16 @@
  * 
  */
 package MedEaseNavigator.DriverPackage;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Date;
-import com.mysql.cj.util.TimeUtil;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.PaymentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.WaitingInterface;
-import MedEaseNavigator.AppointMentModule.UpdateAppointStatus;
 import MedEaseNavigator.DataBaseModule.DBConnectivity;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.DoctorDashBoard.MedDoctorDashBoard;
-import MedEaseNavigator.DoctorDashBoard.ViewMedicalReport;
 import MedEaseNavigator.FindPatientModule.FindCustomerUtil;
 import MedEaseNavigator.LoginModule.MedEaseLogin;
 import MedEaseNavigator.MedMenuBar.MenuBar;
-import MedEaseNavigator.UtilityModule.AppointMent;
-import MedEaseNavigator.UtilityModule.MedEaseDoctor;
-import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
-import MedEaseNavigator.UtilityModule.MedEasePatient;
-import MedEaseNavigator.UtilityModule.MedQueue;
 import MedEaseNavigator.UtilityModule.UtilityMedease;
 
 public class MedEaseApp {

@@ -1,14 +1,5 @@
 package MedEaseNavigator.UtilityModule;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import com.mysql.cj.protocol.Resultset;
-import com.mysql.cj.xdevapi.Result;
-
-import MedEaseNavigator.DataBaseModule.DBOperation;
-import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
-
 public class AppointMent {
     private String Date;
     private String TimeSlot;

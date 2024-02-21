@@ -1,6 +1,5 @@
 package MedEaseNavigator.UtilityModule;
 
-import com.mysql.cj.xdevapi.WarningImpl;
 
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.PaymentInterface;

@@ -268,34 +268,21 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
 
     @Override
     public void columnAdded(TableColumnModelEvent e) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method
-        // 'columnAdded'");
     }
 
     @Override
     public void columnRemoved(TableColumnModelEvent e) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method
-        // 'columnRemoved'");
     }
 
     @Override
     public void columnMoved(TableColumnModelEvent e) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method
-        // 'columnMoved'");
     }
 
     @Override
     public void columnMarginChanged(ChangeEvent e) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method
-        // 'columnMarginChanged'");
     }
     @Override
     public void columnSelectionChanged(ListSelectionEvent e) {
-        // TODO Auto-generated method stub
         if (!e.getValueIsAdjusting()) {
             int row = MediclReportTable.getSelectedRow();
             if (row != -1 && MediclReportTable.getSelectedColumn() == 0) {

@@ -42,8 +42,6 @@ public class LoginEventHandeler extends KeyAdapter implements ActionListener {
 
      @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        // super.keyPressed(e);
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             logobj.LoginBtn.doClick();
         }

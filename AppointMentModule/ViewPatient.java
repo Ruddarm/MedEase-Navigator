@@ -1,16 +1,11 @@
 package MedEaseNavigator.AppointMentModule;
 
 import java.sql.ResultSet;
-import java.util.Set;
-
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-
-import com.mysql.cj.protocol.Resultset;
-
 import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
@@ -163,32 +158,22 @@ public class ViewPatient  implements TableColumnModelListener {
 
     @Override
     public void columnAdded(TableColumnModelEvent e) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnAdded'");
     }
 
     @Override
     public void columnRemoved(TableColumnModelEvent e) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnRemoved'");
     }
 
     @Override
     public void columnMoved(TableColumnModelEvent e) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnMoved'");
     }
 
     @Override
     public void columnMarginChanged(ChangeEvent e) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnMarginChanged'");
     }
 
     @Override
     public void columnSelectionChanged(ListSelectionEvent e) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'columnSelectionChanged'");
         if(!e.getValueIsAdjusting()){
             int row = MediclReportTable.getSelectedRow();
             if(row!=-1&& MediclReportTable.getSelectedColumn()==0){
