@@ -48,6 +48,7 @@ public class MedEaseLogin {
                 LoginFrame.setBounds(200, 200, 600, 300);
                 LoginFrame.setVisible(true);
                 LoginFrame.setLayout(null);
+                LoginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 LogEvent = new LoginEventHandeler(loginobj);
 
                 LoginFrame.setResizable(false);
@@ -91,6 +92,7 @@ public class MedEaseLogin {
                 Password.setBounds(30, 135, 170, 30);
                 Password.setFont(GUIUtil.TimesBoldS2);
                 Password.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                Password.addKeyListener(LogEvent);
                 UserDetailsPannel.add(Password);
 
                 SetupBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);

@@ -65,7 +65,7 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
     public MedDoctorDashBoard(DBOperation DBO) {
         this.DBO = DBO;
 
-        new MenuBar(DoctorFrame, DBO);
+        new MenuBar(DoctorFrame, this.DBO);
 
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 0);
         BackPannel.setBounds(0, 100, 1440, 500);
@@ -213,7 +213,7 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
             Dtm.addColumn(string);
         }
         if (PT != null) {
-            System.out.println("Ye oth nala niklaa");
+            System.out.println("Ye toh nala niklaa");
             ResultSet MedicalReport = DBO.GetMedicalReport(PT.getStrPID());
             if (MedicalReport != null) {
                 PT.setReportHead(null);

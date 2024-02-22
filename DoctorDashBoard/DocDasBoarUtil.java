@@ -3,9 +3,7 @@ package MedEaseNavigator.DoctorDashBoard;
 import javax.swing.JFrame;
 
 import MedEaseNavigator.DataBaseModule.DBOperation;
-import MedEaseNavigator.MedMenuBar.MenuBar;
 import MedEaseNavigator.UtilityModule.GUIUtil;
-
 public class DocDasBoarUtil {
     JFrame DoctorFrame;
     DBOperation DBO;

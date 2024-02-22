@@ -6,16 +6,12 @@
  * 
  */
 package MedEaseNavigator.DriverPackage;
-
-import java.time.LocalDate;
 import java.util.concurrent.Semaphore;
-
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.PaymentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.WaitingInterface;
 import MedEaseNavigator.DataBaseModule.DBConnectivity;
 import MedEaseNavigator.DataBaseModule.DBOperation;
-import MedEaseNavigator.DoctorDashBoard.MedDoctorDashBoard;
 import MedEaseNavigator.FindPatientModule.FindCustomerUtil;
 import MedEaseNavigator.LoginModule.MedEaseLogin;
 import MedEaseNavigator.MedMenuBar.MenuBar;
