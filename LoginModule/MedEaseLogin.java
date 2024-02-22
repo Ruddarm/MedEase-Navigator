@@ -6,6 +6,8 @@ package MedEaseNavigator.LoginModule;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.concurrent.Semaphore;
+
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -28,9 +30,11 @@ public class MedEaseLogin {
     JTextField UserName;
     JTextField Password;
     DBOperation DBO;
+    Semaphore sema;
 
-    public MedEaseLogin(DBOperation dbo) {
+    public MedEaseLogin(DBOperation dbo, Semaphore sema) {
         this.DBO = dbo;
+        this.sema = sema;
         setLoginInterface(this);
 
     }
@@ -64,7 +68,7 @@ public class MedEaseLogin {
                 NavigatorLabel.setFont(new Font("Times New Roman", Font.CENTER_BASELINE, 30));
                 warn = new JLabel();
                 warn.setVisible(false);
-                warn.setBounds(10, 20, 200, 20);
+                warn.setBounds(10, 20, 400, 20);
                 warn.setFont(GUIUtil.TimesItalic);
                 warn.setForeground(GUIUtil.WarningColor);
                 UserDetailsPannel.add(warn);
@@ -105,10 +109,12 @@ public class MedEaseLogin {
                 LoginBtn.addActionListener(LogEvent);
                 LoginBtn.addKeyListener(LogEvent);
                 UserDetailsPannel.add(LoginBtn);
-                
+
             }
         });
 
     }
+
+    
 
 }

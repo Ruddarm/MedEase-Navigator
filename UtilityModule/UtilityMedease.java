@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 import MedEaseNavigator.DataBaseModule.DBConnectivity;
 import MedEaseNavigator.DataBaseModule.DBOperation;
+import MedEaseNavigator.LoginModule.MedEaseLogin;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 
 public class UtilityMedease {
@@ -19,6 +20,7 @@ public class UtilityMedease {
     public MedEaseNotify Notify;
     public DBOperation DBO;
     public AdminInterface Admin;
+    public MedEaseLogin Medlogin;
 
     public UtilityMedease() {
         Notify = new MedEaseNotify();

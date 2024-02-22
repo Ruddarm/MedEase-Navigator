@@ -20,15 +20,12 @@ public class LoginEventHandeler extends KeyAdapter implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getSource());
-        System.out.println("click");
-        System.out.println(logobj.LoginBtn);
         logobj.warn.setVisible(false);
         if (e.getSource() == logobj.LoginBtn) {
             String Username = logobj.UserName.getText();
             String Password = logobj.Password.getText();
             if (logobj.DBO.AdminLogin(Username, Password)) {
-                System.out.println("Loged in    ");
+                logobj.sema.release();
             } else {
                 logobj.warn.setText("User Name or Password is wrong");
                 System.out.println("error");

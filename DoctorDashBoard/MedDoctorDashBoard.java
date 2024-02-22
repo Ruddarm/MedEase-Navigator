@@ -3,6 +3,7 @@ package MedEaseNavigator.DoctorDashBoard;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
+import MedEaseNavigator.MedMenuBar.MenuBar;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
@@ -23,7 +24,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MedDoctorDashBoard implements ActionListener, TableColumnModelListener {
+public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener, TableColumnModelListener {
     DocDasBoarUtil docDasBoarUtil = new DocDasBoarUtil();
     MedPannel BackPannel, ProfielBox, InfoBox;
     /*
@@ -63,6 +64,9 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
 
     public MedDoctorDashBoard(DBOperation DBO) {
         this.DBO = DBO;
+
+        new MenuBar(DoctorFrame, DBO);
+
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 0);
         BackPannel.setBounds(0, 100, 1440, 500);
         docDasBoarUtil.DoctorFrame.add(BackPannel);
