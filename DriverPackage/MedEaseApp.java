@@ -38,6 +38,7 @@ public class MedEaseApp {
 
     public static void main(String[] args) {
         MedEaseApp app = new MedEaseApp();
+        System.out.println(LocalDate.now());
         /*
          * First we will setup connection with database
          */
@@ -54,7 +55,6 @@ public class MedEaseApp {
         }
         app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
         app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
-
         new MedEaseLogin(app.MedEaseUtil.DBO);
         app.MedEaseUtil.SetMainFrame();
         new MenuBar(app.MedEaseUtil.MedEaseFrmae);

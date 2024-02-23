@@ -4,7 +4,6 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
@@ -13,10 +12,11 @@ import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ScheduleAppointment implements ActionListener{
+public class ScheduleAppointment implements ActionListener {
     DBOperation DBO;
     JDialog ScheduleAppointBox;
     MedPannel infoBox;
@@ -31,8 +31,8 @@ public class ScheduleAppointment implements ActionListener{
     String day[] = { "AM", "PM" };
 
     ScheduleAppointment(DBOperation DBO, MedEasePatient Pt) {
-        this.DBO=DBO;
-        this.PT=Pt;
+        this.DBO = DBO;
+        this.PT = Pt;
         ScheduleAppointBox = new JDialog();
         ScheduleAppointBox.setBounds(100, 50, 300, 350);
         ScheduleAppointBox.setVisible(true);
@@ -74,15 +74,15 @@ public class ScheduleAppointment implements ActionListener{
         Hrs.setBounds(50, 160, 50, 25);
         Hrs.setFont(GUIUtil.TimesBold);
         infoBox.add(Hrs);
-        Min=new JComboBox<String>(min);
+        Min = new JComboBox<String>(min);
         Min.setBounds(110, 160, 50, 25);
         Min.setFont(GUIUtil.TimesBold);
         infoBox.add(Min);
-        Day =new JComboBox<String>(day);
+        Day = new JComboBox<String>(day);
         Day.setBounds(170, 160, 50, 25);
         Day.setFont(GUIUtil.TimesBold);
         infoBox.add(Day);
-        Schedule=new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 15);
+        Schedule = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 15);
         Schedule.setText("Schedule");
         Schedule.setBounds(50, 195, 150, 30);
         Schedule.setFont(GUIUtil.TimesBold);
@@ -90,26 +90,28 @@ public class ScheduleAppointment implements ActionListener{
         Schedule.addActionListener(this);
         infoBox.add(Schedule);
 
-        
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==Schedule){
-            String hrs,min,day;
-            hrs = ""+Hrs.getSelectedItem();
-            min= ""+Min.getSelectedItem();
-            day= ""+Day.getSelectedItem();
-            String time = hrs+":"+min+" "+day;
-            String Date = ""+LocalDate.now();
-            AppointMent appoint =new AppointMent();
+        if (e.getSource() == Schedule) {
+            DateTimeFormatter formatr = DateTimeFormatter.ofPattern("hh:mm a");
+
+            String hrs, min, day;
+            hrs = "" + Hrs.getSelectedItem();
+            min = "" + Min.getSelectedItem();
+            day = "" + Day.getSelectedItem();
+            String time = hrs + ":" + min + " " + day;
+            String Date = "" + LocalDate.now();
+            AppointMent appoint = new AppointMent();
             appoint.setPID(PT.getStrPID());
             appoint.setName(PT.getName());
             appoint.setTimeSlot(time);
             System.out.println(time);
             appoint.setDate(Date);
-            appoint.setIntime("00:00 am");
+            // appoint.setIntime("00:00 am");
             appoint.setStatus("Schedule");
-            appoint.setIntime(""+LocalTime.now());
+            appoint.setIntime("" + LocalTime.now().format(formatr));
             DBO.ScheduleAppointment(appoint);
         }
 

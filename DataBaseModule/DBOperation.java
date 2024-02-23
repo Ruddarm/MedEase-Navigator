@@ -111,7 +111,7 @@ public class DBOperation implements DBOpertaionInterface {
             // INSERT INTO patient
             // VALUEs('PID111','Ruddarm','8369517140','2002-10-24','5ft',54,'B+')
             preparedQuery = DBcon.prepareStatement("INSERT INTO patient VALUEs(?,?,?,?,?,?,?,?)");
-            preparedQuery.setString(1, ("PID" + pt.getPID()));
+            preparedQuery.setString(1, (pt.getStrPID()));
             preparedQuery.setString(2, pt.getName());
             preparedQuery.setString(3, pt.getNumber());
             preparedQuery.setString(4, pt.getDOB());
@@ -121,8 +121,14 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(8, pt.getGender());
             preparedQuery.executeUpdate();
             Dbnotfy.setMsg("Patient Added", 1);
-            DBcon.commit();
-            return true;
+            int id = pt.getPID();
+            id++;
+            if (UPdatePID(id)) {
+                DBcon.commit();
+                return true;
+            }
+            Dbnotfy.setMsg("Unable to add patient", -1);
+            return false;
 
         } catch (SQLException ex) {
             Dbnotfy.setMsg("Patient Not added", -1);
