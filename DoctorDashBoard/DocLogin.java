@@ -13,19 +13,20 @@ import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 public class DocLogin  {
-    JFrame LoginFrame;
+    JFrame DocLoginFram;
     MedEaseBtn LoginBtn; // Btn to login
     MedEaseBtn SetupBtn; // setup Btn
     MedPannel UserDetailsPannel;
     JLabel DocNameLabel, DocPswdLabel, warn,DocNumberLabel;
     JLabel MedEaselabel, NavigatorLabel;
-    JTextField DocNameFeild;
+    JTextField DocNumberFeild;
     JTextField DocPswdFeild;
     DBOperation DBO;
 
     public DocLogin(DBOperation dbo) {
         this.DBO = dbo;
-        LoginFrame = new JFrame();
+        DocLoginFram = new JFrame();
+        setLoginInterface();
     }
 
     public void setLoginInterface() {
@@ -33,22 +34,22 @@ public class DocLogin  {
             @Override
             public void run() {
                 /* Design Implemntaion of Login Frame */
-                LoginFrame.setBounds(200, 200, 650, 400);
-                LoginFrame.setVisible(true);
-                LoginFrame.setLayout(null);
-                LoginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                LoginFrame.setResizable(false);
-                LoginFrame.getContentPane().setBackground(GUIUtil.Dark_BLue);
-                LoginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                DocLoginFram.setBounds(200, 200, 650, 400);
+                DocLoginFram.setVisible(true);
+                DocLoginFram.setLayout(null);
+                DocLoginFram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                DocLoginFram.setResizable(false);
+                DocLoginFram.getContentPane().setBackground(GUIUtil.Dark_BLue);
+                DocLoginFram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 UserDetailsPannel = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 0);
                 UserDetailsPannel.setBounds(300, 0, 350, 400);
                 UserDetailsPannel.setLayout(null);
-                LoginFrame.add(UserDetailsPannel);
+                DocLoginFram.add(UserDetailsPannel);
                 MedEaselabel = new JLabel("MedEase");
                 MedEaselabel.setForeground(GUIUtil.WhiteClr);
                 MedEaselabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
                 MedEaselabel.setBounds(70, 80, 200, 30);
-                LoginFrame.add(MedEaselabel);
+                DocLoginFram.add(MedEaselabel);
                 NavigatorLabel = new JLabel("Navigator");
                 NavigatorLabel.setForeground(GUIUtil.WhiteClr);
                 NavigatorLabel.setBounds(80, 130, 200, 40);
@@ -59,17 +60,17 @@ public class DocLogin  {
                 warn.setFont(GUIUtil.TimesItalic);
                 warn.setForeground(GUIUtil.WarningColor);
                 UserDetailsPannel.add(warn);
-                LoginFrame.add(NavigatorLabel);
-                DocNameLabel = new JLabel("User Name");
+                DocLoginFram.add(NavigatorLabel);
+                DocNameLabel = new JLabel("Doctor Number");
                 DocNameLabel.setFont(GUIUtil.TimesBoldS2);
                 DocNameLabel.setBounds(30, 40, 100, 30);
                 UserDetailsPannel.add(DocNameLabel);
-                DocNameFeild = new JTextField();
-                DocNameFeild.setBounds(30, 70, 170, 30);
-                DocNameFeild.setFont(GUIUtil.TimesBoldS2);
-                // DocNameFeild.setBackground(GUIUtil.MedEaseGrey);
-                DocNameFeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                UserDetailsPannel.add(DocNameFeild);
+                DocNumberFeild = new JTextField();
+                DocNumberFeild.setBounds(30, 70, 170, 30);
+                DocNumberFeild.setFont(GUIUtil.TimesBoldS2);
+                // DocNumberFeild.setBackground(GUIUtil.MedEaseGrey);
+                DocNumberFeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                UserDetailsPannel.add(DocNumberFeild);
                 DocPswdLabel = new JLabel("DocPswdFeild");
                 DocPswdLabel.setFont(GUIUtil.TimesBoldS2);
                 DocPswdLabel.setBounds(30, 105, 100, 30);
