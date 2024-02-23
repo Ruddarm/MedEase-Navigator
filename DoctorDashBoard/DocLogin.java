@@ -34,7 +34,7 @@ public class DocLogin  {
             @Override
             public void run() {
                 /* Design Implemntaion of Login Frame */
-                DocLoginFram.setBounds(200, 200, 650, 400);
+                DocLoginFram.setBounds(200, 200, 650, 350);
                 DocLoginFram.setVisible(true);
                 DocLoginFram.setLayout(null);
                 DocLoginFram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -42,7 +42,7 @@ public class DocLogin  {
                 DocLoginFram.getContentPane().setBackground(GUIUtil.Dark_BLue);
                 DocLoginFram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 UserDetailsPannel = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 0);
-                UserDetailsPannel.setBounds(300, 0, 350, 400);
+                UserDetailsPannel.setBounds(300, 0, 350, 350);
                 UserDetailsPannel.setLayout(null);
                 DocLoginFram.add(UserDetailsPannel);
                 MedEaselabel = new JLabel("MedEase");

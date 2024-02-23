@@ -35,7 +35,7 @@ public class MenuBar implements ActionListener {
         DocLog.add(Doclogin);
         menubar.setBounds(0, 0, 1440, 30);
         menubar.setBackground(GUIUtil.Dark_BLue);
-
+        
     }
 
     @Override
