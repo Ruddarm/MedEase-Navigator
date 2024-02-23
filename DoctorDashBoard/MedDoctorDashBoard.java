@@ -65,7 +65,7 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
     public MedDoctorDashBoard(DBOperation DBO) {
         this.DBO = DBO;
 
-        new MenuBar(DoctorFrame, this.DBO);
+        // new MenuBar(DoctorFrame, this.DBO);
 
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 0);
         BackPannel.setBounds(0, 100, 1440, 500);

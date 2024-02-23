@@ -28,7 +28,7 @@ public class MenuBar implements ActionListener {
         Doclogin = new JMenuItem("login");
         Doclogin.setSize(150, 30);
         Doclogin.setBackground(GUIUtil.Dark_BLue);
-        Doclogin.setForeground(GUIUtil.BlackClr);
+        Doclogin.setForeground(GUIUtil.WhiteClr);
         Doclogin.setFocusPainted(false);
         Doclogin.addActionListener(this);
         DocLog.add(Doclogin);
@@ -40,7 +40,6 @@ public class MenuBar implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == Doclogin) {
-            System.out.println("Clicked");
             new MedDoctorDashBoard(DBO);
         }
     }
