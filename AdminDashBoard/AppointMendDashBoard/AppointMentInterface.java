@@ -136,7 +136,9 @@ public class AppointMentInterface implements TableColumnModelListener {
                 AppointMentTable.clearSelection();
 
             } else if (row != -1 && AppointMentTable.getSelectedColumn() == 0) {
-                new ViewPatient(DBO, null);
+                MedEasePatient pt = new MedEasePatient();
+                MedEasePatient.SetPTData(pt, DBO.GetPatient(""+AppointMentTable.getValueAt(row, 2)));
+                new ViewPatient(DBO,pt);
                 AppointMentTable.clearSelection();
             }
         }
