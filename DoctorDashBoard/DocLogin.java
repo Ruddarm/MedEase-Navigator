@@ -65,7 +65,7 @@ public class DocLogin extends KeyAdapter implements ActionListener {
                 NavigatorLabel.setFont(new Font("Times New Roman", Font.CENTER_BASELINE, 30));
                 warn = new JLabel();
                 warn.setVisible(false);
-                warn.setBounds(10, 20, 400, 20);
+                warn.setBounds(10, 10, 400, 20);
                 warn.setFont(GUIUtil.TimesItalic);
                 warn.setForeground(GUIUtil.WarningColor);
                 UserDetailsPannel.add(warn);
