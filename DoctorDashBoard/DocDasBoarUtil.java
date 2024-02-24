@@ -9,6 +9,7 @@ public class DocDasBoarUtil {
     DBOperation DBO;
     public DocDasBoarUtil() {
         DoctorFrame = new JFrame();
+        DoctorFrame.setTitle("Doctor Frame");
         DoctorFrame.getContentPane().setBackground(GUIUtil.Base_Background);
         DoctorFrame.setSize(1440, 1010);
         DoctorFrame.setVisible(true);

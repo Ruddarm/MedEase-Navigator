@@ -15,5 +15,9 @@ public class AdminInterface {
     //     this.WaitingInterfaceObj=wpi;
     //     this.PaymentInterfaceObj=pi;
 
-    // }
+    // }\
+    public void RefreshTable(){
+        AppointmentInterfaceObj.UpdateTable();
+        
+    }
 }
