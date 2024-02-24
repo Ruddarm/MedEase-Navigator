@@ -235,10 +235,6 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
             }
         }
         MediclReportTable = new JTable(Dtm);
-        // MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
-        // MediclReportTable.getColumnModel().getColumn(1).setMinWidth(150);
-        // MediclReportTable.getColumnModel().getColumn().setMaxWidth(200);
-        // MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(150);
         MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
         MediclReportTable.getColumnModel().getColumn(1).setMaxWidth(150);
         MediclReportTable.getColumnModel().getColumn(2).setMinWidth(500);
