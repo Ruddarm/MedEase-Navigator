@@ -7,7 +7,7 @@ import MedEaseNavigator.AppointMentModule.MedEaseAppointMentInterface;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 import MedEaseNavigator.UtilityModule.UtilityMedease;
 
-public class FindPatientEventHandel implements ActionListener {
+public class FindPatientEventHandel extends KeyAdapter implements ActionListener {
     FindCustomerUtil findpteint;
     ResultSet ptdata;
 
@@ -35,6 +35,15 @@ public class FindPatientEventHandel implements ActionListener {
 
         }
 
+
+    }
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getSource()==findpteint.SrchFeild){
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                findpteint.ScrhBtn.doClick();
+            }
+        }
     }
 
 }

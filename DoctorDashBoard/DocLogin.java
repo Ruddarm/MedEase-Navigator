@@ -1,26 +1,35 @@
 package MedEaseNavigator.DoctorDashBoard;
 
-
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.text.html.parser.DocumentParser;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.GUIUtil;
-public class DocLogin  {
+
+public class DocLogin extends KeyAdapter implements ActionListener {
     JFrame DocLoginFram;
     MedEaseBtn LoginBtn; // Btn to login
-    MedEaseBtn SetupBtn; // setup Btn
+    MedEaseBtn AddDocBtn; // setup Btn
     MedPannel UserDetailsPannel;
-    JLabel DocNameLabel, DocPswdLabel, warn,DocNumberLabel;
+    JLabel DocNumberLabel, DocUserNameLabel, warn, DoctorPswdLabel;
     JLabel MedEaselabel, NavigatorLabel;
+    JPasswordField DocPassword;
     JTextField DocNumberFeild;
-    JTextField DocPswdFeild;
+    JTextField DocUserNameFeild, DocPswdFeild;
     DBOperation DBO;
 
     public DocLogin(DBOperation dbo) {
@@ -34,7 +43,7 @@ public class DocLogin  {
             @Override
             public void run() {
                 /* Design Implemntaion of Login Frame */
-                DocLoginFram.setBounds(200, 200, 650, 350);
+                DocLoginFram.setBounds(200, 200, 650, 300);
                 DocLoginFram.setVisible(true);
                 DocLoginFram.setLayout(null);
                 DocLoginFram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -61,44 +70,86 @@ public class DocLogin  {
                 warn.setForeground(GUIUtil.WarningColor);
                 UserDetailsPannel.add(warn);
                 DocLoginFram.add(NavigatorLabel);
-                DocNameLabel = new JLabel("Doctor Number");
-                DocNameLabel.setFont(GUIUtil.TimesBoldS2);
-                DocNameLabel.setBounds(30, 40, 100, 30);
-                UserDetailsPannel.add(DocNameLabel);
+                DocNumberLabel = new JLabel(" Number");
+                DocNumberLabel.setFont(GUIUtil.TimesBoldS2);
+                DocNumberLabel.setBounds(30, 20, 150, 30);
+                UserDetailsPannel.add(DocNumberLabel);
                 DocNumberFeild = new JTextField();
-                DocNumberFeild.setBounds(30, 70, 170, 30);
+                DocNumberFeild.setBounds(30, 50, 170, 30);
                 DocNumberFeild.setFont(GUIUtil.TimesBoldS2);
                 // DocNumberFeild.setBackground(GUIUtil.MedEaseGrey);
                 DocNumberFeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 UserDetailsPannel.add(DocNumberFeild);
-                DocPswdLabel = new JLabel("DocPswdFeild");
-                DocPswdLabel.setFont(GUIUtil.TimesBoldS2);
-                DocPswdLabel.setBounds(30, 105, 100, 30);
-                UserDetailsPannel.add(DocPswdLabel);
-                DocPswdFeild = new JTextField();
-                DocPswdFeild.setBounds(30, 135, 170, 30);
-                DocPswdFeild.setFont(GUIUtil.TimesBoldS2);
-                DocPswdFeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                UserDetailsPannel.add(DocPswdFeild);
-                SetupBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
-                SetupBtn.setBounds(130, 190, 100, 30);
-                SetupBtn.setText("SIGNUP");
-                SetupBtn.setForeground(Color.WHITE);
-                SetupBtn.setFont(GUIUtil.TimesBold);
-                UserDetailsPannel.add(SetupBtn);
+                DocUserNameLabel = new JLabel("Username");
+                DocUserNameLabel.setFont(GUIUtil.TimesBoldS2);
+                DocUserNameLabel.setBounds(30, 85, 100, 30);
+                UserDetailsPannel.add(DocUserNameLabel);
+                DocUserNameFeild = new JTextField();
+                DocUserNameFeild.setBounds(30, 115, 170, 30);
+                DocUserNameFeild.setFont(GUIUtil.TimesBoldS2);
+                DocUserNameFeild.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                UserDetailsPannel.add(DocUserNameFeild);
+                DoctorPswdLabel = new JLabel("Password");
+                DoctorPswdLabel.setFont(GUIUtil.TimesBoldS2);
+                DoctorPswdLabel.setBounds(30, 145, 100, 30);
+
+                UserDetailsPannel.add(DoctorPswdLabel);
+                DocPassword = new JPasswordField();
+                DocPassword.setBounds(30, 175, 170, 30);
+                DocPassword.setBorder(BorderFactory.createLineBorder(Color.black));
+                DocPassword.setFont(GUIUtil.TimesBoldS2);
+                UserDetailsPannel.add(DocPassword);
+                // AddDocBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
+                // AddDocBtn.setBounds(140, 215, 100, 30);
+                // AddDocBtn.setText("ADD");
+                // AddDocBtn.setForeground(Color.WHITE);
+                // AddDocBtn.setFont(GUIUtil.TimesBold);
+                // UserDetailsPannel.add(AddDocBtn);
                 LoginBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
-                LoginBtn.setBounds(20, 190, 100, 30);
+                LoginBtn.setBounds(125, 215, 100, 30);
                 LoginBtn.setText("LOGIN");
                 LoginBtn.setForeground(Color.WHITE);
                 LoginBtn.setFont(GUIUtil.TimesBold);
                 UserDetailsPannel.add(LoginBtn);
-
+                addActionlistenre();
             }
         });
 
     }
 
-    
+    public void addActionlistenre() {
+        LoginBtn.addActionListener(this);
+        DocPassword.addKeyListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == LoginBtn) {
+            String number, username;
+            StringBuilder pswd = new StringBuilder();
+            number = DocNumberFeild.getText();
+            username = DocUserNameFeild.getText();
+            char pswdarray[] = DocPassword.getPassword();
+            for (char c : pswdarray) {
+                pswd.append(c);
+            }
+            if (DBO.DoctorLogin(number, username, pswd.toString())) {
+                DocLoginFram.dispose();
+                new MedDoctorDashBoard(DBO);
+            } else {
+                warn.setText("Something went wrong");
+                warn.setVisible(true);
+            }
+
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            LoginBtn.doClick();
+        }
+    }
+
 }
-
-

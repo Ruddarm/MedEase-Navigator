@@ -47,6 +47,7 @@ public class FindCustomerUtil {
         SrchPannel.add(SrchFeild);
         SrchFeild.setFont(GUIUtil.TimesBoldS2);
         ScrhBtn.addActionListener(eventobj);
+        SrchFeild.addKeyListener(eventobj);
         
         
         

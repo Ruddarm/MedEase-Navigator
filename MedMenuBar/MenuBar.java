@@ -3,7 +3,6 @@ package MedEaseNavigator.MedMenuBar;
 import javax.swing.JMenuBar;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.DoctorDashBoard.DocLogin;
-import MedEaseNavigator.DoctorDashBoard.MedDoctorDashBoard;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -41,7 +40,6 @@ public class MenuBar implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == Doclogin) {
-            // new MedDoctorDashBoard(DBO);
             new DocLogin(DBO);
         }
     }
