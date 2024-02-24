@@ -212,7 +212,6 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
             Dtm.addColumn(string);
         }
         if (PT != null) {
-            System.out.println("Ye toh nala niklaa");
             ResultSet MedicalReport = DBO.GetMedicalReport(PT.getStrPID());
             if (MedicalReport != null) {
                 PT.setReportHead(null);
@@ -249,7 +248,6 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
         MediclReportTable.setCellSelectionEnabled(true);
         TableColumnModel colummodel = MediclReportTable.getColumnModel();
         colummodel.addColumnModelListener(this);
-
         jsp = new JScrollPane(MediclReportTable);
         jsp.setBounds(200, 180, 900, 250);
         BackPannel.add(jsp);
@@ -282,6 +280,8 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
                 appoint.setIntime("" + LocalTime.now());
                 appoint.setStatus("PAYMENT");
                 DBO.UpdateAppointment(appoint);
+                Patient=null;
+
                 restdata();
             }
         }
