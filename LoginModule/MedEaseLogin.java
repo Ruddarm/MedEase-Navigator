@@ -95,16 +95,17 @@ public class MedEaseLogin {
                 Password.addKeyListener(LogEvent);
                 UserDetailsPannel.add(Password);
 
-                SetupBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
-                SetupBtn.setBounds(130, 190, 100, 30);
-                SetupBtn.setText("SIGNUP");
-                SetupBtn.setForeground(Color.WHITE);
-                SetupBtn.setFont(GUIUtil.TimesBold);
-                SetupBtn.addActionListener(LogEvent);
-                SetupBtn.addKeyListener(LogEvent);
-                UserDetailsPannel.add(SetupBtn);
+                // SetupBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
+                // SetupBtn.setBounds(130, 190, 100, 30);
+                // SetupBtn.setText("SIGNUP");
+                // SetupBtn.setForeground(Color.WHITE);
+                // SetupBtn.setFont(GUIUtil.TimesBold);
+                // SetupBtn.addActionListener(LogEvent);
+                // SetupBtn.addKeyListener(LogEvent);
+                // UserDetailsPannel.add(SetupBtn);
+
                 LoginBtn = new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.BlueColor, null, 5);
-                LoginBtn.setBounds(20, 190, 100, 30);
+                LoginBtn.setBounds(60, 190, 150, 30);
                 LoginBtn.setText("LOGIN");
                 LoginBtn.setForeground(Color.WHITE);
                 LoginBtn.setFont(GUIUtil.TimesBold);
