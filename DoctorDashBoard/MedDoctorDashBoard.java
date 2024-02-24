@@ -181,11 +181,6 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
         InfoBox.add(Weight);
         Notify = new MedEaseNotify();
 
-        // Allergy = new JLabel("Allergy");
-        // Allergy.setFont(GUIUtil.TimesBoldS2);
-        // Allergy.setBounds(590, 120, 200, 30);
-        // InfoBox.add(Allergy);
-
     }
 
     /* A methoto to set Patient Info */
@@ -217,7 +212,6 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
                 PT.setReportHead(null);
                 MedEasePatient.SetMedicalReport(PT, MedicalReport);
                 MedEaseMedicalReport Temp = PT.getReportHead();
-                // int n = 0;
                 while (Temp != null) {
                     String row[] = {
                             Temp.getMRID(),
@@ -225,13 +219,9 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
                             Temp.getChiefcomplaint(),
                             Temp.getDID(),
                     };
-                    // System.out.println(Temp.getMRID());
-                    // System.out.println(row[1]);
-                    // n++;
                     Temp = Temp.getNext();
                     Dtm.addRow(row);
                 }
-                // System.out.println("Total row " + n);
             }
         }
         MediclReportTable = new JTable(Dtm);
@@ -258,6 +248,8 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
         Heigh.setText(" ");
         Weight.setText(" ");
         Gender.setText(" ");
+        BackPannel.remove(jsp);
+        BackPannel.repaint();
         SetMedicalReportTable(null);
     }
 
@@ -276,7 +268,7 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
                 appoint.setIntime("" + LocalTime.now());
                 appoint.setStatus("PAYMENT");
                 DBO.UpdateAppointment(appoint);
-                Patient=null;
+                Patient = null;
 
                 restdata();
             }
