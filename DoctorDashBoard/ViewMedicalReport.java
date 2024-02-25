@@ -316,7 +316,7 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
                 PaidAmountArea.setEditable(false);
                 UpdateBtn.setEnabled(false);
             } else {
-                PaidAmountArea.setText(""+MedicalReport.getPaid());
+                PaidAmountArea.setText("" + MedicalReport.getPaid());
 
             }
         }
@@ -409,7 +409,7 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         WarnLabel.setVisible(false);
-        if (e.getSource() == UpdateBtn && isvalid) {
+        if (e.getSource() == UpdateBtn && isvalid && view) {
             double Fees;
             double Paid;
             try {
@@ -444,27 +444,25 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
             }
 
         } else if (e.getSource() == UpdateBtn && !view) {
-               try{
+            System.out.println("here");
+            try {
                 double paid = Double.parseDouble(PaidAmountArea.getText());
-                // double Fees = Double.parseDouble(FeesArea.getText(0,2));
-                if(paid==MedicalReport.getFees()){
+                if (paid == MedicalReport.getFees()) {
                     MedicalReport.setStatus(StatusOpt.getItemAt(2));
                     MedicalReport.setPaid(paid);
-                }else{
+                } else {
                     MedicalReport.setStatus(StatusOpt.getItemAt(1));
                     MedicalReport.setPaid(paid);
-
                 }
-               }catch(NumberFormatException ex){
-                    System.out.println("idehr agya");
-
+            } catch (NumberFormatException ex) {
+                System.out.println("idehr agya");
                 WarnLabel.setVisible(true);
-                return ;
-               } 
-               DBO.UpdatePayment(MedicalReport);
-               ViewBoxl.dispose();
-               return ;
-               
+                return;
+            }
+            DBO.UpdatePayment(MedicalReport);
+            ViewBoxl.dispose();
+            return;
+
         }
     }
 
