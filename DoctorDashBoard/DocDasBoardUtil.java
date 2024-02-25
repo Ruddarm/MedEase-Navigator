@@ -4,10 +4,10 @@ import javax.swing.JFrame;
 
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.UtilityModule.GUIUtil;
-public class DocDasBoarUtil {
+public class DocDasBoardUtil {
     JFrame DoctorFrame;
     DBOperation DBO;
-    public DocDasBoarUtil() {
+    public DocDasBoardUtil() {
         DoctorFrame = new JFrame();
         System.out.println("ruunning");
         DoctorFrame.setTitle("Doctor Frame");

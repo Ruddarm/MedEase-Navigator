@@ -11,6 +11,7 @@ import MedEaseNavigator.UtilityModule.MedEasePatient;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.time.LocalTime;
 import javax.swing.JScrollPane;
@@ -23,9 +24,10 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener, TableColumnModelListener {
-    DocDasBoarUtil docDasBoarUtil;
+public class MedDoctorDashBoard  implements ActionListener, TableColumnModelListener {
+    DocDasBoardUtil DocDasBoardUtil;
     MedPannel BackPannel, ProfielBox, InfoBox;
+    // JFrame DoctorFame;
     /*
      * 
      */
@@ -59,12 +61,13 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
     };
 
     public MedDoctorDashBoard(DBOperation DBO) {
-        super();
+        // super();
         this.DBO = DBO;
+        DocDasBoardUtil = new DocDasBoardUtil();
         // new MenuBar(DoctorFrame, tAdhis.DBO);
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 0);
         BackPannel.setBounds(0, 100, 1440, 500);
-        docDasBoarUtil.DoctorFrame.add(BackPannel);
+        DocDasBoardUtil.DoctorFrame.add(BackPannel);
         ProfielBox = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 5);
         ProfielBox.setBounds(135, 20, 150, 150);
         BackPannel.add(ProfielBox);
