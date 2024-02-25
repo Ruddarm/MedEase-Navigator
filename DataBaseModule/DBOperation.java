@@ -291,6 +291,7 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(3, Report.getMRID());
             preparedQuery.execute();
             DBcon.commit();
+            Dbnotfy.setMsg("Payment Updated", 1);
             return true;
         }catch(SQLException ex){
             Dbnotfy.setMsg("Eroor while Updating ", -1);

@@ -311,7 +311,9 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
             FeesArea.setText("Rs : " + MedicalReport.getFees());
             FeesArea.setEditable(false);
             StatusOpt.setActionCommand(MedicalReport.getStatus());
-            if (MedicalReport.getStatus().equals("PAID")) {
+            System.out.println(MedicalReport.getStatus());
+            if (MedicalReport.getStatus().equalsIgnoreCase("Paid")) {
+                System.out.println("true");
                 PaidAmountArea.setText("Rs : " + MedicalReport.getPaid());
                 PaidAmountArea.setEditable(false);
                 UpdateBtn.setEnabled(false);

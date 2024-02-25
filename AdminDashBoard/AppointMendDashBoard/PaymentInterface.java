@@ -4,11 +4,15 @@
  *
  */
 package MedEaseNavigator.AdminDashBoard.AppointMendDashBoard;
+
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.AppointMent;
@@ -26,7 +30,7 @@ public class PaymentInterface {
     MedQueue PaymentQueue;
 
     String TableHead[] = {
-            "PID", "Name", "Number", "Status", "Fees"
+            "PID", "Name", "Number", "Status"
     };
 
     public PaymentInterface(JFrame MedEaseFrame, DBOperation dbo) {
@@ -57,12 +61,25 @@ public class PaymentInterface {
         PaymentQueue.CreateAppointmentList();
         AppointMent Temp = PaymentQueue.Head;
         while (Temp != null) {
+            String appointdata[] = { Temp.getPID(), Temp.getName(), Temp.getNumber(), Temp.getStatus(),
+                    Temp.getTimeSlot() };
+            // System.out.println(temp.getName());
+            Dtm.addRow(appointdata);
+            Temp = Temp.getNextAppointment();
 
         }
-
         PaymentTable = new JTable(Dtm);
+        PaymentTable.getColumnModel().getColumn(0).setMinWidth(80);
+        PaymentTable.getColumnModel().getColumn(0).setMaxWidth(50);
+        PaymentTable.removeEditor();
+        PaymentTable.setFont(GUIUtil.TimesBold);
+        PaymentTable.setLayout(null);
+        PaymentTable.setDragEnabled(false);
+        PaymentTable.setRowSelectionAllowed(false);
+        PaymentTable.setColumnSelectionAllowed(false);
+        PaymentTable.setCellSelectionEnabled(true);
+        PaymentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jsp = new JScrollPane(PaymentTable);
-        // jsp.setLayout(null);
         jsp.setBounds(0, 0, 500, 200);
         FrontPannel.add(jsp);
 
