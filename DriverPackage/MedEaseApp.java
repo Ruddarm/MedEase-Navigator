@@ -48,7 +48,6 @@ public class MedEaseApp {
             app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
             app.MedEaseUtil.Medlogin = new MedEaseLogin(app.MedEaseUtil.DBO, sema);
             try {
-
                 // System.out.println(currentThread().getName());
                 sema.acquire();
 
@@ -65,8 +64,7 @@ public class MedEaseApp {
             new MenuBar(app.MedEaseUtil.MedEaseFrmae,app.MedEaseUtil.DBO);
             app.MedEaseUtil.Admin.AppointmentInterfaceObj = new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae,
                     app.MedEaseUtil.DBO);
-
-            // AppointMent ap =new AppointMent();
+            // AppointMent ap =new AppointMent(); 
             // ap.setPID("PID111");
             // ap.setName("Ruddarm");
             // ap.setNumber("8369517140");
@@ -78,6 +76,7 @@ public class MedEaseApp {
                     app.MedEaseUtil.DBO);
             app.MedEaseUtil.Admin.PaymentInterfaceObj = new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
             app.MedEaseUtil.Admin.AppointmentInterfaceObj.setWaittable(app.MedEaseUtil.Admin.WaitingInterfaceObj);
+            app.MedEaseUtil.Admin.SetRefBtn(app.MedEaseUtil.Admin.AppointmentInterfaceObj.FrontPannel);
             new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO, app.MedEaseUtil.Admin);
             
         }
