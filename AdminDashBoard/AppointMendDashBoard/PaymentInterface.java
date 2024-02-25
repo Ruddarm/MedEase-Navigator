@@ -4,16 +4,11 @@
  *
  */
 package MedEaseNavigator.AdminDashBoard.AppointMendDashBoard;
-
 import javax.swing.JLabel;
 import javax.swing.JTable;
-
-import java.sql.ResultSet;
-
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.AppointMent;
@@ -57,13 +52,12 @@ public class PaymentInterface {
         for (String string : TableHead) {
             Dtm.addColumn(string);
         }
-        PaymentQueue.Head=null;
+        PaymentQueue.Head = null;
         PaymentQueue.GetPaymentAppointmentData();
         PaymentQueue.CreateAppointmentList();
-        AppointMent Temp= PaymentQueue.Head;
-        while (Temp!=null) {
-            
-            
+        AppointMent Temp = PaymentQueue.Head;
+        while (Temp != null) {
+
         }
 
         PaymentTable = new JTable(Dtm);

@@ -283,6 +283,20 @@ public class DBOperation implements DBOpertaionInterface {
         }
 
     }
+    public boolean UpdatePayment(MedEaseMedicalReport Report){
+        try{
+            preparedQuery=DBcon.prepareStatement("UPDATE medical_history SET status=? , Paid_Amount =? WHERE MRID=?");
+            preparedQuery.setString(1, Report.getStatus());
+            preparedQuery.setDouble(2, Report.getPaid());
+            preparedQuery.setString(3, Report.getMRID());
+            preparedQuery.execute();
+            DBcon.commit();
+            return true;
+        }catch(SQLException ex){
+            Dbnotfy.setMsg("Eroor while Updating ", -1);
+            return false;
+        }
+    }
 
     public boolean SetUserName(String UserName) {
         try {

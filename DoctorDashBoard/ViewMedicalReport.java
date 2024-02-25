@@ -306,15 +306,19 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
             PrescriptionArea.setEditable(false);
             FollowUPAdivceArea.setText(MedicalReport.getFollowupadvice());
             FollowUPAdivceArea.setEditable(false);
-        
             LabTestArea.setText(MedicalReport.getLabtest());
             LabTestArea.setEditable(false);
-            FeesArea.setText("Rs : "+MedicalReport.getFees());
+            FeesArea.setText("Rs : " + MedicalReport.getFees());
             FeesArea.setEditable(false);
             StatusOpt.setActionCommand(MedicalReport.getStatus());
-            PaidAmountArea.setText("Rs : "+MedicalReport.getPaid());
-            PaidAmountArea.setEditable(false);
-            UpdateBtn.setEnabled(false);
+            if (MedicalReport.getStatus().equals("PAID")) {
+                PaidAmountArea.setText("Rs : " + MedicalReport.getPaid());
+                PaidAmountArea.setEditable(false);
+                UpdateBtn.setEnabled(false);
+            } else {
+                PaidAmountArea.setText(""+MedicalReport.getPaid());
+
+            }
         }
     }
 
@@ -405,7 +409,7 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         WarnLabel.setVisible(false);
-        if (e.getSource() == UpdateBtn & isvalid) {
+        if (e.getSource() == UpdateBtn && isvalid) {
             double Fees;
             double Paid;
             try {
@@ -435,18 +439,33 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
             } else {
                 MedicalReport.setStatus(StatusOpt.getItemAt(1));
             }
-            if(DBO.InsertMedicalHistory(MedicalReport)){
+            if (DBO.InsertMedicalHistory(MedicalReport)) {
                 DBO.UPdateMID(INTMID);
             }
 
+        } else if (e.getSource() == UpdateBtn && !view) {
+               try{
+                double paid = Double.parseDouble(PaidAmountArea.getText());
+                // double Fees = Double.parseDouble(FeesArea.getText(0,2));
+                if(paid==MedicalReport.getFees()){
+                    MedicalReport.setStatus(StatusOpt.getItemAt(2));
+                    MedicalReport.setPaid(paid);
+                }else{
+                    MedicalReport.setStatus(StatusOpt.getItemAt(1));
+                    MedicalReport.setPaid(paid);
+
+                }
+               }catch(NumberFormatException ex){
+                    System.out.println("idehr agya");
+
+                WarnLabel.setVisible(true);
+                return ;
+               } 
+               DBO.UpdatePayment(MedicalReport);
+               ViewBoxl.dispose();
+               return ;
+               
         }
     }
 
 }
-
-
-
-
-
-
-
