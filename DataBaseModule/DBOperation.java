@@ -283,9 +283,10 @@ public class DBOperation implements DBOpertaionInterface {
         }
 
     }
-    public boolean UpdatePayment(MedEaseMedicalReport Report){
-        try{
-            preparedQuery=DBcon.prepareStatement("UPDATE medical_history SET status=? , Paid_Amount =? WHERE MRID=?");
+
+    public boolean UpdatePayment(MedEaseMedicalReport Report) {
+        try {
+            preparedQuery = DBcon.prepareStatement("UPDATE medical_history SET status=? , Paid_Amount =? WHERE MRID=?");
             preparedQuery.setString(1, Report.getStatus());
             preparedQuery.setDouble(2, Report.getPaid());
             preparedQuery.setString(3, Report.getMRID());
@@ -293,7 +294,7 @@ public class DBOperation implements DBOpertaionInterface {
             DBcon.commit();
             Dbnotfy.setMsg("Payment Updated", 1);
             return true;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Dbnotfy.setMsg("Eroor while Updating ", -1);
             return false;
         }
@@ -449,7 +450,11 @@ public class DBOperation implements DBOpertaionInterface {
 
     public ResultSet GetPaymentAppontment() {
         try {
-            preparedQuery = DBcon.prepareStatement("SELECT *from appointment WHERE Date =  ? and status= 'PAYMENT'");
+            preparedQuery = DBcon.prepareStatement(
+                    "SELECT appointment.*, patient.name AS patient_name , patient.Number as patientNumber\r\n" + //
+                            "FROM appointment\r\n" + //
+                            "INNER JOIN patient ON appointment.patient_id = patient.patient_id WHERE Date= ? && Status = 'PAYMENT' ORDER  BY Time asc;");
+            
             preparedQuery.setString(1, "" + LocalDate.now());
             ResultSet Data = preparedQuery.executeQuery();
             if (Data.next() != false) {
@@ -460,6 +465,8 @@ public class DBOperation implements DBOpertaionInterface {
 
         } catch (SQLException ex) {
             Dbnotfy.setMsg("Erorr in Payment Appointment", -1);
+            System.out.println(ex);
+
             return null;
         }
     }

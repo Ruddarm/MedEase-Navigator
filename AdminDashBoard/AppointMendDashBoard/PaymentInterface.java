@@ -58,15 +58,18 @@ public class PaymentInterface {
         }
         PaymentQueue.Head = null;
         PaymentQueue.GetPaymentAppointmentData();
-        PaymentQueue.CreateAppointmentList();
-        AppointMent Temp = PaymentQueue.Head;
-        while (Temp != null) {
-            String appointdata[] = { Temp.getPID(), Temp.getName(), Temp.getNumber(), Temp.getStatus(),
-                    Temp.getTimeSlot() };
-            // System.out.println(temp.getName());
-            Dtm.addRow(appointdata);
-            Temp = Temp.getNextAppointment();
+        if (PaymentQueue.AppointData != null) {
 
+            PaymentQueue.CreateAppointmentList();
+            AppointMent Temp = PaymentQueue.Head;
+            while (Temp != null) {
+                String appointdata[] = { Temp.getPID(), Temp.getName(), Temp.getNumber(), Temp.getStatus(),
+                        Temp.getTimeSlot() };
+                // System.out.println(temp.getName());
+                Dtm.addRow(appointdata);
+                Temp = Temp.getNextAppointment();
+
+            }
         }
         PaymentTable = new JTable(Dtm);
         PaymentTable.getColumnModel().getColumn(0).setMinWidth(80);
