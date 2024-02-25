@@ -6,6 +6,7 @@
  * 
  */
 package MedEaseNavigator.DriverPackage;
+
 import java.util.concurrent.Semaphore;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.PaymentInterface;
@@ -61,10 +62,10 @@ public class MedEaseApp {
             // System.out.println(TodayQueue.Head.getName());
             // TodayQueue.Head= TodayQueue.Head.getNextAppointment();
             // }
-            new MenuBar(app.MedEaseUtil.MedEaseFrmae,app.MedEaseUtil.DBO);
+            new MenuBar(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO);
             app.MedEaseUtil.Admin.AppointmentInterfaceObj = new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae,
                     app.MedEaseUtil.DBO);
-            // AppointMent ap =new AppointMent(); 
+            // AppointMent ap =new AppointMent();
             // ap.setPID("PID111");
             // ap.setName("Ruddarm");
             // ap.setNumber("8369517140");
@@ -74,11 +75,12 @@ public class MedEaseApp {
             // AppointementI.SetTable(TodayQueue.Head);
             app.MedEaseUtil.Admin.WaitingInterfaceObj = new WaitingInterface(app.MedEaseUtil.MedEaseFrmae,
                     app.MedEaseUtil.DBO);
-            app.MedEaseUtil.Admin.PaymentInterfaceObj = new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
+            app.MedEaseUtil.Admin.PaymentInterfaceObj = new PaymentInterface(app.MedEaseUtil.MedEaseFrmae,
+                    app.MedEaseUtil.DBO);
             app.MedEaseUtil.Admin.AppointmentInterfaceObj.setWaittable(app.MedEaseUtil.Admin.WaitingInterfaceObj);
             app.MedEaseUtil.Admin.SetRefBtn(app.MedEaseUtil.Admin.AppointmentInterfaceObj.FrontPannel);
             new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO, app.MedEaseUtil.Admin);
-            
+
         }
     }
 }

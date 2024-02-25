@@ -23,6 +23,9 @@ public class MedQueue {
     public void GetWaitingAppointmentData(){
         AppointData= DBO.GetWaitingAppointMent();
     }
+    public void GetPaymentAppointmentData(){
+        AppointData=DBO.GetPaymentAppontment();
+    }
 
     /*
      * To add patient in queue

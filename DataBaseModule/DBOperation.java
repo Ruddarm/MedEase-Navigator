@@ -432,6 +432,23 @@ public class DBOperation implements DBOpertaionInterface {
         }
     }
 
+    public ResultSet GetPaymentAppontment() {
+        try {
+            preparedQuery = DBcon.prepareStatement("SELECT *from appointment WHERE Date =  ? and status= 'PAYMENT'");
+            preparedQuery.setString(1, "" + LocalDate.now());
+            ResultSet Data = preparedQuery.executeQuery();
+            if (Data.next() != false) {
+                return Data;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Erorr in Payment Appointment", -1);
+            return null;
+        }
+    }
+
     /*
      * 
      * A method to create appoint in database
