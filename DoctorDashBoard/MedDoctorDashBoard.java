@@ -11,7 +11,6 @@ import MedEaseNavigator.UtilityModule.MedEasePatient;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.time.LocalTime;
 import javax.swing.JScrollPane;

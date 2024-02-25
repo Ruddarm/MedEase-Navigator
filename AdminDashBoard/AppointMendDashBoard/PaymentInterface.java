@@ -8,18 +8,24 @@ package MedEaseNavigator.AdminDashBoard.AppointMendDashBoard;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import MedEaseNavigator.AppointMentModule.ViewPatient;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
+import MedEaseNavigator.UtilityModule.MedEasePatient;
 import MedEaseNavigator.UtilityModule.MedQueue;
 
-public class PaymentInterface {
+public class PaymentInterface implements TableColumnModelListener {
     MedPannel BackPannel;
     MedPannel FrontPannel;
     JLabel PaymentLble;
@@ -71,6 +77,7 @@ public class PaymentInterface {
 
             }
         }
+
         PaymentTable = new JTable(Dtm);
         PaymentTable.getColumnModel().getColumn(0).setMinWidth(80);
         PaymentTable.getColumnModel().getColumn(0).setMaxWidth(50);
@@ -82,10 +89,50 @@ public class PaymentInterface {
         PaymentTable.setColumnSelectionAllowed(false);
         PaymentTable.setCellSelectionEnabled(true);
         PaymentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        PaymentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TableColumnModel colummodel = PaymentTable.getColumnModel();
+        colummodel.addColumnModelListener(this);
         jsp = new JScrollPane(PaymentTable);
         jsp.setBounds(0, 0, 500, 200);
         FrontPannel.add(jsp);
 
+    }
+
+    public void UpdatePaymentTable() {
+        FrontPannel.remove(jsp);
+        FrontPannel.repaint();
+        SetPaymentTable();
+    }
+
+    @Override
+    public void columnAdded(TableColumnModelEvent e) {
+    }
+
+    @Override
+    public void columnRemoved(TableColumnModelEvent e) {
+    }
+
+    @Override
+    public void columnMoved(TableColumnModelEvent e) {
+    }
+
+    @Override
+    public void columnMarginChanged(ChangeEvent e) {
+    }
+
+    @Override
+    public void columnSelectionChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) {
+            int row = PaymentTable.getSelectedRow();
+            if (row != -1 && PaymentTable.getSelectedColumn() == 0) {
+                MedEasePatient pt = new MedEasePatient();
+                MedEasePatient.SetPTData(pt, DBO.GetPatient("" + PaymentTable.getValueAt(row, 2)));
+                new ViewPatient(DBO, pt);
+                PaymentTable.clearSelection();
+                UpdatePaymentTable();
+                
+            }
+        }
     }
 
 }

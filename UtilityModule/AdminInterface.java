@@ -34,7 +34,7 @@ public class AdminInterface implements ActionListener {
     public void RefreshTable(){
         AppointmentInterfaceObj.UpdateTable();
         WaitingInterfaceObj.UpdateTabel();
-        
+        PaymentInterfaceObj.UpdatePaymentTable();
     }
     @Override
     public void actionPerformed(ActionEvent e) {

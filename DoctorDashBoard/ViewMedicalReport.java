@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
+import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
@@ -462,7 +463,12 @@ public class ViewMedicalReport extends KeyAdapter implements ActionListener {
                 return;
             }
             DBO.UpdatePayment(MedicalReport);
+            AppointMent appoint = new AppointMent();
+            appoint.setPID(MedicalReport.getPID());
+            appoint.setStatus("Close");
+            DBO.UpdateAppointment(appoint);
             ViewBoxl.dispose();
+
             return;
 
         }

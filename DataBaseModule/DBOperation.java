@@ -1,5 +1,4 @@
 package MedEaseNavigator.DataBaseModule;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -454,7 +453,7 @@ public class DBOperation implements DBOpertaionInterface {
                     "SELECT appointment.*, patient.name AS patient_name , patient.Number as patientNumber\r\n" + //
                             "FROM appointment\r\n" + //
                             "INNER JOIN patient ON appointment.patient_id = patient.patient_id WHERE Date= ? && Status = 'PAYMENT' ORDER  BY Time asc;");
-            
+
             preparedQuery.setString(1, "" + LocalDate.now());
             ResultSet Data = preparedQuery.executeQuery();
             if (Data.next() != false) {
@@ -596,7 +595,6 @@ public class DBOperation implements DBOpertaionInterface {
             DBcon.commit();
             Dbnotfy.setMsg("Patient data Updated", 1);
             return true;
-
         } catch (SQLException ex) {
             Dbnotfy.setMsg("Error while updateing data ", -1);
             return false;
