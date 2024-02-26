@@ -111,7 +111,7 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
         PID.setBounds(150, 10, 100, 30);
         InfoBox.add(PID);
 
-        Name_L = new JLabel("Name           :");
+        Name_L = new JLabel("Name          :");
         Name_L.setFont(GUIUtil.TimesBoldS2);
         Name_L.setBounds(10, 50, 120, 30);
         InfoBox.add(Name_L);
@@ -131,14 +131,14 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
         Number.setBounds(150, 90, 200, 30);
         InfoBox.add(Number);
 
-        Age_L = new JLabel("DOB : ");
+        Age_L = new JLabel("DOB          : ");
         Age_L.setFont(GUIUtil.TimesBoldS2);
-        Age_L.setBounds(30, 120, 100, 30);
+        Age_L.setBounds(10, 120, 130, 30);
         InfoBox.add(Age_L);
 
         Age = new JLabel("   ");
         Age.setFont(GUIUtil.TimesBoldS2);
-        Age.setBounds(100, 120, 100, 30);
+        Age.setBounds(150, 120, 100, 30);
         InfoBox.add(Age);
 
         Gender_L = new JLabel("GENDER  :");

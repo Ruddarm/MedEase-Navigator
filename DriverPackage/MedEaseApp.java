@@ -6,6 +6,7 @@
  * 
  */
 package MedEaseNavigator.DriverPackage;
+
 import java.util.concurrent.Semaphore;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.PaymentInterface;
@@ -32,7 +33,7 @@ public class MedEaseApp {
              * First we will setup connection with database
              */
             // Creating object of DBconnectivity
-            app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "ruddarmsql",
+            app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "Serene@123#",
                     app.MedEaseUtil.DBCon);
             // If true then connection Sucesfull
             if (!app.MedEaseUtil.DbConnectObj.setConnection()) {
@@ -62,7 +63,7 @@ public class MedEaseApp {
             // System.out.println(TodayQueue.Head.getName());
             // TodayQueue.Head= TodayQueue.Head.getNextAppointment();
             // }
-            new MenuBar(app.MedEaseUtil.MedEaseFrmae,app.MedEaseUtil.DBO);
+            new MenuBar(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO);
             app.MedEaseUtil.Admin.AppointmentInterfaceObj = new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae,
                     app.MedEaseUtil.DBO);
 
@@ -79,7 +80,7 @@ public class MedEaseApp {
             app.MedEaseUtil.Admin.PaymentInterfaceObj = new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
             app.MedEaseUtil.Admin.AppointmentInterfaceObj.setWaittable(app.MedEaseUtil.Admin.WaitingInterfaceObj);
             new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO, app.MedEaseUtil.Admin);
-            
+
         }
     }
 }
