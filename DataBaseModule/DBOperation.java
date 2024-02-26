@@ -1,4 +1,5 @@
 package MedEaseNavigator.DataBaseModule;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,7 +53,7 @@ public class DBOperation implements DBOpertaionInterface {
     @Override
     public ResultSet GetMedicalReport(String PID) {
         try {
-            preparedQuery = DBcon.prepareStatement("Select *from Medical_history where patient_ID =?");
+            preparedQuery = DBcon.prepareStatement("Select *from Medical_history where patient_ID =? order by reportdate desc");
             preparedQuery.setString(1, PID);
             data = preparedQuery.executeQuery();
             if (data.next() != false) {
@@ -456,11 +457,7 @@ public class DBOperation implements DBOpertaionInterface {
 
             preparedQuery.setString(1, "" + LocalDate.now());
             ResultSet Data = preparedQuery.executeQuery();
-            if (Data.next() != false) {
-                return Data;
-            } else {
-                return null;
-            }
+            return Data;
 
         } catch (SQLException ex) {
             Dbnotfy.setMsg("Erorr in Payment Appointment", -1);

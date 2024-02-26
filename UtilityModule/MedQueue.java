@@ -53,6 +53,7 @@ public class MedQueue {
                     Nodeone.setNextAppointment(null);
                     Head = Nodeone;
                     temp = Nodeone;
+                    System.out.println("head ban gya bhia");
                 } else {
                     AppointMent NextNode = new AppointMent();
                     NextNode.setPID(AppointData.getString(1));
@@ -69,7 +70,6 @@ public class MedQueue {
                 // System.out.println(AppointData.getString(1));
             }
             ;
-            System.out.println("List createed");
 
         } catch (SQLException xe) {
             notfication.setMsg("Error while Creating Appoinment List", -1);
