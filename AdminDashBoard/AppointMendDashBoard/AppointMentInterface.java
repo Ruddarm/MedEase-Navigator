@@ -22,7 +22,7 @@ import MedEaseNavigator.UtilityModule.MedQueue;
 
 public class AppointMentInterface implements TableColumnModelListener {
     JFrame mainFrame;
-    MedPannel BackPannel, FrontPannel;
+    public MedPannel BackPannel, FrontPannel;
     JLabel TodayLabel;
 
     JTableHeader JTh;
@@ -55,12 +55,15 @@ public class AppointMentInterface implements TableColumnModelListener {
         SetTable();
 
     }
+
     public void setWaittable(WaitingInterface waittable) {
         this.waittable = waittable;
     }
+
     public WaitingInterface getWaittable() {
         return waittable;
     }
+
     // { "PID", "Name", "Number", "Status", "Time Slot" };
     public void SetTable() {
 
@@ -120,13 +123,13 @@ public class AppointMentInterface implements TableColumnModelListener {
                 // String Pnumber = "" + AppointMentTable.getValueAt(row, 2);
                 // MedEasePatient Pt = new MedEasePatient();
                 // MedEasePatient.SetPTData(Pt, DBO.GetPatient(Pnumber));
-                AppointMent appointment =new AppointMent();
-                appointment.setPID(""+AppointMentTable.getValueAt(row, 0));
-                appointment.setName(""+AppointMentTable.getValueAt(row, 1));
-                appointment.setNumber(""+AppointMentTable.getValueAt(row,2));
-                appointment.setStatus(""+AppointMentTable.getValueAt(row, 3));
-                appointment.setTimeSlot(""+AppointMentTable.getValueAt(row, 4));    
-                new UpdateAppointStatus(appointment, DBO, waittable,this);
+                AppointMent appointment = new AppointMent();
+                appointment.setPID("" + AppointMentTable.getValueAt(row, 0));
+                appointment.setName("" + AppointMentTable.getValueAt(row, 1));
+                appointment.setNumber("" + AppointMentTable.getValueAt(row, 2));
+                appointment.setStatus("" + AppointMentTable.getValueAt(row, 3));
+                appointment.setTimeSlot("" + AppointMentTable.getValueAt(row, 4));
+                new UpdateAppointStatus(appointment, DBO, waittable, this);
                 AppointMentTable.clearSelection();
             } else if (row != -1 && AppointMentTable.getSelectedColumn() == 4) {
                 String Pnumber = "" + AppointMentTable.getValueAt(row, 0);
@@ -136,7 +139,9 @@ public class AppointMentInterface implements TableColumnModelListener {
                 AppointMentTable.clearSelection();
 
             } else if (row != -1 && AppointMentTable.getSelectedColumn() == 0) {
-                new ViewPatient(DBO, null);
+                MedEasePatient pt = new MedEasePatient();
+                MedEasePatient.SetPTData(pt, DBO.GetPatient("" + AppointMentTable.getValueAt(row, 2)));
+                new ViewPatient(DBO, pt);
                 AppointMentTable.clearSelection();
             }
         }

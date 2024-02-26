@@ -1,9 +1,7 @@
 package MedEaseNavigator.DoctorDashBoard;
-
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
-import MedEaseNavigator.MedMenuBar.MenuBar;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
@@ -24,9 +22,10 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener, TableColumnModelListener {
-    DocDasBoarUtil docDasBoarUtil = new DocDasBoarUtil();
+public class MedDoctorDashBoard  implements ActionListener, TableColumnModelListener {
+    DocDasBoardUtil DocDasBoardUtil;
     MedPannel BackPannel, ProfielBox, InfoBox;
+    // JFrame DoctorFame;
     /*
      * 
      */
@@ -51,9 +50,6 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
     MedEaseMedicalReport Temp;
     MedEaseNotify Notify;
     String PatientHead[] = {
-
-            // "PID",
-            // "Name",
             // "Number",
             "MRID",
             "Date",
@@ -63,13 +59,13 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
     };
 
     public MedDoctorDashBoard(DBOperation DBO) {
+        // super();
         this.DBO = DBO;
-
-        // new MenuBar(DoctorFrame, this.DBO);
-
+        DocDasBoardUtil = new DocDasBoardUtil();
+        // new MenuBar(DoctorFrame, tAdhis.DBO);
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 0);
         BackPannel.setBounds(0, 100, 1440, 500);
-        docDasBoarUtil.DoctorFrame.add(BackPannel);
+        DocDasBoardUtil.DoctorFrame.add(BackPannel);
         ProfielBox = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 5);
         ProfielBox.setBounds(135, 20, 150, 150);
         BackPannel.add(ProfielBox);
@@ -182,11 +178,6 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
         InfoBox.add(Weight);
         Notify = new MedEaseNotify();
 
-        // Allergy = new JLabel("Allergy");
-        // Allergy.setFont(GUIUtil.TimesBoldS2);
-        // Allergy.setBounds(590, 120, 200, 30);
-        // InfoBox.add(Allergy);
-
     }
 
     /* A methoto to set Patient Info */
@@ -213,13 +204,11 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
             Dtm.addColumn(string);
         }
         if (PT != null) {
-            System.out.println("Ye toh nala niklaa");
             ResultSet MedicalReport = DBO.GetMedicalReport(PT.getStrPID());
             if (MedicalReport != null) {
                 PT.setReportHead(null);
                 MedEasePatient.SetMedicalReport(PT, MedicalReport);
                 MedEaseMedicalReport Temp = PT.getReportHead();
-                // int n = 0;
                 while (Temp != null) {
                     String row[] = {
                             Temp.getMRID(),
@@ -227,20 +216,12 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
                             Temp.getChiefcomplaint(),
                             Temp.getDID(),
                     };
-                    // System.out.println(Temp.getMRID());
-                    // System.out.println(row[1]);
-                    // n++;
                     Temp = Temp.getNext();
                     Dtm.addRow(row);
                 }
-                // System.out.println("Total row " + n);
             }
         }
         MediclReportTable = new JTable(Dtm);
-        // MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
-        // MediclReportTable.getColumnModel().getColumn(1).setMinWidth(150);
-        // MediclReportTable.getColumnModel().getColumn().setMaxWidth(200);
-        // MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(150);
         MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
         MediclReportTable.getColumnModel().getColumn(1).setMaxWidth(150);
         MediclReportTable.getColumnModel().getColumn(2).setMinWidth(500);
@@ -250,7 +231,6 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
         MediclReportTable.setCellSelectionEnabled(true);
         TableColumnModel colummodel = MediclReportTable.getColumnModel();
         colummodel.addColumnModelListener(this);
-
         jsp = new JScrollPane(MediclReportTable);
         jsp.setBounds(200, 180, 900, 250);
         BackPannel.add(jsp);
@@ -265,6 +245,8 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
         Heigh.setText(" ");
         Weight.setText(" ");
         Gender.setText(" ");
+        BackPannel.remove(jsp);
+        BackPannel.repaint();
         SetMedicalReportTable(null);
     }
 
@@ -283,6 +265,8 @@ public class MedDoctorDashBoard extends DocDasBoarUtil implements ActionListener
                 appoint.setIntime("" + LocalTime.now());
                 appoint.setStatus("PAYMENT");
                 DBO.UpdateAppointment(appoint);
+                Patient = null;
+
                 restdata();
             }
         }
