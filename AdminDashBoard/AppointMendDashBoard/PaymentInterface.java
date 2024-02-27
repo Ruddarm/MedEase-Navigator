@@ -64,18 +64,15 @@ public class PaymentInterface implements TableColumnModelListener {
         }
         PaymentQueue.Head = null;
         PaymentQueue.GetPaymentAppointmentData();
-        if (PaymentQueue.AppointData != null) {
+        System.out.println("Ye  nulla nahi  hai");
+        PaymentQueue.CreateAppointmentList();
+        AppointMent Temp = PaymentQueue.Head;
+        while (Temp != null) {
+            String appointdata[] = { Temp.getPID(), Temp.getName(), Temp.getNumber(), Temp.getStatus(),
+                    Temp.getTimeSlot() };
+            Dtm.addRow(appointdata);
+            Temp = Temp.getNextAppointment();
 
-            PaymentQueue.CreateAppointmentList();
-            AppointMent Temp = PaymentQueue.Head;
-            while (Temp != null) {
-                String appointdata[] = { Temp.getPID(), Temp.getName(), Temp.getNumber(), Temp.getStatus(),
-                        Temp.getTimeSlot() };
-                // System.out.println(temp.getName());
-                Dtm.addRow(appointdata);
-                Temp = Temp.getNextAppointment();
-
-            }
         }
 
         PaymentTable = new JTable(Dtm);
@@ -130,7 +127,7 @@ public class PaymentInterface implements TableColumnModelListener {
                 new ViewPatient(DBO, pt);
                 PaymentTable.clearSelection();
                 UpdatePaymentTable();
-                
+
             }
         }
     }
