@@ -351,6 +351,7 @@ public class DBOperation implements DBOpertaionInterface {
     /*
      * A method to get last mid
      */
+    
     public int GetLastMID() {
 
         try {
