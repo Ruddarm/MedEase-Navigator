@@ -1,8 +1,6 @@
 /* This is Our Main Class from where our software will start it is like engine of our software
  * @author Ruddarm
  * @author Soumya Vinod
- * .
- * .
  * 
  */
 package MedEaseNavigator.DriverPackage;
@@ -58,10 +56,6 @@ public class MedEaseApp {
 
             app.MedEaseUtil.SetMainFrame();
 
-            // while (TodayQueue.Head!=null) {
-            // System.out.println(TodayQueue.Head.getName());
-            // TodayQueue.Head= TodayQueue.Head.getNextAppointment();
-            // }
             new MenuBar(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO);
             app.MedEaseUtil.Admin.AppointmentInterfaceObj = new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae,
                     app.MedEaseUtil.DBO);
