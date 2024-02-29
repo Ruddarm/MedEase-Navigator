@@ -47,19 +47,36 @@ public class AddDoctor {
                 NameFeild.setBounds(180, 65, 150, 30);
                 AddBox.add(NameFeild);
 
-                
-                
-                UserName=new JLabel("User Name");
+                Number = new JLabel("Number");
+                Number.setFont(GUIUtil.TimesBold);
+                Number.setBounds(70, 100, 100, 30);
+                AddBox.add(Number);
+                NumberFeild=new JTextField();
+                NumberFeild.setFont(GUIUtil.TimesBold);
+                NumberFeild.setBounds(180, 100, 150, 30);
+                // NumberFeild = new JTextField();
+                AddBox.add(NumberFeild);
+
+                Age = new JLabel("Age");
+                Age.setFont(GUIUtil.TimesBold);
+                Age.setBounds(70, 135, 100, 30);
+                AddBox.add(Age);
+                AgeFeild=new JTextField();
+                AgeFeild.setFont(GUIUtil.TimesBold);
+                AgeFeild = new JTextField();
+                AgeFeild.setBounds(180, 135, 150, 30);
+                AddBox.add(AgeFeild);
+
+                UserName = new JLabel("User Name");
                 UserName.setFont(GUIUtil.TimesBold);
-                UserName.setBounds(30, 100, 100, 30);
+                UserName.setBounds(70, 170, 100, 30);
                 AddBox.add(UserName);
-                UserNameFeild=new JTextField();
+                UserNameFeild = new JTextField();
                 UserNameFeild.setFont(GUIUtil.TimesBold);
-                UserNameFeild.setBounds(150, 100, 150, 30);
+                UserNameFeild.setBounds(180, 170, 150, 30);
                 AddBox.add(UserNameFeild);
 
-
-
+                
 
             }
         });
