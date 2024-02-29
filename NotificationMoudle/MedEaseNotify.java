@@ -41,7 +41,7 @@ public class MedEaseNotify {
         if(val==1){
             errorMsg.setForeground(GUIUtil.SucesfullColor);
             errorMsg.setText(msg);
-            errorMsg.setFont(GUIUtil.TimesBold );
+            errorMsg.setFont(GUIUtil.TimesBold3 );
             NotifyBox.setVisible(true );
         }
         
