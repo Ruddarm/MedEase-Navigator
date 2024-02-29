@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 import MedEaseNavigator.UtilityModule.AppointMent;
+import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
@@ -489,7 +490,9 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(5, "" + appoint.getIntime());
             preparedQuery.executeUpdate();
             DBcon.commit();
-            Dbnotfy.setMsg("Appointment Scheduled", 1);
+            Dbnotfy.setMsg("APPOINTMENT SCHEDULED", 1);
+            
+
             return true;
         } catch (SQLException ex) {
             Dbnotfy.setMsg("Error while Scheduling appointment", -1);

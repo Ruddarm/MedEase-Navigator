@@ -1,4 +1,5 @@
 package MedEaseNavigator.DoctorDashBoard;
+
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
@@ -22,7 +23,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MedDoctorDashBoard  implements ActionListener, TableColumnModelListener {
+public class MedDoctorDashBoard implements ActionListener, TableColumnModelListener {
     DocDasBoardUtil DocDasBoardUtil;
     MedPannel BackPannel, ProfielBox, InfoBox;
     // JFrame DoctorFame;
@@ -102,17 +103,17 @@ public class MedDoctorDashBoard  implements ActionListener, TableColumnModelList
         PID_L.setBounds(10, 10, 120, 30);
         InfoBox.add(PID_L);
 
-        PID = new JLabel("PID");
+        PID = new JLabel("");
         PID.setFont(GUIUtil.TimesBoldS2);
         PID.setBounds(150, 10, 100, 30);
         InfoBox.add(PID);
 
-        Name_L = new JLabel("Name           :");
+        Name_L = new JLabel("Name          :");
         Name_L.setFont(GUIUtil.TimesBoldS2);
         Name_L.setBounds(10, 50, 120, 30);
         InfoBox.add(Name_L);
 
-        Name = new JLabel("Name");
+        Name = new JLabel("");
         Name.setFont(GUIUtil.TimesBoldS2);
         Name.setBounds(150, 50, 200, 30);
         InfoBox.add(Name);
@@ -122,59 +123,59 @@ public class MedDoctorDashBoard  implements ActionListener, TableColumnModelList
         Number_L.setBounds(10, 90, 120, 30);
         InfoBox.add(Number_L);
 
-        Number = new JLabel("Number");
+        Number = new JLabel("");
         Number.setFont(GUIUtil.TimesBoldS2);
         Number.setBounds(150, 90, 200, 30);
         InfoBox.add(Number);
 
-        Age_L = new JLabel("DOB : ");
+        Age_L = new JLabel("DOB           : ");
         Age_L.setFont(GUIUtil.TimesBoldS2);
-        Age_L.setBounds(30, 120, 100, 30);
+        Age_L.setBounds(10, 120, 130, 30);
         InfoBox.add(Age_L);
 
         Age = new JLabel("   ");
         Age.setFont(GUIUtil.TimesBoldS2);
-        Age.setBounds(100, 120, 100, 30);
+        Age.setBounds(150, 120, 100, 30);
         InfoBox.add(Age);
 
-        Gender_L = new JLabel("GENDER  :");
+        Gender_L = new JLabel("GENDER          :");
         Gender_L.setFont(GUIUtil.TimesBoldS2);
-        Gender_L.setBounds(200, 120, 100, 30);
+        Gender_L.setBounds(400, 10, 180, 30);
         InfoBox.add(Gender_L);
 
         Gender = new JLabel(" ");
         Gender.setFont(GUIUtil.TimesBoldS2);
-        Gender.setBounds(300, 120, 100, 30);
+        Gender.setBounds(580, 10, 130, 30);
         InfoBox.add(Gender);
 
-        BloodGrup_L = new JLabel("BLOOD GRP :");
+        BloodGrup_L = new JLabel("BLOOD GRP   :");
         BloodGrup_L.setFont(GUIUtil.TimesBoldS2);
-        BloodGrup_L.setBounds(330, 120, 180, 30);
+        BloodGrup_L.setBounds(400, 50, 178, 30);
         InfoBox.add(BloodGrup_L);
 
         BloodGrup = new JLabel(" ");
         BloodGrup.setFont(GUIUtil.TimesBoldS2);
-        BloodGrup.setBounds(460, 120, 120, 30);
+        BloodGrup.setBounds(580, 50, 120, 30);
         InfoBox.add(BloodGrup);
 
-        Height_L = new JLabel("HEIGHT :");
+        Height_L = new JLabel("HEIGHT           :");
         Height_L.setFont(GUIUtil.TimesBoldS2);
-        Height_L.setBounds(490, 120, 100, 30);
+        Height_L.setBounds(400, 90, 180, 30);
         InfoBox.add(Height_L);
 
         Heigh = new JLabel(" ");
         Heigh.setFont(GUIUtil.TimesBoldS2);
-        Heigh.setBounds(580, 120, 100, 30);
+        Heigh.setBounds(580, 90, 100, 30);
         InfoBox.add(Heigh);
 
-        Weight_L = new JLabel("WEIGHT :");
+        Weight_L = new JLabel("WEIGHT          :");
         Weight_L.setFont(GUIUtil.TimesBoldS2);
-        Weight_L.setBounds(620, 120, 100, 30);
+        Weight_L.setBounds(400, 120, 180, 30);
         InfoBox.add(Weight_L);
 
         Weight = new JLabel(" ");
         Weight.setFont(GUIUtil.TimesBoldS2);
-        Weight.setBounds(710, 120, 100, 30);
+        Weight.setBounds(580, 120, 100, 30);
         InfoBox.add(Weight);
         Notify = new MedEaseNotify();
 
