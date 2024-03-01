@@ -4,7 +4,7 @@ public class MedEaseDoctor {
 private String name;
 private int age;
 private String PhnNumber;
-private int DID;
+private String DID;
 private String Username;
 private String pswd;
 private  Boolean IsVlaid;
@@ -12,7 +12,7 @@ private  Boolean IsVlaid;
 public int getAge() {
     return age;
 }
-public int getDID() {
+public String getDID() {
     return DID;
 }
 public String getName() {
@@ -38,7 +38,7 @@ public void setAge(int age) {
 public void setUsername(String username) {
     Username = username;
 }
-public void setDID(int dID) {
+public void setDID(String dID) {
     DID = dID;
 }
 public void setName(String name) {

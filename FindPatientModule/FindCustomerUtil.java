@@ -10,10 +10,10 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
+import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 
 /*
@@ -23,11 +23,13 @@ public class FindCustomerUtil {
     MedPannel SrchPannel;
     JTextField SrchFeild;
     MedEaseBtn ScrhBtn;
+    AdminInterface AdminInterfaceObj;
     DBOperation DBO;
-    public FindCustomerUtil(JFrame MedeaseFrame,DBOperation dbo) {
+    public FindCustomerUtil(JFrame MedeaseFrame,DBOperation dbo,AdminInterface Admin) {
 
         FindPatientEventHandel eventobj=new FindPatientEventHandel(this);
         this.DBO=dbo;
+        this.AdminInterfaceObj=Admin;
         SrchPannel = new MedPannel(Color.white, GUIUtil.Dark_BLue, null, 10);
         // SrchPannel =new();
         SrchPannel.setBounds(100, 50, 600, 45);

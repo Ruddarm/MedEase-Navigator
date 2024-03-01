@@ -6,13 +6,14 @@ public class MedEaseMedicalReport {
     private String diagnosis;
     private String prescription;
     private String followupadvice;
-    private String followupdate;
+    private String ReportDate;
     private String symptoms;
     private String labtest;
     private String status;
-    private float fees;
+    private double fees;
+    private double Paid;
     // try 
-    private int PID;
+    private String PID;
     private String DID;
     private MedEaseMedicalReport next;
     private Boolean IsVlaid;
@@ -26,14 +27,14 @@ public class MedEaseMedicalReport {
     public String getDiagnosis() {
         return diagnosis;
     }
-    public float getFees() {
+    public double getFees() {
         return fees;
     }
     public String getFollowupadvice() {
         return followupadvice;
     }
-    public String getFollowupdate() {
-        return followupdate;
+    public String getReportDate() {
+        return ReportDate;
     }
     public Boolean getIsVlaid() {
         return IsVlaid;
@@ -44,7 +45,7 @@ public class MedEaseMedicalReport {
     public String getMRID() {
         return MRID;
     }
-    public int getPID() {
+    public String getPID() {
         return PID;
     }
     public String getPrescription() {
@@ -72,14 +73,14 @@ public class MedEaseMedicalReport {
     public void setDiagnosis(String diagnosis) {
         this.diagnosis = diagnosis;
     }
-    public void setFees(float fees) {
+    public void setFees(double fees) {
         this.fees = fees;
     }
     public void setFollowupadvice(String followupadvice) {
         this.followupadvice = followupadvice;
     }
-    public void setFollowupdate(String followupdate) {
-        this.followupdate = followupdate;
+    public void setReportDate(String ReportDate) {
+        this.ReportDate = ReportDate;
     }
     public void setIsVlaid(Boolean isVlaid) {
         IsVlaid = isVlaid;
@@ -90,7 +91,7 @@ public class MedEaseMedicalReport {
     public void setMRID(String mRID) {
         MRID = mRID;
     }
-    public void setPID(int pID) {
+    public void setPID(String pID) {
         PID = pID;
     }
     public void setPrescription(String prescription) {
@@ -101,6 +102,18 @@ public class MedEaseMedicalReport {
     }
     public void setSymptoms(String symptoms) {
         this.symptoms = symptoms;
+    }
+    public double getPaid() {
+        return Paid;
+    }
+    public MedEaseMedicalReport getNext() {
+        return next;
+    }
+    public void setNext(MedEaseMedicalReport next) {
+        this.next = next;
+    }
+    public void setPaid(double paid) {
+        Paid = paid;
     }
 
     

@@ -1,32 +1,20 @@
 /* This is Our Main Class from where our software will start it is like engine of our software
  * @author Ruddarm
- * @author 
+ * @author Soumya Vinod
  * .
  * .
  * 
  */
 package MedEaseNavigator.DriverPackage;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Date;
-import com.mysql.cj.util.TimeUtil;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
+import java.util.concurrent.Semaphore;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.PaymentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.WaitingInterface;
 import MedEaseNavigator.DataBaseModule.DBConnectivity;
 import MedEaseNavigator.DataBaseModule.DBOperation;
-import MedEaseNavigator.DoctorDashBoard.MedDoctorDashBoard;
 import MedEaseNavigator.FindPatientModule.FindCustomerUtil;
 import MedEaseNavigator.LoginModule.MedEaseLogin;
 import MedEaseNavigator.MedMenuBar.MenuBar;
-import MedEaseNavigator.UtilityModule.AppointMent;
-import MedEaseNavigator.UtilityModule.MedEaseDoctor;
-import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
-import MedEaseNavigator.UtilityModule.MedEasePatient;
 import MedEaseNavigator.UtilityModule.UtilityMedease;
 
 public class MedEaseApp {
@@ -38,32 +26,61 @@ public class MedEaseApp {
 
     public static void main(String[] args) {
         MedEaseApp app = new MedEaseApp();
-        System.out.println(LocalDate.now());
-        /*
-         * First we will setup connection with database
-         */
-        // Creating object of DBconnectivity
-        app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "niks",
-                app.MedEaseUtil.DBCon);
-        // If true then connection Sucesfull
-        if (!app.MedEaseUtil.DbConnectObj.setConnection()) {
-            app.MedEaseUtil.Notify.setMsg("DATABASE HAS NOT BEEN CONNECTED ", -1);
-        }
-        // if True then DataBase MedEaseNavigator already exist or created
-        if (!app.MedEaseUtil.DbConnectObj.CreateDB("MedEaseNavigator")) {
-            app.MedEaseUtil.Notify.setMsg("DATABASE HAS NOT BEEN CREATED ", -1);
-        }
-        app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
-        app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
-        new MedEaseLogin(app.MedEaseUtil.DBO);
-        app.MedEaseUtil.SetMainFrame();
-        new MenuBar(app.MedEaseUtil.MedEaseFrmae);
-        new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO);
-        new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae);
-        new WaitingInterface(app.MedEaseUtil.MedEaseFrmae);
-        new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
-        new MedDoctorDashBoard();
+        Semaphore sema = new Semaphore(0);
+        synchronized (app) {
+            /*
+             * First we will setup connection with database
+             */
+            // Creating object of DBconnectivity
+            app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "niks",
+                    app.MedEaseUtil.DBCon);
+            // If true then connection Sucesfull
+            if (!app.MedEaseUtil.DbConnectObj.setConnection()) {
+                app.MedEaseUtil.Notify.setMsg("DATABASE HAS NOT BEEN CONNECTED ", -1);
+            }
+            // if True then DataBase MedEaseNavigator already exist or created
+            if (!app.MedEaseUtil.DbConnectObj.CreateDB("MedEaseNavigator")) {
+                app.MedEaseUtil.Notify.setMsg("DATABASE HAS NOT BEEN CREATED ", -1);
+            }
 
+            app.MedEaseUtil.DBCon = app.MedEaseUtil.DbConnectObj.GetConnection();
+
+            app.MedEaseUtil.DBO = new DBOperation(app.MedEaseUtil.DBCon);
+            app.MedEaseUtil.Medlogin = new MedEaseLogin(app.MedEaseUtil.DBO, sema);
+            try {
+
+                // System.out.println(currentThread().getName());
+                sema.acquire();
+
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+
+            app.MedEaseUtil.SetMainFrame();
+
+            // while (TodayQueue.Head!=null) {
+            // System.out.println(TodayQueue.Head.getName());
+            // TodayQueue.Head= TodayQueue.Head.getNextAppointment();
+            // }
+            new MenuBar(app.MedEaseUtil.MedEaseFrmae,app.MedEaseUtil.DBO);
+            app.MedEaseUtil.Admin.AppointmentInterfaceObj = new AppointMentInterface(app.MedEaseUtil.MedEaseFrmae,
+                    app.MedEaseUtil.DBO);
+
+            // AppointMent ap =new AppointMent();
+            // ap.setPID("PID111");
+            // ap.setName("Ruddarm");
+            // ap.setNumber("8369517140");
+            // ap.setStatus("Schedule");
+            // ap.setTimeSlot("1:45 am");
+            // ap.setNextAppointment(null);
+            // AppointementI.SetTable(TodayQueue.Head);
+            app.MedEaseUtil.Admin.WaitingInterfaceObj = new WaitingInterface(app.MedEaseUtil.MedEaseFrmae,
+                    app.MedEaseUtil.DBO);
+            app.MedEaseUtil.Admin.PaymentInterfaceObj = new PaymentInterface(app.MedEaseUtil.MedEaseFrmae);
+            app.MedEaseUtil.Admin.AppointmentInterfaceObj.setWaittable(app.MedEaseUtil.Admin.WaitingInterfaceObj);
+            new FindCustomerUtil(app.MedEaseUtil.MedEaseFrmae, app.MedEaseUtil.DBO, app.MedEaseUtil.Admin);
+            
+        }
     }
 }
 

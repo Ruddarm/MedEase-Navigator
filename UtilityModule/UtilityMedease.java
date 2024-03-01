@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 import MedEaseNavigator.DataBaseModule.DBConnectivity;
 import MedEaseNavigator.DataBaseModule.DBOperation;
+import MedEaseNavigator.LoginModule.MedEaseLogin;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 
 public class UtilityMedease {
@@ -18,6 +19,8 @@ public class UtilityMedease {
     public DBConnectivity DbConnectObj; // object to create Database and estabhlish connection with database
     public MedEaseNotify Notify;
     public DBOperation DBO;
+    public AdminInterface Admin;
+    public MedEaseLogin Medlogin;
 
     public UtilityMedease() {
         Notify = new MedEaseNotify();
@@ -30,7 +33,9 @@ public class UtilityMedease {
         MedEaseFrmae.getContentPane().setBackground(GUIUtil.Base_Background);
         MedEaseFrmae.setVisible(true);
         MedEaseFrmae.setLayout(null);
-        MedEaseFrmae.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        MedEaseFrmae.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Admin = new AdminInterface();
+        // MedEaseFrmae.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /*

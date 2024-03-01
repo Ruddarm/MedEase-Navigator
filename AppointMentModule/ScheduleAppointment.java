@@ -3,10 +3,10 @@ package MedEaseNavigator.AppointMentModule;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
+import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
@@ -23,15 +23,16 @@ public class ScheduleAppointment implements ActionListener {
     JLabel HeadingLabel, PIDLabel, PNameLabel, PNumberLabel, hrsLabel, Minlabe, Am_PMLabel;
     MedEaseBtn Schedule;
     MedEasePatient PT;
-
     JComboBox<Integer> Hrs;
     JComboBox<String> Day, Min;
     Integer hrs[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
     String min[] = { "00", "15", "30", "45" };
     String day[] = { "AM", "PM" };
+    AdminInterface AddminInterfaceObj;
 
-    ScheduleAppointment(DBOperation DBO, MedEasePatient Pt) {
+    ScheduleAppointment(DBOperation DBO, MedEasePatient Pt, AdminInterface AddminInterfaceObj) {
         this.DBO = DBO;
+        this.AddminInterfaceObj = AddminInterfaceObj;
         this.PT = Pt;
         ScheduleAppointBox = new JDialog();
         ScheduleAppointBox.setBounds(100, 50, 300, 350);
@@ -113,6 +114,9 @@ public class ScheduleAppointment implements ActionListener {
             appoint.setStatus("Schedule");
             appoint.setIntime("" + LocalTime.now().format(formatr));
             DBO.ScheduleAppointment(appoint);
+            ScheduleAppointBox.dispose();
+            AddminInterfaceObj.AppointmentInterfaceObj.UpdateTable();
+
         }
 
     }

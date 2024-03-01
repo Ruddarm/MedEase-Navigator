@@ -51,15 +51,15 @@ public class DBOperation implements DBOpertaionInterface {
     }
 
     @Override
-    public ResultSet GetMedicalReport(int PID) {
+    public ResultSet GetMedicalReport(String PID) {
         try {
             preparedQuery = DBcon.prepareStatement("Select *from Medical_history where patient_ID =?");
-            preparedQuery.setString(1, "PID" + PID);
+            preparedQuery.setString(1, PID);
             data = preparedQuery.executeQuery();
             if (data.next() != false) {
                 return data;
             } else {
-                Dbnotfy.setMsg("No Medical History", -1);
+                // Dbnotfy.setMsg("No Medical History", -1);
                 return null;
             }
 
@@ -72,14 +72,32 @@ public class DBOperation implements DBOpertaionInterface {
 
     @Override
     public ResultSet GetAppointmentSchedule(String Date) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'GetAppointmentSchedule'");
     }
 
     @Override
-    public boolean UpdateAppointment(String Stas) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'UpdateAppointment'");
+    public boolean UpdateAppointment(AppointMent Appointment) {
+
+        try {
+            preparedQuery = DBcon.prepareStatement(
+                    "Update appointment set status= ? , IN_TIME = ? where date = ? && patient_id = ?");
+            preparedQuery.setString(1, Appointment.getStatus());
+            preparedQuery.setString(2, Appointment.getIntime());
+            preparedQuery.setString(3, "" + LocalDate.now());
+            preparedQuery.setString(4, Appointment.getPID());
+            System.out.println(preparedQuery);
+
+            preparedQuery.executeUpdate();
+            DBcon.commit();
+            Dbnotfy.setMsg("Updated", 1);
+
+            return true;
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Gadbad hogya", -1);
+            System.out.println(ex);
+            return false;
+        }
+
     }
 
     @Override
@@ -180,19 +198,20 @@ public class DBOperation implements DBOpertaionInterface {
             // INSERT INTO medical_history VALUES ('MRID11','Fever','viral fever
             // ','Crocine','Nothing','null','high
             // temprature','no','close','700','PID111','DOC123')
-            preparedQuery = DBcon.prepareStatement(" INSERT INTO medical_history VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-            preparedQuery.setString(1, "MRID" + MedicalReport.getMRID());
+            preparedQuery = DBcon.prepareStatement(" INSERT INTO medical_history VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            preparedQuery.setString(1, MedicalReport.getMRID());
             preparedQuery.setString(2, MedicalReport.getChiefcomplaint());
             preparedQuery.setString(3, MedicalReport.getDiagnosis());
             preparedQuery.setString(4, MedicalReport.getPrescription());
             preparedQuery.setString(5, MedicalReport.getFollowupadvice());
-            preparedQuery.setString(6, MedicalReport.getFollowupdate());
+            preparedQuery.setString(6, MedicalReport.getReportDate());
             preparedQuery.setString(7, MedicalReport.getSymptoms());
             preparedQuery.setString(8, MedicalReport.getLabtest());
             preparedQuery.setString(9, MedicalReport.getStatus());
-            preparedQuery.setFloat(10, MedicalReport.getFees());
-            preparedQuery.setString(11, "PID" + MedicalReport.getPID());
-            preparedQuery.setString(12, "DOC" + MedicalReport.getDID());
+            preparedQuery.setDouble(10, MedicalReport.getFees());
+            preparedQuery.setDouble(11, MedicalReport.getPaid());
+            preparedQuery.setString(12, MedicalReport.getPID());
+            preparedQuery.setString(13, MedicalReport.getDID());
 
             preparedQuery.executeUpdate();
             DBcon.commit();
@@ -450,7 +469,10 @@ public class DBOperation implements DBOpertaionInterface {
 
         try {
             // SELECT *from appointment WHERE Date = '2024-02-04'
-            preparedQuery = DBcon.prepareStatement("SELECT *from appointment WHERE Date = ? ORDER BY Time asc");
+            preparedQuery = DBcon.prepareStatement(
+                    "SELECT appointment.*, patient.name AS patient_name , patient.Number as patientNumber\r\n" + //
+                            "FROM appointment\r\n" + //
+                            "INNER JOIN patient ON appointment.patient_id = patient.patient_id WHERE Date= ? && Status = 'Schedule' ORDER  BY Time asc;");
             preparedQuery.setString(1, "" + LocalDate.now());
             data = preparedQuery.executeQuery();
             return data;
@@ -459,6 +481,44 @@ public class DBOperation implements DBOpertaionInterface {
             return null;
         }
 
+    }
+
+    public ResultSet GetWaitingAppointMent() {
+
+        try {
+            // SELECT *from appointment WHERE Date = '2024-02-04'
+            preparedQuery = DBcon.prepareStatement(
+                    "SELECT appointment.*, patient.name AS patient_name , patient.Number as patientNumber\r\n" + //
+                            "FROM appointment\r\n" + //
+                            "INNER JOIN patient ON appointment.patient_id = patient.patient_id WHERE Date= ? && (Status = 'IN' || Status='Waiting' || Status='NEXT' || Status='Current') ORDER  BY IN_time asc;");
+            preparedQuery.setString(1, "" + LocalDate.now());
+            data = preparedQuery.executeQuery();
+            return data;
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error in Today Appointmetn method", 1);
+            return null;
+        }
+
+    }
+
+    public ResultSet GetNextPatient() {
+        try {
+            // SELECT *from appointment WHERE Date = '2024-02-04'
+            preparedQuery = DBcon.prepareStatement(
+                    "SELECT appointment.*, patient.name AS patient_name , patient.Number as patientNumber\r\n" + //
+                            "FROM appointment\r\n" + //
+                            "INNER JOIN patient ON appointment.patient_id = patient.patient_id WHERE Date= ? &&  Status='WAITING'  ORDER  BY IN_Time asc;");
+            preparedQuery.setString(1, "" + LocalDate.now());
+            data = preparedQuery.executeQuery();
+            if (data.next() != false) {
+                return data;
+            }
+            return null;
+
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Error in Today Appointmetn method", 1);
+            return null;
+        }
     }
 
     public boolean UpdateAppointment(String Status, int PID) {

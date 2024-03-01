@@ -2,6 +2,8 @@ package MedEaseNavigator.DataBaseModule;
 
 import java.sql.ResultSet;
 
+import MedEaseNavigator.UtilityModule.AppointMent;
+
 public interface DBOpertaionInterface {
 
     // set login for first time
@@ -48,7 +50,7 @@ public interface DBOpertaionInterface {
      * 
      * @return ResultSet //Result Set of Medical Report
      */
-    public ResultSet GetMedicalReport(int PID);
+    public ResultSet GetMedicalReport(String PID);
 
     /*
      * Get AppointMent Schedule
@@ -68,6 +70,6 @@ public interface DBOpertaionInterface {
      * @return boolean true if sucessfull else falsse
      * 
      */
-    public boolean UpdateAppointment(String  Stas);
+    public boolean UpdateAppointment(AppointMent appoint);
 
 }

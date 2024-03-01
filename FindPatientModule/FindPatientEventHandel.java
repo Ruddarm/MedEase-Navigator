@@ -30,10 +30,8 @@ public class FindPatientEventHandel implements ActionListener {
                 } else {
                     Patient = null;
                 }
-                new MedEaseAppointMentInterface(Patient,findpteint.DBO,Number);
+                new MedEaseAppointMentInterface(Patient,findpteint.DBO,Number,findpteint.AdminInterfaceObj);
             }
-
-        } else {
 
         }
 
