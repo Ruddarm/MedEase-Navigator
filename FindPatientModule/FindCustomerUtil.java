@@ -45,7 +45,7 @@ public class FindCustomerUtil {
         SrchFeild.setBorder(BorderFactory.createLineBorder(GUIUtil.WhiteClr));
         SrchFeild.setBounds(10, 5, 420, 30);
         SrchPannel.add(SrchFeild);
-        SrchFeild.setFont(GUIUtil.TimesBoldS2);
+        // SrchFeild.setFont(GUIUtil.TimesBoldS2);
         ScrhBtn.addActionListener(eventobj);
         SrchFeild.addKeyListener(eventobj);
         
