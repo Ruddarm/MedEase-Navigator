@@ -1,5 +1,8 @@
 package MedEaseNavigator.DoctorDashBoard;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.print.attribute.standard.MediaSize.NA;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -9,11 +12,12 @@ import javax.swing.SwingUtilities;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.UtilityModule.GUIUtil;
+import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 
 public class AddDoctor {
     DBOperation DBO;
     JDialog AddBox;
-    JLabel DID, Name, Number, UserName, Password, Age;
+    JLabel DID, Name, Number, UserName, Password, Age,warnJLabel;
     JTextField DIDFeild, NameFeild, NumberFeild, UserNameFeild, PasswordFeild, AgeFeild;
     MedEaseBtn AddDocBtn;
 
@@ -29,6 +33,12 @@ public class AddDoctor {
                 AddBox.setBounds(300, 50, 400, 450);
                 AddBox.setVisible(true);
                 AddBox.getContentPane().setBackground(GUIUtil.Base_Background);
+                warnJLabel= new JLabel();
+                warnJLabel.setText("warn");
+                warnJLabel.setFont(GUIUtil.TimesBold);
+                warnJLabel.setForeground(GUIUtil.RedClr);
+                warnJLabel.setBounds(180, 10, 150, 10);
+                warnJLabel.setVisible(false);
                 DID = new JLabel("DID");
                 DID.setFont(GUIUtil.TimesBold);
                 DID.setBounds(70, 30, 100, 30);
@@ -76,7 +86,34 @@ public class AddDoctor {
                 UserNameFeild.setBounds(180, 170, 150, 30);
                 AddBox.add(UserNameFeild);
 
-                
+                Password = new JLabel("User Name");
+                Password.setFont(GUIUtil.TimesBold);
+                Password.setBounds(70, 205, 100, 30);
+                AddBox.add(Password);
+                PasswordFeild = new JTextField();
+                PasswordFeild.setFont(GUIUtil.TimesBold);
+                PasswordFeild.setBounds(180, 205, 150, 30);
+                AddBox.add(PasswordFeild);
+
+                AddDocBtn= new MedEaseBtn(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 5);
+                AddDocBtn.setText("ADD");
+                AddDocBtn.setForeground(GUIUtil.WhiteClr);
+                AddDocBtn.setFont(GUIUtil.TimesBold);
+                AddDocBtn.setBounds(200, 240, 100, 30);
+                AddBox.add(AddDocBtn);
+                AddDocBtn.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        MedEaseDoctor Doctor = new MedEaseDoctor();
+                        Doctor.setDID(DIDFeild.getText());
+                        Doctor.setName(NameFeild.getText());
+                        Doctor.setPhnNumber(NumberFeild.getText());
+                        
+                        Doctor.getAge();
+                        DBO.InsertDoctor(null);
+                    }
+                    
+                });
 
             }
         });
