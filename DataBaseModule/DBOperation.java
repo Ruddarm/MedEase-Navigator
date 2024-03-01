@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 import MedEaseNavigator.UtilityModule.AppointMent;
+import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
@@ -53,7 +54,7 @@ public class DBOperation implements DBOpertaionInterface {
     @Override
     public ResultSet GetMedicalReport(String PID) {
         try {
-            preparedQuery = DBcon.prepareStatement("Select *from Medical_history where patient_ID =?");
+            preparedQuery = DBcon.prepareStatement("Select *from Medical_history where patient_ID =? order by reportdate desc");
             preparedQuery.setString(1, PID);
             data = preparedQuery.executeQuery();
             if (data.next() != false) {
@@ -284,6 +285,22 @@ public class DBOperation implements DBOpertaionInterface {
 
     }
 
+    public boolean UpdatePayment(MedEaseMedicalReport Report) {
+        try {
+            preparedQuery = DBcon.prepareStatement("UPDATE medical_history SET status=? , Paid_Amount =? WHERE MRID=?");
+            preparedQuery.setString(1, Report.getStatus());
+            preparedQuery.setDouble(2, Report.getPaid());
+            preparedQuery.setString(3, Report.getMRID());
+            preparedQuery.execute();
+            DBcon.commit();
+            Dbnotfy.setMsg("Payment Updated", 1);
+            return true;
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Eroor while Updating ", -1);
+            return false;
+        }
+    }
+
     public boolean SetUserName(String UserName) {
         try {
             preparedQuery = DBcon.prepareStatement("UPDATE utility SET Admin_login=? WHERE Utindex=1;");
@@ -334,6 +351,7 @@ public class DBOperation implements DBOpertaionInterface {
     /*
      * A method to get last mid
      */
+    
     public int GetLastMID() {
 
         try {
@@ -432,6 +450,25 @@ public class DBOperation implements DBOpertaionInterface {
         }
     }
 
+    public ResultSet GetPaymentAppontment() {
+        try {
+            preparedQuery = DBcon.prepareStatement(
+                    "SELECT appointment.*, patient.name AS patient_name , patient.Number as patientNumber\r\n" + //
+                            "FROM appointment\r\n" + //
+                            "INNER JOIN patient ON appointment.patient_id = patient.patient_id WHERE Date= ? && Status = 'PAYMENT' ORDER  BY Time asc;");
+
+            preparedQuery.setString(1, "" + LocalDate.now());
+            ResultSet Data = preparedQuery.executeQuery();
+            return Data;
+
+        } catch (SQLException ex) {
+            Dbnotfy.setMsg("Erorr in Payment Appointment", -1);
+            System.out.println(ex);
+
+            return null;
+        }
+    }
+
     /*
      * 
      * A method to create appoint in database
@@ -453,7 +490,9 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(5, "" + appoint.getIntime());
             preparedQuery.executeUpdate();
             DBcon.commit();
-            Dbnotfy.setMsg("Appointment Scheduled", 1);
+            Dbnotfy.setMsg("APPOINTMENT SCHEDULED", 1);
+            
+
             return true;
         } catch (SQLException ex) {
             Dbnotfy.setMsg("Error while Scheduling appointment", -1);
@@ -557,7 +596,6 @@ public class DBOperation implements DBOpertaionInterface {
             DBcon.commit();
             Dbnotfy.setMsg("Patient data Updated", 1);
             return true;
-
         } catch (SQLException ex) {
             Dbnotfy.setMsg("Error while updateing data ", -1);
             return false;

@@ -33,6 +33,7 @@ public class ViewPatient  implements TableColumnModelListener {
             "MRID",
             "Date",
             "Chief Complaint",
+            "Status",
             "Doctor Name"
 
     };
@@ -134,6 +135,7 @@ public class ViewPatient  implements TableColumnModelListener {
                         Temp.getMRID(),
                         Temp.getReportDate(),
                         Temp.getChiefcomplaint(),
+                        Temp.getStatus(),
                         Temp.getDID(),
                 };
                 Temp = Temp.getNext();
@@ -143,7 +145,8 @@ public class ViewPatient  implements TableColumnModelListener {
         MediclReportTable  = new JTable(Dtm);
         MediclReportTable.getColumnModel().getColumn(0).setMaxWidth(100);
         MediclReportTable.getColumnModel().getColumn(1).setMaxWidth(150);
-        MediclReportTable.getColumnModel().getColumn(2).setMinWidth(500);
+        MediclReportTable.getColumnModel().getColumn(2).setMinWidth(400);
+        MediclReportTable.getColumnModel().getColumn(3).setMaxWidth(100);
         MediclReportTable.getColumnModel().getColumn(3).setMaxWidth(100);
         MediclReportTable.setRowSelectionAllowed(false);
         MediclReportTable.setColumnSelectionAllowed(false);

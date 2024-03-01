@@ -13,15 +13,22 @@ public class MedQueue {
     public MedEaseNotify notfication;
     public DBOperation DBO;
 
-    public MedQueue(DBOperation DBO){
+    public MedQueue(DBOperation DBO) {
         this.DBO = DBO;
+        notfication = new MedEaseNotify();
 
     }
-    public void GetAppointmentData(){
-            AppointData = DBO.GetTodayAppointment();
+
+    public void GetAppointmentData() {
+        AppointData = DBO.GetTodayAppointment();
     }
-    public void GetWaitingAppointmentData(){
-        AppointData= DBO.GetWaitingAppointMent();
+
+    public void GetWaitingAppointmentData() {
+        AppointData = DBO.GetWaitingAppointMent();
+    }
+
+    public void GetPaymentAppointmentData() {
+        AppointData = DBO.GetPaymentAppontment();
     }
 
     /*
@@ -30,14 +37,14 @@ public class MedQueue {
     public void CreateAppointmentList() {
         // DateTimeFormatter formatr = DateTimeFormatter.ofPattern("hh:mm a");
         try {
-             this.temp = Head;
+            this.temp = Head;
             while (AppointData.next() != false) {
 
                 if (Head == null) {
                     AppointMent Nodeone = new AppointMent();
                     Nodeone.setPID(AppointData.getString(1));
                     Time Time = AppointData.getTime(2);
-                    Nodeone.setTimeSlot(""+Time);
+                    Nodeone.setTimeSlot("" + Time);
                     Nodeone.setDate(AppointData.getString(3));
                     Nodeone.setStatus(AppointData.getString(4));
                     Nodeone.setIntime(AppointData.getString(5));
@@ -46,6 +53,7 @@ public class MedQueue {
                     Nodeone.setNextAppointment(null);
                     Head = Nodeone;
                     temp = Nodeone;
+                    System.out.println("head ban gya bhia");
                 } else {
                     AppointMent NextNode = new AppointMent();
                     NextNode.setPID(AppointData.getString(1));
@@ -57,15 +65,16 @@ public class MedQueue {
                     NextNode.setNumber(AppointData.getString(7));
                     NextNode.setNextAppointment(null);
                     temp.setNextAppointment(NextNode);
-                    temp=NextNode;
+                    temp = NextNode;
                 }
                 // System.out.println(AppointData.getString(1));
-            };
-            System.out.println("List createed");
+            }
+            ;
 
         } catch (SQLException xe) {
-            notfication.setMsg("Error while Creating Appoinment List", -1); 
-        }   
+            notfication.setMsg("Error while Creating Appoinment List", -1);
+            System.out.println(xe);
+        }
     }
 
 }
