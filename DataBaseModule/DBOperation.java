@@ -580,7 +580,7 @@ public class DBOperation implements DBOpertaionInterface {
     }
     public ResultSet GetDoctor(String Number){
         try{
-            preparedQuery= DBcon.prepareStatement("Select *from doctor where number =?");
+            preparedQuery= DBcon.prepareStatement("Select *from doctor where phone_no =?");
             preparedQuery.setString(1, Number);
             data = preparedQuery.executeQuery();
             if(data.next()!=false){

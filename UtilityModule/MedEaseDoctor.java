@@ -70,7 +70,7 @@ public class MedEaseDoctor {
         IsVlaid = isVlaid;
     }
 
-    public void SetDocDetails(MedEaseDoctor Doc, ResultSet data) {
+    public  static void SetDocDetails(MedEaseDoctor Doc, ResultSet data) {
         if (data != null) {
             // 'DID01', 'Niks', '836957140', 30, 'nikisuser', 'nikspswd'
             try {

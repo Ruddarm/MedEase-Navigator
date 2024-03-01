@@ -6,6 +6,7 @@ import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
+import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 import javax.swing.JTable;
@@ -18,6 +19,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.TableColumnModelEvent;
 import javax.swing.event.TableColumnModelListener;
+
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -59,11 +62,16 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
 
     };
 
-    public MedDoctorDashBoard(DBOperation DBO) {
+    public MedDoctorDashBoard(DBOperation DBO, MedEaseDoctor Doc) {
         // super();
         this.DBO = DBO;
+        //1100 = 570,570
         DocDasBoardUtil = new DocDasBoardUtil();
         // new MenuBar(DoctorFrame, tAdhis.DBO);
+        WelcomLogo = new JLabel("Welcome Doctor "+Doc.getName());
+        WelcomLogo.setFont(new Font("Times New Roman", Font.ITALIC, 40));
+        WelcomLogo.setBounds(370, 40, 500, 40);
+        DocDasBoardUtil.DoctorFrame.add(WelcomLogo);
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 0);
         BackPannel.setBounds(0, 100, 1440, 500);
         DocDasBoardUtil.DoctorFrame.add(BackPannel);
@@ -172,7 +180,6 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         Weight_L.setFont(GUIUtil.TimesBoldS2);
         Weight_L.setBounds(400, 120, 180, 30);
         InfoBox.add(Weight_L);
-
         Weight = new JLabel(" ");
         Weight.setFont(GUIUtil.TimesBoldS2);
         Weight.setBounds(580, 120, 100, 30);

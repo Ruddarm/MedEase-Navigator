@@ -134,7 +134,8 @@ public class DocLogin extends KeyAdapter implements ActionListener {
             if (DBO.DoctorLogin(number, username, pswd.toString())) {
                 DocLoginFram.dispose();
                 MedEaseDoctor DOC = new MedEaseDoctor();
-                new MedDoctorDashBoard(DBO);
+                MedEaseDoctor.SetDocDetails(DOC, DBO.GetDoctor(number));
+                new MedDoctorDashBoard(DBO,DOC);
             } else {
                 warn.setText("Something went wrong");
                 warn.setVisible(true);
