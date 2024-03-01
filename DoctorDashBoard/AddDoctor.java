@@ -2,13 +2,10 @@ package MedEaseNavigator.DoctorDashBoard;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.print.attribute.standard.MediaSize.NA;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.UtilityModule.GUIUtil;
@@ -17,6 +14,7 @@ import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 public class AddDoctor {
     DBOperation DBO;
     JDialog AddBox;
+    int LastDID;
     JLabel DID, Name, Number, UserName, Password, Age, warnJLabel;
     JTextField DIDFeild, NameFeild, NumberFeild, UserNameFeild, PasswordFeild, AgeFeild;
     MedEaseBtn AddDocBtn;
@@ -26,6 +24,7 @@ public class AddDoctor {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                LastDID = DBO.GetLastDID();
                 AddBox = new JDialog();
                 AddBox.setTitle("Add Doctor");
                 AddBox.setFont(GUIUtil.TimesBold);
@@ -43,7 +42,7 @@ public class AddDoctor {
                 DID.setFont(GUIUtil.TimesBold);
                 DID.setBounds(70, 30, 100, 30);
                 AddBox.add(DID);
-                DIDFeild = new JTextField();
+                DIDFeild = new JTextField("DID" + LastDID);
                 DIDFeild.setFont(GUIUtil.TimesBold);
                 DIDFeild.setBounds(180, 30, 150, 30);
                 AddBox.add(DIDFeild);
@@ -114,11 +113,25 @@ public class AddDoctor {
                             Doctor.setAge(age);
                         } catch (NumberFormatException ex) {
                             warnJLabel.setText("Enter Valid Age");
+                            warnJLabel.setVisible(true);
                             return;
                         }
-                        
-                        Doctor.getAge();
-                        DBO.InsertDoctor(null);
+                        if (UserNameFeild.getText().length() > 50 || PasswordFeild.getText().length() > 50) {
+                            warnJLabel.setText("Enter valid username or password");
+                            warnJLabel.setVisible(true);
+                            return;
+                        } else {
+                            Doctor.setUsername(UserNameFeild.getText());
+                            Doctor.setPswd(PasswordFeild.getText());
+                        }
+                        if(DBO.InsertDoctor(Doctor)){
+                            LastDID++;
+                            if(DBO.UPdateDoc(LastDID)){
+                                AddBox.dispose();
+                            }
+
+                        }
+
                     }
                 });
 
