@@ -578,6 +578,22 @@ public class DBOperation implements DBOpertaionInterface {
             return false;
         }
     }
+    public ResultSet GetDoctor(String Number){
+        try{
+            preparedQuery= DBcon.prepareStatement("Select *from doctor where number =?");
+            preparedQuery.setString(1, Number);
+            data = preparedQuery.executeQuery();
+            if(data.next()!=false){
+                return data;
+            }
+            else{
+                return null;
+            }
+        }catch(SQLException ex){
+            Dbnotfy.setMsg("Eroor while Getting Doctor ", -1);
+            return null;
+        }
+    }
 
     public boolean UpdatePatientDetials(MedEasePatient pt) {
         // UPDATE patient set name='Nikita',Number ='9594120025', Dob='2004-7-22',

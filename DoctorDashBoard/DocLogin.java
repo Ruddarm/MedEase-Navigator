@@ -15,6 +15,7 @@ import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.GUIUtil;
+import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 
 public class DocLogin extends KeyAdapter implements ActionListener {
     JFrame DocLoginFram;
@@ -132,6 +133,7 @@ public class DocLogin extends KeyAdapter implements ActionListener {
             }
             if (DBO.DoctorLogin(number, username, pswd.toString())) {
                 DocLoginFram.dispose();
+                MedEaseDoctor DOC = new MedEaseDoctor();
                 new MedDoctorDashBoard(DBO);
             } else {
                 warn.setText("Something went wrong");
