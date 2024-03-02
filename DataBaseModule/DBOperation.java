@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 import MedEaseNavigator.UtilityModule.AppointMent;
-import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
