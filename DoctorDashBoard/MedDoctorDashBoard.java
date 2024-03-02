@@ -42,7 +42,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
             BloodGrup_L,
             Gender_L,
             Age_L,
-            Number_L;
+            Number_L,ProfileLogo;
     MedEaseBtn Update, Next, CreateMedicalReport;
     JTable MediclReportTable;
     DefaultTableModel Dtm;
@@ -77,6 +77,9 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         DocDasBoardUtil.DoctorFrame.add(BackPannel);
         ProfielBox = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 5);
         ProfielBox.setBounds(135, 20, 150, 150);
+        ProfileLogo=new JLabel(GUIUtil.PTICON);
+        ProfileLogo.setBounds(0, 0, 150, 150);
+        ProfielBox.add(ProfileLogo);
         BackPannel.add(ProfielBox);
         InfoBox = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 5);
         InfoBox.setLayout(null);
