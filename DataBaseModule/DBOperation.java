@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 import MedEaseNavigator.UtilityModule.AppointMent;
-import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEaseDoctor;
 import MedEaseNavigator.UtilityModule.MedEaseMedicalReport;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
@@ -576,6 +575,22 @@ public class DBOperation implements DBOpertaionInterface {
         } catch (SQLException ex) {
             Dbnotfy.setMsg("Error while updating Appointment Status", -1);
             return false;
+        }
+    }
+    public ResultSet GetDoctor(String Number){
+        try{
+            preparedQuery= DBcon.prepareStatement("Select *from doctor where phone_no =?");
+            preparedQuery.setString(1, Number);
+            data = preparedQuery.executeQuery();
+            if(data.next()!=false){
+                return data;
+            }
+            else{
+                return null;
+            }
+        }catch(SQLException ex){
+            Dbnotfy.setMsg("Eroor while Getting Doctor ", -1);
+            return null;
         }
     }
 

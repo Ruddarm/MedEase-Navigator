@@ -52,6 +52,7 @@ public class MenuBar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == Doclogin) {
             new DocLogin(DBO);
+            
         }else if(e.getSource()== AddDoctor){
             new AddDoctor(DBO);
         }

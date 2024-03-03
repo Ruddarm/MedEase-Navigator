@@ -8,13 +8,11 @@ import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
-
 import MedEaseNavigator.AppointMentModule.UpdateAppointMentTime;
 import MedEaseNavigator.AppointMentModule.UpdateAppointStatus;
 import MedEaseNavigator.AppointMentModule.ViewPatient;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
-// import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
