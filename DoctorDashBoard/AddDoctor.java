@@ -85,7 +85,7 @@ public class AddDoctor {
                 UserNameFeild.setBounds(180, 170, 150, 30);
                 AddBox.add(UserNameFeild);
 
-                Password = new JLabel("User Name");
+                Password = new JLabel("Password");
                 Password.setFont(GUIUtil.TimesBold);
                 Password.setBounds(70, 205, 100, 30);
                 AddBox.add(Password);

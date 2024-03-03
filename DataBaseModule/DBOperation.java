@@ -489,7 +489,7 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(5, "" + appoint.getIntime());
             preparedQuery.executeUpdate();
             DBcon.commit();
-            Dbnotfy.setMsg("APPOINTMENT SCHEDULED", 1);
+            Dbnotfy.setMsg("\nAPPOINTMENT SCHEDULED", 1);
             
 
             return true;
