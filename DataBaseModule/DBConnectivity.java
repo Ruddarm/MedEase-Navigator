@@ -35,7 +35,7 @@ public class DBConnectivity {
             return true;
         } catch (SQLException connectionError) {
             // System.out.println("ik");
-            DbNotify.setMsg("Unnable To Connect ", -1);
+            DbNotify.setMsg("Unable To Connect ", -1);
             return false;
         }
 
@@ -73,7 +73,7 @@ public class DBConnectivity {
                         CreateUtilitytable()) {
                     DBCon.commit();
                 } else {
-                    DbNotify.setMsg("Uanablee to create tables", -1);
+                    DbNotify.setMsg("Unable to create tables", -1);
                 }
                 return true;
             } catch (SQLException error) {
