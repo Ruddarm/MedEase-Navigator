@@ -25,6 +25,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MedCreatePatient extends KeyAdapter implements ActionListener {
     JDialog CreateDailog;
@@ -281,6 +283,23 @@ public class MedCreatePatient extends KeyAdapter implements ActionListener {
                     HeightFeild.setForeground(GUIUtil.WarningColor);
                     return;
                 }
+                if (NumberField.getText().length() > 0) {
+                    System.out.println("entered");
+                    String tt = NumberField.getText();
+                    Pattern ptrn = Pattern.compile("(0/91)?[7-9][0-9]{9}");
+                    Matcher match = ptrn.matcher(tt);
+                    boolean set = (match.find() && match.group().equals(tt));
+                    if (set == false) {
+                        System.out.println(true);
+                        NumberField.setForeground(GUIUtil.WarningColor);
+                    }
+                }
+                else if (NumberField.getText().length() > 10) {
+                    System.out.println("true");
+                    NumberField.setForeground(GUIUtil.WarningColor);
+
+                }
+                
                 if (GroupFeild.getText().length() > 3) {
                     GroupFeild.setForeground(GUIUtil.WarningColor);
                     return;
@@ -323,7 +342,7 @@ public class MedCreatePatient extends KeyAdapter implements ActionListener {
             HeightFeild.setForeground(Color.black);
         }
         if (e.getSource() == WeightFeild) {
-            HeightFeild.setForeground(Color.BLACK);
+            WeightFeild.setForeground(Color.BLACK);
         }
         if (e.getSource() == BloodGroup) {
             BloodGroup.setForeground(Color.black);
