@@ -24,7 +24,7 @@ public class AdminChangeUserName {
         UNbox.setTitle("Change Username");
         UNbox.setFont(GUIUtil.TimesBold);
         UNbox.setLayout(null);
-        UNbox.setBounds(300, 50, 300, 200);
+        UNbox.setBounds(300, 50, 500, 200);
         UNbox.setVisible(true);
         UNbox.getContentPane().setBackground(GUIUtil.Base_Background);
 
@@ -52,7 +52,7 @@ public class AdminChangeUserName {
         ChangeBtn.setText("UPDATE");
         ChangeBtn.setForeground(GUIUtil.WhiteClr);
         ChangeBtn.setFont(GUIUtil.TimesBold);
-        ChangeBtn.setBounds(200, 240, 100, 30);
+        ChangeBtn.setBounds(200, 120, 100, 30);
         UNbox.add(ChangeBtn);
 
     // DBOperation DBO;
