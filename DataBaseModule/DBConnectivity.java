@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 
-public class DBConnectivity {
+public class DBConnectivity{
     String UserName;
     String Password;
     Connection DBCon;
