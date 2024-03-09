@@ -8,6 +8,7 @@ package MedEaseNavigator.UtilityModule;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.*;
 
 public class MedEasePatient {
     private int PID; // PId+112
@@ -136,6 +137,9 @@ public class MedEasePatient {
      * @param Resultset
      * 
      */
+
+
+
     public static boolean SetPTData(MedEasePatient pt, ResultSet data) {
         try {
             pt.setStrPID(data.getString(1));
@@ -209,3 +213,11 @@ public class MedEasePatient {
         return true;
     }
 }
+// public static boolean isValidMobileNo(String  number) 
+// {
+//     Pattern ptrn = Pattern.compile("(0/91)?[7-9][0-9]{9}");
+//     Matcher match = ptrn.matcher(number);
+//     boolean set = (match.find() && match.group().equals(number));
+//     return set;
+// }
+

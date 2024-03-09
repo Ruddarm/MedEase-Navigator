@@ -89,11 +89,11 @@ public class DBOperation implements DBOpertaionInterface {
 
             preparedQuery.executeUpdate();
             DBcon.commit();
-            Dbnotfy.setMsg("Updated", 1);
+            Dbnotfy.setMsg("UPDATED", 1);
 
             return true;
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Gadbad hogya", -1);
+            Dbnotfy.setMsg("SOMETHING WENT WRONG", -1);
             System.out.println(ex);
             return false;
         }
@@ -219,7 +219,7 @@ public class DBOperation implements DBOpertaionInterface {
             return true;
 
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Error while Inserting Medical Reprot", -1);
+            Dbnotfy.setMsg("Error while Inserting Medical Report", -1);
             System.out.println(ex);
             return false;
         }
@@ -295,7 +295,7 @@ public class DBOperation implements DBOpertaionInterface {
             Dbnotfy.setMsg("Payment Updated", 1);
             return true;
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Eroor while Updating ", -1);
+            Dbnotfy.setMsg("Error while Updating ", -1);
             return false;
         }
     }
@@ -324,7 +324,7 @@ public class DBOperation implements DBOpertaionInterface {
             return true;
 
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Error while updating User Name", -1);
+            Dbnotfy.setMsg("Error while updating Password", -1);
             System.out.println(ex);
             return false;
         }
@@ -359,7 +359,7 @@ public class DBOperation implements DBOpertaionInterface {
                 return data.getInt(3);
             }
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Error in Get lat mid method ", -1);
+            Dbnotfy.setMsg("Error in Get last mid method ", -1);
             return 0;
         }
         return 0;
@@ -373,7 +373,7 @@ public class DBOperation implements DBOpertaionInterface {
                 return data.getInt(4);
             }
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Error in Get lat mid method ", -1);
+            Dbnotfy.setMsg("Error in Get last did method ", -1);
             return 0;
         }
         return 0;
@@ -387,7 +387,7 @@ public class DBOperation implements DBOpertaionInterface {
                 return data.getString(5);
             }
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Error in Get lat mid method ", -1);
+            Dbnotfy.setMsg("Error in Get username method ", -1);
             return "";
         }
         return "";
@@ -401,7 +401,7 @@ public class DBOperation implements DBOpertaionInterface {
                 return data.getString(6);
             }
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Error in Get lat mid method ", -1);
+            Dbnotfy.setMsg("Error in Get PSWD method ", -1);
             return "";
         }
         return "";
@@ -444,7 +444,7 @@ public class DBOperation implements DBOpertaionInterface {
             }
         } catch (SQLException ex) {
 
-            Dbnotfy.setMsg("Erro in Doctor Loging", -1);
+            Dbnotfy.setMsg("Error in Doctor Login", -1);
             return false;
         }
     }
@@ -515,7 +515,7 @@ public class DBOperation implements DBOpertaionInterface {
             data = preparedQuery.executeQuery();
             return data;
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Error in Today Appointmetn method", 1);
+            Dbnotfy.setMsg("Error in Get Today Appointment method", 1);
             return null;
         }
 
@@ -533,7 +533,7 @@ public class DBOperation implements DBOpertaionInterface {
             data = preparedQuery.executeQuery();
             return data;
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Error in Today Appointmetn method", 1);
+            Dbnotfy.setMsg("Error in Waiting Appointment method", 1);
             return null;
         }
 
@@ -554,7 +554,7 @@ public class DBOperation implements DBOpertaionInterface {
             return null;
 
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Error in Today Appointmetn method", 1);
+            Dbnotfy.setMsg("Error in get next patient", 1);
             return null;
         }
     }
@@ -570,7 +570,7 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(3, "PID" + PID);
             preparedQuery.executeUpdate();
             DBcon.commit();
-            Dbnotfy.setMsg("Status Updated", 1);
+            Dbnotfy.setMsg("Status UPDATED", 1);
             return true;
         } catch (SQLException ex) {
             Dbnotfy.setMsg("Error while updating Appointment Status", -1);
@@ -589,7 +589,7 @@ public class DBOperation implements DBOpertaionInterface {
                 return null;
             }
         }catch(SQLException ex){
-            Dbnotfy.setMsg("Eroor while Getting Doctor ", -1);
+            Dbnotfy.setMsg("Error while Getting Doctor ", -1);
             return null;
         }
     }
@@ -609,10 +609,10 @@ public class DBOperation implements DBOpertaionInterface {
             preparedQuery.setString(7, "PID" + pt.getPID());
             preparedQuery.executeUpdate();
             DBcon.commit();
-            Dbnotfy.setMsg("Patient data Updated", 1);
+            Dbnotfy.setMsg("Patient Data Updated", 1);
             return true;
         } catch (SQLException ex) {
-            Dbnotfy.setMsg("Error while updateing data ", -1);
+            Dbnotfy.setMsg("Error while updating data ", -1);
             return false;
         }
     }

@@ -70,7 +70,7 @@ public class MedDoctorDashBoard implements ActionListener, TableColumnModelListe
         // new MenuBar(DoctorFrame, tAdhis.DBO);
         WelcomLogo = new JLabel("Welcome Doctor "+Doc.getName());
         WelcomLogo.setFont(new Font("Times New Roman", Font.ITALIC, 40));
-        WelcomLogo.setBounds(370, 40, 500, 40);
+        WelcomLogo.setBounds(370, 40, 900, 40);
         DocDasBoardUtil.DoctorFrame.add(WelcomLogo);
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 0);
         BackPannel.setBounds(0, 100, 1440, 500);

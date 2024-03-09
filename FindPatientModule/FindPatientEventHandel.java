@@ -6,12 +6,17 @@ import java.sql.ResultSet;
 import MedEaseNavigator.AppointMentModule.MedEaseAppointMentInterface;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
 import MedEaseNavigator.UtilityModule.UtilityMedease;
+import MedEaseNavigator.NotificationMoudle.MedEaseNotify;
 
-public class FindPatientEventHandel extends KeyAdapter implements ActionListener {
+
+    // MedEaseNotify DbNotify = new MedEaseNotify();
+public class FindPatientEventHandel extends KeyAdapter implements ActionListener 
+{
     FindCustomerUtil findpteint;
     ResultSet ptdata;
-
-    public FindPatientEventHandel(FindCustomerUtil obj) {
+    MedEaseNotify DbNotify = new MedEaseNotify();
+    public FindPatientEventHandel(FindCustomerUtil obj) 
+    {
         findpteint = obj;
 
     }
@@ -21,16 +26,24 @@ public class FindPatientEventHandel extends KeyAdapter implements ActionListener
         if (e.getSource() == findpteint.ScrhBtn) {
 
             String Number = findpteint.SrchFeild.getText();
-            if (UtilityMedease.isValidNumber(Number)) {
+            if (UtilityMedease.Validity(Number) == "1") 
+            {
                 MedEasePatient Patient = new MedEasePatient();
 
                 ptdata = findpteint.DBO.GetPatient(Number);
-                if (ptdata != null) {
+                if (ptdata != null) 
+                {
                     MedEasePatient.SetPTData(Patient, ptdata);
-                } else {
+                } 
+                else 
+                {
                     Patient = null;
                 }
                 new MedEaseAppointMentInterface(Patient,findpteint.DBO,Number,findpteint.AdminInterfaceObj);
+            }
+            else
+            {
+                DbNotify.setMsg("PHONE NO. IS INVALID", -1);
             }
 
         }
