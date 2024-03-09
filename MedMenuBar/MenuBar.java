@@ -15,7 +15,7 @@ public class MenuBar implements ActionListener {
     JMenuBar menubar;
     JMenuItem AdminLog, DocLog;
     DBOperation DBO;
-    JMenuItem Doclogin, AddDoctor;
+    JMenuItem Doclogin, AddDoctor,ChangeUserName,ChangePswd;
 
     public MenuBar(JFrame medFrame, DBOperation DBO) {
         menubar = new JMenuBar();
@@ -44,6 +44,22 @@ public class MenuBar implements ActionListener {
         AddDoctor.setFont(GUIUtil.TimesBold);
         AddDoctor.addActionListener(this);
         DocLog.add(AddDoctor);
+        ChangeUserName = new JMenuItem("UserName");
+        ChangeUserName.setForeground(GUIUtil.WhiteClr);
+        ChangeUserName.setBackground(GUIUtil.Dark_BLue);
+        ChangeUserName.setSize(250, 30);
+        ChangeUserName.setFont(GUIUtil.TimesBold);
+        ChangeUserName.addActionListener(this);
+        AdminLog.add(ChangeUserName);
+        ChangePswd = new JMenuItem("Password");
+        ChangePswd.setForeground(GUIUtil.WhiteClr);
+        ChangePswd.setBackground(GUIUtil.Dark_BLue);
+        ChangePswd.setSize(250, 30);
+        ChangePswd.setFont(GUIUtil.TimesBold);
+        ChangePswd.addActionListener(this);
+        AdminLog.add(ChangePswd);
+
+        
 
 
     }
@@ -55,6 +71,11 @@ public class MenuBar implements ActionListener {
             
         }else if(e.getSource()== AddDoctor){
             new AddDoctor(DBO);
+        }else if(e.getSource()==ChangeUserName){
+            new AdminChangeUserName(DBO);
+
+        }else if(e.getSource()==ChangePswd){
+            new AdminChangePswd(DBO);
         }
     }
 }
