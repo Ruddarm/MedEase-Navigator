@@ -28,7 +28,7 @@ public class ViewPatient  implements TableColumnModelListener {
     DefaultTableModel Dtm;
     MedEasePatient Patient;
     JTable MediclReportTable;
-    JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy;
+    JLabel PaitienTLogo, PID, Name, Number, Age, Gender, BloodGrup, Heigh, Weight, Allergy,ProfileLogo ;
     String PatientHead[] = {
             "MRID",
             "Date",
@@ -53,6 +53,10 @@ public class ViewPatient  implements TableColumnModelListener {
          */
         ProfilePannel = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 10);
         ProfilePannel.setBounds(20, 20, 150, 150);
+        ProfileLogo=new JLabel(GUIUtil.PTICON);
+        ProfileLogo.setBounds(0, 0, 150, 150);
+        ProfilePannel.add(ProfileLogo);
+        // BackPannel.add(ProfilePannel);
         ViewBox.add(ProfilePannel);
         /*
          * Setting info pannel;

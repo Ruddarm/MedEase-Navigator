@@ -9,8 +9,10 @@ import MedEaseNavigator.MedEaseComponent.MedPannel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class AdminInterface implements ActionListener {
+public class AdminInterface extends MouseAdapter implements ActionListener {
     
     public AppointMentInterface AppointmentInterfaceObj;
     public WaitingInterface WaitingInterfaceObj;
@@ -28,6 +30,7 @@ public class AdminInterface implements ActionListener {
         RefreshBtn.setBounds(490, 360, 100, 30);
         RefreshBtn.setForeground(GUIUtil.WhiteClr);
         RefreshBtn.addActionListener(this);
+        RefreshBtn.addMouseListener(this);
 
         srcPannel.add(RefreshBtn);
     }
@@ -40,6 +43,21 @@ public class AdminInterface implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==RefreshBtn){
             RefreshTable();
+        }
+    }
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if(e.getSource()==RefreshBtn){
+            RefreshBtn.Background=GUIUtil.BlackClr;
+            RefreshBtn.repaint();
+
+        }
+    }
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (e.getSource()==RefreshBtn) {
+            RefreshBtn.setBackground(GUIUtil.Dark_BLue);
+            // RefreshBtn.setFont(GUIUtil.WhiteClr);
         }
     }
 }
