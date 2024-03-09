@@ -36,6 +36,7 @@ public class MedEaseBtn extends JButton {
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         // super.paintComponent(g);
+        this.PaintBrushColor=this.Background;
         g2.setColor(PaintBrushColor);
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), Radius, Radius);
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), Radius, Radius);

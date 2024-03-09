@@ -51,13 +51,14 @@ public class AdminInterface extends MouseAdapter implements ActionListener {
             RefreshBtn.Background=GUIUtil.BlackClr;
             RefreshBtn.repaint();
 
+
         }
     }
     @Override
     public void mouseExited(MouseEvent e) {
         if (e.getSource()==RefreshBtn) {
-            RefreshBtn.setBackground(GUIUtil.Dark_BLue);
-            // RefreshBtn.setFont(GUIUtil.WhiteClr);
+            RefreshBtn.Background=GUIUtil.Dark_BLue;
+            RefreshBtn.repaint();
         }
     }
 }
