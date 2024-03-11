@@ -31,8 +31,6 @@ public class LoginEventHandeler extends KeyAdapter implements ActionListener {
                 logobj.warn.setText("User Name or Password is wrong");
                 System.out.println("error");
                 logobj.warn.setVisible(true);
-                
-
             }
 
         }else if(e.getSource()==logobj.SetupBtn){

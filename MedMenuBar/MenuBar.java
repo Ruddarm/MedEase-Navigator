@@ -19,6 +19,9 @@ public class MenuBar implements ActionListener {
 
     public MenuBar(JFrame medFrame, DBOperation DBO) {
         menubar = new JMenuBar();
+        menubar.setBounds(0, 0, 1440, 30);
+        menubar.setBackground(GUIUtil.Dark_BLue);
+
         this.DBO = DBO;
         AdminLog = new JMenu("Admin");
         DocLog = new JMenu("Doctor");
@@ -35,8 +38,6 @@ public class MenuBar implements ActionListener {
         Doclogin.setFocusPainted(false);
         Doclogin.addActionListener(this);
         DocLog.add(Doclogin);
-        menubar.setBounds(0, 0, 1440, 30);
-        menubar.setBackground(GUIUtil.Dark_BLue);
         AddDoctor = new JMenuItem("Add Doctor");
         AddDoctor.setForeground(GUIUtil.WhiteClr);
         AddDoctor.setBackground(GUIUtil.Dark_BLue);
