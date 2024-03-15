@@ -8,13 +8,11 @@ import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
-
 import MedEaseNavigator.AppointMentModule.UpdateAppointMentTime;
 import MedEaseNavigator.AppointMentModule.UpdateAppointStatus;
 import MedEaseNavigator.AppointMentModule.ViewPatient;
 import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
-// import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.AppointMent;
 import MedEaseNavigator.UtilityModule.GUIUtil;
 import MedEaseNavigator.UtilityModule.MedEasePatient;
@@ -23,7 +21,7 @@ import MedEaseNavigator.UtilityModule.MedQueue;
 public class AppointMentInterface implements TableColumnModelListener {
     JFrame mainFrame;
     public MedPannel BackPannel, FrontPannel;
-    JLabel TodayLabel;
+    JLabel TodayLabel, appoint;
 
     JTableHeader JTh;
     DefaultTableModel DTM;
@@ -42,6 +40,12 @@ public class AppointMentInterface implements TableColumnModelListener {
         BackPannel = new MedPannel(GUIUtil.Dark_BLue, GUIUtil.Dark_BLue, null, 20);
         BackPannel.setBounds(100, 130, 600, 500);
         BackPannel.setLayout(null);
+        // JLabel appoint = new JLabel("No. of appointments");
+        // appoint.setForeground(GUIUtil.WhiteClr);
+        // appoint.setFont(GUIUtil.TimesBoldS2);
+        // appoint.setBounds(160, 720, 300, 20);
+        // BackPannel.add(appoint);
+
         FrontPannel = new MedPannel(GUIUtil.WhiteClr, GUIUtil.WhiteClr, null, 0);
         FrontPannel.setBounds(0, 50, 600, 450);
         FrontPannel.setLayout(null);

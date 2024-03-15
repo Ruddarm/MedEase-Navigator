@@ -17,8 +17,9 @@ import MedEaseNavigator.DataBaseModule.DBOperation;
 import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.GUIUtil;
-
-public class MedEaseLogin {
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+public class MedEaseLogin  extends MouseAdapter {
     JFrame LoginFrame;
     MedEaseBtn LoginBtn; // Btn to login
     MedEaseBtn SetupBtn; // setup Btn
@@ -117,7 +118,21 @@ public class MedEaseLogin {
         });
 
     }
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if(e.getSource()==LoginBtn){
+            LoginBtn.Background=GUIUtil.BlackClr;
+            LoginBtn.repaint();
 
-    
+
+        }
+    }
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (e.getSource()==LoginBtn) {
+            LoginBtn.Background=GUIUtil.Dark_BLue;
+            LoginBtn.repaint();
+        }
+    }
 
 }

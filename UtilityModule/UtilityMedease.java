@@ -5,6 +5,8 @@
 package MedEaseNavigator.UtilityModule;
 
 import java.sql.Connection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 
@@ -60,6 +62,33 @@ public class UtilityMedease {
             }
         }
         return true;
+    }
+
+    public static String Validity(String Number)
+    {
+        String s = null;
+        if (Number.length() > 0) 
+        {
+            System.out.println("entering");
+            String tt = Number;
+            Pattern ptrn = Pattern.compile("(0/91)?[7-9][0-9]{9}");
+            Matcher match = ptrn.matcher(tt);
+            boolean sett = (match.find() && match.group().equals(tt));
+            if (sett == false) 
+            {
+                System.out.println(true);
+                //SrchFeild.setForeground(GUIUtil.WarningColor);
+                s = "0";
+                return s;
+            }
+            else
+            {
+                s = "1";
+                return s;
+            }
+
+        }
+        return s;
     }
     /*
      * A Method to count Character in String

@@ -6,6 +6,8 @@
 package MedEaseNavigator.FindPatientModule;
 
 import java.awt.Color;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -15,11 +17,15 @@ import MedEaseNavigator.MedEaseComponent.MedEaseBtn;
 import MedEaseNavigator.MedEaseComponent.MedPannel;
 import MedEaseNavigator.UtilityModule.AdminInterface;
 import MedEaseNavigator.UtilityModule.GUIUtil;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /*
  * A constructor which will set all gui component 
  */
-public class FindCustomerUtil {
+public class FindCustomerUtil extends KeyAdapter implements ActionListener {
     MedPannel SrchPannel;
     JTextField SrchFeild;
     MedEaseBtn ScrhBtn;
@@ -48,10 +54,26 @@ public class FindCustomerUtil {
         // SrchFeild.setFont(GUIUtil.TimesBoldS2);
         ScrhBtn.addActionListener(eventobj);
         SrchFeild.addKeyListener(eventobj);
-        
-        
-        
     }
-    
-
+    @Override
+    public void actionPerformed(ActionEvent e) 
+    {
+        System.out.println("enter");
+        if (e.getSource() == ScrhBtn)
+        {
+            if (SrchFeild.getText().length() > 0) 
+            {
+                System.out.println("entering");
+                String tt = SrchFeild.getText();
+                Pattern ptrn = Pattern.compile("(0/91)?[7-9][0-9]{9}");
+                Matcher match = ptrn.matcher(tt);
+                boolean set = (match.find() && match.group().equals(tt));
+                if (set == false) 
+                {
+                    System.out.println(true);
+                    SrchFeild.setForeground(GUIUtil.WarningColor);
+                }
+            }
+        }
+    }
 }
