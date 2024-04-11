@@ -48,8 +48,7 @@ public class MedEaseAppointMentInterface {
         /*
          * 
          */
-        Plogo = new JLabel();
-        Plogo.setText("This is profile");
+        Plogo = new JLabel(GUIUtil.PTICON);
         Plogo.setBackground(GUIUtil.Dark_BLue);
         logoBox.add(Plogo);
         Plogo.setBounds(0, 0, 130, 130);
