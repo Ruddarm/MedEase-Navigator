@@ -31,16 +31,11 @@ public class MedEaseApp {
              * First we will setup connection with database
              */
             // Creating object of DBconnectivity
-<<<<<<< HEAD
-<<<<<<< HEAD
-            app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "niks",
-=======
-            app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "Serene@123#",
->>>>>>> f6628b42ebd37337ca84df6a3e3024ed3cacedc7
-=======
-            app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "ruddarmsql",
->>>>>>> 155711e560505c1cf48af2f2ae5c85042553559c
-                    app.MedEaseUtil.DBCon);
+
+            app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "ruddarmsql", app.MedEaseUtil.DBCon);
+           
+
+           
             // If true then connection Sucesfull
             if (!app.MedEaseUtil.DbConnectObj.setConnection()) {
                 app.MedEaseUtil.Notify.setMsg("DATABASE HAS NOT BEEN CONNECTED ", -1);
