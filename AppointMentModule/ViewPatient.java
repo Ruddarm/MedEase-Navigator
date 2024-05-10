@@ -47,7 +47,6 @@ public class ViewPatient  implements TableColumnModelListener {
         ViewBox.getContentPane().setBackground(GUIUtil.Dark_BLue);
         ViewBox.setVisible(true);
         ViewBox.setResizable(false);
-
         /*
          * Setting profile box pannel
          */

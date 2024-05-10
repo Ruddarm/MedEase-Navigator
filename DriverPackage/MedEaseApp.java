@@ -1,10 +1,9 @@
 /* dddThis is Our Main Class from where our software will start it is like engine of our software
- * @author Ruddarm
+ * @author Ruddarmo
  * @author Soumya Vinod
  * 
  */
 package MedEaseNavigator.DriverPackage;
-
 import java.util.concurrent.Semaphore;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.AppointMentInterface;
 import MedEaseNavigator.AdminDashBoard.AppointMendDashBoard.PaymentInterface;
@@ -27,6 +26,7 @@ public class MedEaseApp {
         MedEaseApp app = new MedEaseApp();
         Semaphore sema = new Semaphore(0);
         synchronized (app) {
+<<<<<<< HEAD
             /*
              * First we will setup connection with database
              */
@@ -36,6 +36,10 @@ public class MedEaseApp {
            
 
            
+=======
+            app.MedEaseUtil.DbConnectObj = new DBConnectivity("jdbc:mysql://localhost:3306/", "ruddarmsql",
+                    app.MedEaseUtil.DBCon);
+>>>>>>> ed86a0e3531744088ac3d4bbc48a3038c2942432
             // If true then connection Sucesfull
             if (!app.MedEaseUtil.DbConnectObj.setConnection()) {
                 app.MedEaseUtil.Notify.setMsg("DATABASE HAS NOT BEEN CONNECTED ", -1);
